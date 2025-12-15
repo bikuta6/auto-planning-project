@@ -1,0 +1,116 @@
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'P02' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+advancing to distance:   27
+                         26
+                         25
+                         24
+                         23
+                         22
+                         21
+                         20
+                         19
+                         18
+                         17
+                         16
+                         15
+                         14
+                         13
+                         12
+                         11
+                         10
+                          9
+                          8
+                          7
+                          6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BURG-SQUARE)
+        1: (ATTACK MOB2 BURG-SQUARE)
+        2: (DRINK-ESTUS)
+        3: (ATTACK MOB2 BURG-SQUARE)
+        4: (ATTACK MOB2 BURG-SQUARE)
+        5: (EXECUTE-ENEMY MOB2 BURG-SQUARE)
+        6: (ATTACK MOB1 BURG-SQUARE)
+        7: (ATTACK MOB1 BURG-SQUARE)
+        8: (ATTACK MOB1 BURG-SQUARE)
+        9: (EXECUTE-ENEMY MOB1 BURG-SQUARE)
+       10: (MOVE BURG-SQUARE GARGOYLE-ROOFTOP)
+       11: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       12: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       13: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       14: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       15: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       16: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       17: (DRINK-ESTUS)
+       18: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       19: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       20: (DRINK-ESTUS)
+       21: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       22: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       23: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       24: (FLEE-BOSS GARGOYLE-ROOFTOP BURG-SQUARE GARGOYLE1)
+       25: (REST BURG-SQUARE)
+       26: (ATTACK MOB2 BURG-SQUARE)
+       27: (DRINK-ESTUS)
+       28: (ATTACK MOB2 BURG-SQUARE)
+       29: (ATTACK MOB2 BURG-SQUARE)
+       30: (EXECUTE-ENEMY MOB2 BURG-SQUARE)
+       31: (ATTACK MOB1 BURG-SQUARE)
+       32: (ATTACK MOB1 BURG-SQUARE)
+       33: (ATTACK MOB1 BURG-SQUARE)
+       34: (EXECUTE-ENEMY MOB1 BURG-SQUARE)
+       35: (MOVE BURG-SQUARE GARGOYLE-ROOFTOP)
+       36: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       37: (KILL-BOSS GARGOYLE2 GARGOYLE-ROOFTOP)
+       38: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       39: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       40: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       41: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       42: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       43: (DRINK-ESTUS)
+       44: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       45: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       46: (DRINK-ESTUS)
+       47: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       48: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       49: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       50: (KILL-BOSS GARGOYLE1 GARGOYLE-ROOFTOP)
+       51: (MOVE GARGOYLE-ROOFTOP BURG-SQUARE)
+       52: (MOVE BURG-SQUARE FIRELINK)
+       53: (DEPOSIT-SOUL GARGOYLE1 FIRELINK)
+       54: (DEPOSIT-SOUL GARGOYLE2 FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 33 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 23 facts and 23 actions
+               0.00 seconds creating final representation with 17 relevant facts, 23 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 214 states, to a max depth of 0
+               0.00 seconds total time
+

@@ -1,0 +1,99 @@
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'P02' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+Cueing down from goal distance:   29 into depth [1]
+                                  27            [1]
+                                  25            [1][2] --- pruning stopped --- [1]
+                                  24            [1][2] --- pruning stopped --- [1]
+                                  23            [1][2] --- pruning stopped --- [1]
+                                  22            [1][2] --- pruning stopped --- [1]
+                                  21            [1][2] --- pruning stopped --- [1]
+                                  20            [1][2] --- pruning stopped --- [1]
+                                  19            [1][2] --- pruning stopped --- [1][2]
+                                  18            [1][2] --- pruning stopped --- [1]
+                                  17            [1][2] --- pruning stopped --- [1][2]
+                                  16            [1][2] --- pruning stopped --- [1]
+                                  15            [1][2][3][4] --- pruning stopped --- [1][2]
+                                  14            [1][2][3][4] --- pruning stopped --- [1]
+                                  13            [1][2][3][4] --- pruning stopped --- [1][2][3][4]
+                                  12            [1][2]
+                                  11            [1]
+                                  10            [1] --- pruning stopped --- [1][2]
+                                   9            [1][2] --- pruning stopped --- [1]
+                                   8            [1][2] --- pruning stopped --- [1]
+                                   7            [1][2] --- pruning stopped --- [1]
+                                   6            [1][2] --- pruning stopped --- [1]
+                                   5            [1][2] --- pruning stopped --- [1]
+                                   4            [1][2] --- pruning stopped --- [1][2]
+                                   3            [1][2] --- pruning stopped --- [1][2][3]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BURG-SQUARE)
+        1: (MOVE BURG-SQUARE GARGOYLE-ROOFTOP)
+        2: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+        3: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+        4: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+        5: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+        6: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+        7: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+        8: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+        9: (DRINK-ESTUS)
+       10: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       11: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       12: (DRINK-ESTUS)
+       13: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       14: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       15: (DRINK-ESTUS)
+       16: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       17: (ATTACK GARGOYLE1 GARGOYLE-ROOFTOP)
+       18: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       19: (KILL-BOSS GARGOYLE1 GARGOYLE-ROOFTOP)
+       20: (MOVE GARGOYLE-ROOFTOP BURG-SQUARE)
+       21: (MOVE BURG-SQUARE FIRELINK)
+       22: (DEPOSIT-SOUL GARGOYLE1 FIRELINK)
+       23: (MOVE FIRELINK BURG-SQUARE)
+       24: (REST BURG-SQUARE)
+       25: (MOVE BURG-SQUARE GARGOYLE-ROOFTOP)
+       26: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       27: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       28: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       29: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       30: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       31: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       32: (DRINK-ESTUS)
+       33: (ATTACK GARGOYLE2 GARGOYLE-ROOFTOP)
+       34: (KILL-BOSS GARGOYLE2 GARGOYLE-ROOFTOP)
+       35: (MOVE GARGOYLE-ROOFTOP BURG-SQUARE)
+       36: (MOVE BURG-SQUARE FIRELINK)
+       37: (DEPOSIT-SOUL GARGOYLE2 FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 33 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 23 facts and 23 actions
+               0.00 seconds creating final representation with 17 relevant facts, 23 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 475 states, to a max depth of 4
+               0.00 seconds total time
+

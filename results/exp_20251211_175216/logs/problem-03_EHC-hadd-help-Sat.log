@@ -1,0 +1,39 @@
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'P03' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+Cueing down from goal distance:    2 into depth [1][2]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: (PICK-UP-KEY KEY-BELL FIRELINK)
+        1: (MOVE FIRELINK PARISH)
+        2: (UNLOCK-DOOR KEY-BELL PARISH BELL-TOWER)
+     
+
+time spent:    0.00 seconds instantiating 22 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 22 facts and 12 actions
+               0.00 seconds creating final representation with 11 relevant facts, 17 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 5 states, to a max depth of 2
+               0.00 seconds total time
+

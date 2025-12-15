@@ -1,0 +1,71 @@
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'P01' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+advancing to distance:   16
+                         15
+                         14
+                         13
+                         12
+                         11
+                         10
+                          9
+                          8
+                          7
+                          6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK UNDEAD-BURG)
+        1: (MOVE UNDEAD-BURG TAURUS-ARENA)
+        2: (ATTACK TAURUS TAURUS-ARENA)
+        3: (ATTACK TAURUS TAURUS-ARENA)
+        4: (ATTACK TAURUS TAURUS-ARENA)
+        5: (ATTACK TAURUS TAURUS-ARENA)
+        6: (ATTACK TAURUS TAURUS-ARENA)
+        7: (DRINK-ESTUS)
+        8: (ATTACK TAURUS TAURUS-ARENA)
+        9: (ATTACK TAURUS TAURUS-ARENA)
+       10: (DRINK-ESTUS)
+       11: (ATTACK TAURUS TAURUS-ARENA)
+       12: (ATTACK TAURUS TAURUS-ARENA)
+       13: (ATTACK TAURUS TAURUS-ARENA)
+       14: (DRINK-ESTUS)
+       15: (ATTACK TAURUS TAURUS-ARENA)
+       16: (ATTACK TAURUS TAURUS-ARENA)
+       17: (KILL-BOSS TAURUS TAURUS-ARENA)
+       18: (MOVE TAURUS-ARENA UNDEAD-BURG)
+       19: (MOVE UNDEAD-BURG FIRELINK)
+       20: (DEPOSIT-SOUL TAURUS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 22 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 11 relevant facts, 18 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 50 states, to a max depth of 0
+               0.00 seconds total time
+

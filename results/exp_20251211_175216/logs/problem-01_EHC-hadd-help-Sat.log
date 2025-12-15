@@ -1,0 +1,71 @@
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'P01' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+Cueing down from goal distance:   16 into depth [1]
+                                  15            [1]
+                                  14            [1][2] --- pruning stopped --- [1]
+                                  13            [1][2] --- pruning stopped --- [1]
+                                  12            [1][2] --- pruning stopped --- [1]
+                                  11            [1][2] --- pruning stopped --- [1]
+                                  10            [1][2] --- pruning stopped --- [1]
+                                   9            [1][2] --- pruning stopped --- [1][2]
+                                   8            [1][2] --- pruning stopped --- [1]
+                                   7            [1][2] --- pruning stopped --- [1][2]
+                                   6            [1][2] --- pruning stopped --- [1]
+                                   5            [1][2] --- pruning stopped --- [1]
+                                   4            [1][2] --- pruning stopped --- [1][2]
+                                   3            [1][2] --- pruning stopped --- [1][2][3]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK UNDEAD-BURG)
+        1: (MOVE UNDEAD-BURG TAURUS-ARENA)
+        2: (ATTACK TAURUS TAURUS-ARENA)
+        3: (ATTACK TAURUS TAURUS-ARENA)
+        4: (ATTACK TAURUS TAURUS-ARENA)
+        5: (ATTACK TAURUS TAURUS-ARENA)
+        6: (ATTACK TAURUS TAURUS-ARENA)
+        7: (ATTACK TAURUS TAURUS-ARENA)
+        8: (DRINK-ESTUS)
+        9: (ATTACK TAURUS TAURUS-ARENA)
+       10: (ATTACK TAURUS TAURUS-ARENA)
+       11: (DRINK-ESTUS)
+       12: (ATTACK TAURUS TAURUS-ARENA)
+       13: (ATTACK TAURUS TAURUS-ARENA)
+       14: (ATTACK TAURUS TAURUS-ARENA)
+       15: (DRINK-ESTUS)
+       16: (ATTACK TAURUS TAURUS-ARENA)
+       17: (KILL-BOSS TAURUS TAURUS-ARENA)
+       18: (MOVE TAURUS-ARENA UNDEAD-BURG)
+       19: (MOVE UNDEAD-BURG FIRELINK)
+       20: (DEPOSIT-SOUL TAURUS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 22 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 11 relevant facts, 18 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.16 seconds searching, evaluating 115 states, to a max depth of 3
+               0.16 seconds total time
+
