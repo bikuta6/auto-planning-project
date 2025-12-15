@@ -134,7 +134,7 @@ def max_hp_bucket(player_max: int) -> str:
 
 
 def emit_objects_block(problem_name: str, typed: dict[str, list[str]],
-                       estus_slots: list[str], soul_tokens: list[str],
+                       estus_slots: list[str], soul_levels: list[str],
                        wlevels: list[str], boss_phases: list[str]) -> str:
     lines = ["  (:objects"]
 
@@ -155,8 +155,8 @@ def emit_objects_block(problem_name: str, typed: dict[str, list[str]],
     if boss_phases:
         emit_type("boss-phase", boss_phases)
     emit_type("estus-slot", estus_slots)
-    if soul_tokens:
-        emit_type("soul-token", soul_tokens)
+    if soul_levels:
+        emit_type("soul-level", soul_levels)
 
     lines.append("  )")
     return "\n".join(lines)
@@ -238,8 +238,9 @@ def convert_problem(src_path: Path, dst_path: Path) -> None:
     total_slots = max(1, estus_max + len(bosses))
     estus_slots = [f"e{i}" for i in range(1, total_slots + 1)]
 
-    # soul tokens: one per minor enemy (earned), up to 20
-    soul_tokens = [f"s{i}" for i in range(min(len(minors), 20))]
+    # Souls: discrete levels (like HP) with a maximum.
+    # We keep a small fixed ladder for compatibility across instances.
+    soul_levels = [f"s{i}" for i in range(7)]  # s0..s6
 
     # init facts: keep non-numeric s-exprs
     kept_facts = [sx for sx in sexprs_in_init(init_inner) if not sx.lstrip().startswith("(=")]
@@ -266,6 +267,14 @@ def convert_problem(src_path: Path, dst_path: Path) -> None:
     init_lines.append(f"    (player-hp {max_hp})")
 
     init_lines.append("    (player-level pl0) (player-level-next pl0 pl1)")
+
+    # souls (discrete with max)
+    init_lines.append("")
+    init_lines.append("    ;; souls ladder (discrete, with max)")
+    for i in range(len(soul_levels) - 1):
+        init_lines.append(f"    (soul-next {soul_levels[i]} {soul_levels[i+1]})")
+    init_lines.append(f"    (player-max-souls {soul_levels[-1]})")
+    init_lines.append(f"    (player-souls {soul_levels[0]})")
 
     # weapon
     init_lines.append(f"    (player-weapon-level w{w_init})")
@@ -301,12 +310,28 @@ def convert_problem(src_path: Path, dst_path: Path) -> None:
         init_lines.append(f"    (hp-after-attack {e} hp2 hp1)")
         init_lines.append(f"    (hp-after-attack {e} hp1 hp0)")
 
-    # soul drops
+    # soul drops: executing a minor enemy increases souls by 1, saturating at max.
     init_lines.append("")
-    if soul_tokens and minors:
-        init_lines.append("    ;; soul drops from minor enemies")
-        for m_name, t_name in zip(minors, soul_tokens, strict=False):
-            init_lines.append(f"    (drops-soul {m_name} {t_name})")
+    if minors:
+        init_lines.append("    ;; souls gain from minor enemies (saturating)")
+        for m_name in minors:
+            for i in range(len(soul_levels) - 1):
+                init_lines.append(f"    (soul-after-drop {m_name} {soul_levels[i]} {soul_levels[i+1]})")
+            init_lines.append(f"    (soul-after-drop {m_name} {soul_levels[-1]} {soul_levels[-1]})")
+
+    # level-up soul costs: increasing cost per player-level edge.
+    # pl0->pl1 costs 1, pl1->pl2 costs 2, ... (if such edges exist in the problem)
+    init_lines.append("")
+    init_lines.append("    ;; souls spend for leveling (cost increases per level)")
+    player_levels = ["pl0", "pl1"]
+    for idx in range(len(player_levels) - 1):
+        l1 = player_levels[idx]
+        l2 = player_levels[idx + 1]
+        cost = idx + 1
+        for s_idx in range(cost, len(soul_levels)):
+            s1 = soul_levels[s_idx]
+            s2 = soul_levels[s_idx - cost]
+            init_lines.append(f"    (soul-spend-for-level {l1} {l2} {s1} {s2})")
 
     # boss damage requirements
     if bosses:
@@ -323,7 +348,7 @@ def convert_problem(src_path: Path, dst_path: Path) -> None:
     out = []
     out.append(f"(define (problem {pname}-fd)")
     out.append("  (:domain dark-souls-fd)")
-    out.append(emit_objects_block(pname, typed, estus_slots, soul_tokens, wlevels, boss_phases))
+    out.append(emit_objects_block(pname, typed, estus_slots, soul_levels, wlevels, boss_phases))
     out.append("\n".join(init_lines))
     out.append("  " + goal_block.strip())
     out.append(")")

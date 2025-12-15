@@ -11,7 +11,7 @@
     pl0 pl1 - player-level
     bp0 bp1 bp2 - boss-phase
     e1 e2 e3 e4 e5 - estus-slot
-    s0 s1 - soul-token
+    s0 s1 s2 s3 s4 s5 s6 - soul-level
   )
   (:init
     (connected firelink burg-square)
@@ -46,6 +46,11 @@
     (player-level pl0) (player-level-next pl0 pl1)
     (player-weapon-level w0)
 
+    ;; souls ladder (discrete, with max)
+    (soul-next s0 s1) (soul-next s1 s2) (soul-next s2 s3) (soul-next s3 s4) (soul-next s4 s5) (soul-next s5 s6)
+    (player-max-souls s6)
+    (player-souls s0)
+
     ;; boss phases (hits remaining)
     (boss-phase-zero bp0)
     (boss-phase-next bp2 bp1)
@@ -73,9 +78,12 @@
     (hp-after-attack mob2 hp2 hp1)
     (hp-after-attack mob2 hp1 hp0)
 
-    ;; soul drops from minor enemies
-    (drops-soul mob1 s0)
-    (drops-soul mob2 s1)
+    ;; souls gain from minor enemies (saturating)
+    (soul-after-drop mob1 s0 s1) (soul-after-drop mob1 s1 s2) (soul-after-drop mob1 s2 s3) (soul-after-drop mob1 s3 s4) (soul-after-drop mob1 s4 s5) (soul-after-drop mob1 s5 s6) (soul-after-drop mob1 s6 s6)
+    (soul-after-drop mob2 s0 s1) (soul-after-drop mob2 s1 s2) (soul-after-drop mob2 s2 s3) (soul-after-drop mob2 s3 s4) (soul-after-drop mob2 s4 s5) (soul-after-drop mob2 s5 s6) (soul-after-drop mob2 s6 s6)
+
+    ;; souls spend for leveling (cost increases per level)
+    (soul-spend-for-level pl0 pl1 s1 s0) (soul-spend-for-level pl0 pl1 s2 s1) (soul-spend-for-level pl0 pl1 s3 s2) (soul-spend-for-level pl0 pl1 s4 s3) (soul-spend-for-level pl0 pl1 s5 s4) (soul-spend-for-level pl0 pl1 s6 s5)
 
     ;; boss weapon requirements
     (can-damage-boss gargoyle1 w0)

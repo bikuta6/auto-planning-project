@@ -36,8 +36,8 @@
     ;; estus como "slots" discretos (cada slot es una carga)
     estus-slot - object
 
-    ;; almas como tokens discretos (moneda para level-up)
-    soul-token - object
+    ;; almas como niveles discretos (tipo HP, con máximo)
+    soul-level - object
   )
 
   (:predicates
@@ -96,9 +96,14 @@
     (estus-unlocked ?s - estus-slot)              ;; forma parte del máximo
     (estus-full ?s - estus-slot)                  ;; carga disponible
 
-    ;; Souls (moneda)
-    (has-soul ?t - soul-token)
-    (drops-soul ?e - enemy ?t - soul-token)
+    ;; Souls (moneda) como nivel discreto (tipo HP)
+    (player-souls ?s - soul-level)
+    (player-max-souls ?s - soul-level)
+    (soul-next ?s1 ?s2 - soul-level)
+    ;; tabla de ganancia al ejecutar un enemigo: s1 -> s2 (debe saturar en el máximo)
+    (soul-after-drop ?e - enemy ?s1 ?s2 - soul-level)
+    ;; tabla de gasto por subir nivel: desde l1 a l2, s1 -> s2 (coste creciente por nivel)
+    (soul-spend-for-level ?l1 ?l2 - player-level ?s1 ?s2 - soul-level)
   )
 
   ;; =================================================================
@@ -278,19 +283,21 @@
   )
 
   (:action execute-enemy
-    :parameters (?e - enemy ?loc - location ?t - soul-token)
+    :parameters (?e - enemy ?loc - location ?s1 ?s2 - soul-level)
     :precondition (and
       (at-player ?loc)
       (not (player-dead))
       (enemy-at ?e ?loc)
       (is-alive ?e)
       (weakened ?e)
-      (drops-soul ?e ?t)
+      (player-souls ?s1)
+      (soul-after-drop ?e ?s1 ?s2)
     )
     :effect (and
       (not (is-alive ?e))
       (not (weakened ?e))
-      (has-soul ?t)
+      (not (player-souls ?s1))
+      (player-souls ?s2)
     )
   )
 
@@ -380,25 +387,28 @@
     )
   )
 
-  ;; Subir nivel (bonfire): consume 1 soul-token, sube player-level y aumenta max HP (1 paso).
+  ;; Subir nivel (bonfire): gasta almas discretas (coste creciente), sube player-level y aumenta max HP (1 paso).
   (:action level-up-stats
-    :parameters (?loc - location ?t - soul-token ?l1 ?l2 - player-level ?m1 ?m2 - hp-level)
+    :parameters (?loc - location ?l1 ?l2 - player-level ?m1 ?m2 - hp-level ?s1 ?s2 - soul-level)
     :precondition (and
       (at-player ?loc)
       (not (player-dead))
       (has-bonfire ?loc)
-      (has-soul ?t)
       (player-level ?l1)
       (player-level-next ?l1 ?l2)
       (player-max-hp ?m1)
       (hp-next ?m1 ?m2)
+      (player-souls ?s1)
+      (soul-spend-for-level ?l1 ?l2 ?s1 ?s2)
     )
     :effect (and
-      (not (has-soul ?t))
       (not (player-level ?l1))
       (player-level ?l2)
       (not (player-max-hp ?m1))
       (player-max-hp ?m2)
+
+      (not (player-souls ?s1))
+      (player-souls ?s2)
 
       ;; también curamos al nuevo máximo
       (forall (?h - hp-level)
