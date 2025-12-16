@@ -1,0 +1,56 @@
+=== FAST DOWNWARD EXPERIMENT REPORT ===
+Generated on: 2025-12-16 11:46:33
+Time Limit: 1800 seconds
+Domains Tested: darksouls-fd
+Planners Tested: lama-first lama fdss-opt
+
+=== PLANNER CONFIGURATIONS ===
+- lama-first: LAMA planner with unit costs, returns first solution found
+  Command: --alias lama-first
+- lama: Full LAMA planner from IPC'11 satisficing track
+  Command: --alias seq-sat-lama-2011
+- fdss-opt: FDSS optimal planner from IPC'11 optimal track
+  Command: --alias seq-opt-fdss-1
+
+=== COVERAGE ANALYSIS ===
+
+Domain: darksouls-fd
+----------------------------------------
+lama-first     : 12/12 solved (100%)
+lama           : 12/12 solved (100%)
+fdss-opt       : 12/12 solved (100%)
+
+=== FILES GENERATED ===
+- Detailed logs: ./experiment_results/logs/
+- Summary CSV: ./experiment_results/summaries/experiment_summary_20251216_114632.csv
+- This report: ./experiment_results/summaries/detailed_report_20251216_114632.txt
+
+=== ANALYSIS TIPS FOR YOUR REPORT ===
+1. Coverage Comparison: Compare solved/total ratios across planners
+2. Runtime Analysis: Analyze timing differences between planners
+3. Plan Quality: Compare plan length and cost metrics
+4. Search Efficiency: Compare expanded/generated nodes ratios
+5. Domain-Specific Performance: Analyze performance per domain
+
+=== METRICS EXPLANATION ===
+- Solved: YES/NO/TIMEOUT/OUT_OF_MEMORY/NO_SOLUTION/CRITICAL_ERROR/FAILED
+- Total_Time(s): Complete execution time including translation
+- Plan_Length: Number of actions in the solution
+- Plan_Cost: Total cost of the plan
+- Expanded_Nodes: States expanded during search
+- Generated_Nodes: States generated during search
+- Exit_Code: Fast Downward's exit code
+
+=== EXIT CODE MEANINGS ===
+- 0: SUCCESS (clean solution found)
+- 2: PARTIAL SUCCESS (portfolio found solution despite some component failures)
+- 23: TIMEOUT (time limit exceeded)
+- 30: OUT OF MEMORY (memory limit exceeded)
+- 32: NO SOLUTION (search completed but no solution exists)
+- 1: CRITICAL ERROR (translation failed, invalid input, etc.)
+
+=== EXPECTED RESULTS ===
+- LAMA-first: Fast, may find suboptimal solutions, exit codes 0/2
+- LAMA: Balanced speed/quality, satisficing solutions, exit codes 0/2
+- FDSS-opt: Slower optimal planner, more likely timeouts (exit code 23)
+

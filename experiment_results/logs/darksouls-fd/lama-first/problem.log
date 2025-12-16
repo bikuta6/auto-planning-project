@@ -1,0 +1,264 @@
+=== Fast Downward Experiment Log ===
+Domain: darksouls-fd
+Planner: lama-first (lama-first)
+Problem: problem.pddl
+Time Limit: 1800 seconds
+Start Time: 2025-12-16 11:43:13
+Domain File: .//darksouls-fd/domain.pddl
+Problem File: .//darksouls-fd/problem.pddl
+
+=== Fast Downward Output ===
+INFO     planner time limit: None
+INFO     planner memory limit: None
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     translator command line string: /opt/homebrew/opt/python@3.14/bin/python3.14 -m translate darksouls-fd/domain.pddl darksouls-fd/problem.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.010s CPU, 0.004s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.000s wall-clock]
+Normalizing Datalog program...
+Unbound effect variables: Adding @object predicate.
+Normalizing Datalog program: [0.000s CPU, 0.001s wall-clock]
+Preparing model... [0.000s CPU, 0.001s wall-clock]
+Generated 130 rules.
+Computing model... [0.000s CPU, 0.003s wall-clock]
+759 relevant atoms
+612 auxiliary atoms
+1371 final queue length
+2188 total queue pushes
+Completing instantiation... [0.010s CPU, 0.007s wall-clock]
+Instantiating: [0.010s CPU, 0.013s wall-clock]
+Computing fact groups...
+Finding invariants...
+47 initial candidates
+Finding invariants: [0.000s CPU, 0.002s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups... [0.000s CPU, 0.000s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.000s wall-clock]
+Choosing groups...
+82 uncovered facts
+Choosing groups: [0.000s CPU, 0.000s wall-clock]
+Building translation key... [0.000s CPU, 0.000s wall-clock]
+Computing fact groups: [0.000s CPU, 0.002s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.000s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.000s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.000s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
+Translator axioms removed by simplifying: 0
+Processing axioms: [0.000s CPU, 0.000s wall-clock]
+Translating task: [0.050s CPU, 0.052s wall-clock]
+1053 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+6 operators removed
+0 axioms removed
+114 propositions removed
+Detecting unreachable propositions: [0.010s CPU, 0.011s wall-clock]
+Reordering and filtering variables...
+38 of 38 variables necessary.
+0 of 13 mutex groups necessary.
+324 of 324 operators necessary.
+0 of 0 axiom rules necessary.
+Reordering and filtering variables: [0.010s CPU, 0.007s wall-clock]
+Translator variables: 38
+Translator derived variables: 0
+Translator facts: 101
+Translator goal facts: 2
+Translator mutex groups: 0
+Translator total mutex groups size: 0
+Translator operators: 324
+Translator axioms: 0
+Translator task size: 21002
+warning: could not determine peak memory
+Writing output... [0.010s CPU, 0.006s wall-clock]
+Done! [0.100s CPU, 0.095s wall-clock]
+b"Warning: name clash between type and predicate 'boss-phase'.\nInterpreting as predicate in conditions.\nWarning: name clash between type and predicate 'player-level'.\nInterpreting as predicate in conditions.\n"
+translate exit code: 0
+
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: 1800s
+INFO     search memory limit: None
+INFO     search command line string: /Users/vramos/Master_uc3m/PlanifAuto/downward/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < output.sas
+[t=0.000176s, 435302992 KB] Search code revision: 505701e0f
+[t=0.000188s, 435302992 KB] reading input...
+[t=0.006049s, 435302992 KB] done reading input!
+[t=0.006848s, 435307088 KB] Initializing landmark sum heuristic...
+[t=0.006863s, 435307088 KB] Generating landmark graph...
+[t=0.006900s, 435307088 KB] Building a landmark graph with reasonable orders.
+[t=0.006931s, 435307088 KB] Initializing Exploration...
+[t=0.007494s, 435307088 KB] Generating landmarks using the RPG/SAS+ approach
+[t=0.010675s, 435307088 KB] Landmarks generation time: 0.003774s
+[t=0.010682s, 435307088 KB] Discovered 31 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=0.010685s, 435307088 KB] There are 175 landmark orderings.
+[t=0.010688s, 435307088 KB] approx. reasonable orders
+[t=0.010769s, 435307088 KB] Landmarks generation time: 0.003905s
+[t=0.010772s, 435307088 KB] Discovered 31 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=0.010775s, 435307088 KB] There are 181 landmark orderings.
+[t=0.010778s, 435307088 KB] Landmark graph generation time: 0.003916s
+[t=0.010780s, 435307088 KB] Landmark graph contains 31 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=0.010783s, 435307088 KB] Landmark graph contains 181 orderings.
+[t=0.011103s, 435307088 KB] Simplifying 5186 unary operators... done! [4706 unary operators]
+[t=0.013441s, 435307088 KB] time to simplify: 0.002339s
+[t=0.013533s, 435307088 KB] Initializing additive heuristic...
+[t=0.013536s, 435307088 KB] Initializing FF heuristic...
+[t=0.013560s, 435307088 KB] Building successor generator...done!
+[t=0.013640s, 435307088 KB] peak memory difference for successor generator creation: 0 KB
+[t=0.013642s, 435307088 KB] time for successor generation creation: 0.000074s
+[t=0.013645s, 435307088 KB] Variables: 38
+[t=0.013648s, 435307088 KB] FactPairs: 101
+[t=0.013650s, 435307088 KB] Bytes per state: 8
+[t=0.013667s, 435307088 KB] Conducting lazy best first search, (real) bound = 2147483647
+[t=0.013708s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 22
+[t=0.013711s, 435307088 KB] New best heuristic value for ff: 21
+[t=0.013714s, 435307088 KB] g=0, 1 evaluated, 0 expanded
+[t=0.013719s, 435307088 KB] Initial heuristic value for landmark_sum_heuristic: 22
+[t=0.013722s, 435307088 KB] Initial heuristic value for ff: 21
+[t=0.013755s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 21
+[t=0.013757s, 435307088 KB] g=1, 2 evaluated, 1 expanded
+[t=0.013820s, 435307088 KB] New best heuristic value for ff: 20
+[t=0.013823s, 435307088 KB] g=3, 4 evaluated, 3 expanded
+[t=0.013853s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 20
+[t=0.013856s, 435307088 KB] New best heuristic value for ff: 19
+[t=0.013858s, 435307088 KB] g=4, 5 evaluated, 4 expanded
+[t=0.013916s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 19
+[t=0.013918s, 435307088 KB] g=5, 7 evaluated, 6 expanded
+[t=0.013947s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 18
+[t=0.013949s, 435307088 KB] New best heuristic value for ff: 18
+[t=0.013952s, 435307088 KB] g=6, 8 evaluated, 7 expanded
+[t=0.013991s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 17
+[t=0.013994s, 435307088 KB] New best heuristic value for ff: 17
+[t=0.013997s, 435307088 KB] g=7, 10 evaluated, 8 expanded
+[t=0.014090s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 16
+[t=0.014093s, 435307088 KB] New best heuristic value for ff: 16
+[t=0.014095s, 435307088 KB] g=9, 14 evaluated, 11 expanded
+[t=0.014171s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 15
+[t=0.014174s, 435307088 KB] g=10, 17 evaluated, 14 expanded
+[t=0.014202s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 14
+[t=0.014204s, 435307088 KB] New best heuristic value for ff: 15
+[t=0.014206s, 435307088 KB] g=11, 18 evaluated, 15 expanded
+[t=0.016232s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 13
+[t=0.016236s, 435307088 KB] New best heuristic value for ff: 14
+[t=0.016238s, 435307088 KB] g=13, 113 evaluated, 88 expanded
+[t=0.016267s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 12
+[t=0.016269s, 435307088 KB] New best heuristic value for ff: 13
+[t=0.016271s, 435307088 KB] g=14, 114 evaluated, 89 expanded
+[t=0.016306s, 435307088 KB] New best heuristic value for ff: 12
+[t=0.016309s, 435307088 KB] g=15, 115 evaluated, 90 expanded
+[t=0.016359s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 11
+[t=0.016362s, 435307088 KB] g=16, 117 evaluated, 92 expanded
+[t=0.016381s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 10
+[t=0.016383s, 435307088 KB] g=17, 118 evaluated, 93 expanded
+[t=0.016417s, 435307088 KB] New best heuristic value for ff: 11
+[t=0.016419s, 435307088 KB] g=17, 120 evaluated, 94 expanded
+[t=0.016484s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 9
+[t=0.016486s, 435307088 KB] g=20, 123 evaluated, 97 expanded
+[t=0.016532s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 8
+[t=0.016534s, 435307088 KB] New best heuristic value for ff: 10
+[t=0.016537s, 435307088 KB] g=22, 126 evaluated, 99 expanded
+[t=0.016590s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 7
+[t=0.016593s, 435307088 KB] New best heuristic value for ff: 9
+[t=0.016595s, 435307088 KB] g=24, 129 evaluated, 101 expanded
+[t=0.016927s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 6
+[t=0.016930s, 435307088 KB] New best heuristic value for ff: 8
+[t=0.016932s, 435307088 KB] g=26, 148 evaluated, 116 expanded
+[t=0.016973s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 5
+[t=0.016975s, 435307088 KB] New best heuristic value for ff: 7
+[t=0.016977s, 435307088 KB] g=28, 151 evaluated, 118 expanded
+[t=0.023203s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 4
+[t=0.023208s, 435307088 KB] New best heuristic value for ff: 6
+[t=0.023210s, 435307088 KB] g=32, 477 evaluated, 372 expanded
+[t=0.090706s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 3
+[t=0.090717s, 435307088 KB] New best heuristic value for ff: 5
+[t=0.090720s, 435307088 KB] g=40, 3730 evaluated, 2996 expanded
+[t=0.090740s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 2
+[t=0.090743s, 435307088 KB] New best heuristic value for ff: 4
+[t=0.090745s, 435307088 KB] g=41, 3731 evaluated, 2997 expanded
+[t=0.090765s, 435307088 KB] New best heuristic value for ff: 3
+[t=0.090768s, 435307088 KB] g=42, 3732 evaluated, 2998 expanded
+[t=0.090787s, 435307088 KB] New best heuristic value for ff: 2
+[t=0.090790s, 435307088 KB] g=43, 3733 evaluated, 2999 expanded
+[t=0.090808s, 435307088 KB] New best heuristic value for landmark_sum_heuristic: 1
+[t=0.090811s, 435307088 KB] New best heuristic value for ff: 1
+[t=0.090813s, 435307088 KB] g=44, 3734 evaluated, 3000 expanded
+[t=0.090822s, 435307088 KB] Solution found!
+[t=0.090827s, 435307088 KB] Actual search time: 0.077155s
+move firelink burg (1)
+move burg parish (1)
+open-shortcut parish firelink (1)
+pick-up-key crest-of-artorias parish (1)
+move parish darkroot (1)
+unlock-door crest-of-artorias darkroot boss-arena (1)
+pick-up-titanite darkroot (1)
+move darkroot parish (1)
+upgrade-weapon parish w0 w1 (1)
+move parish roof (1)
+attack-boss gargoyles roof hp2 hp1 bp2 bp1 (1)
+drink-estus e1 hp1 hp2 hp2 (1)
+attack-boss gargoyles roof hp2 hp1 bp1 bp0 (1)
+kill-boss gargoyles roof w1 e3 bp0 (1)
+move roof parish (1)
+move parish firelink (1)
+deposit-soul gargoyles firelink (1)
+drink-estus e3 hp1 hp2 hp2 (1)
+move firelink parish (1)
+attack-minor balder-knight parish hp2 hp1 (1)
+execute-enemy balder-knight parish s0 s1 (1)
+rest parish (1)
+attack-minor balder-knight parish hp2 hp1 (1)
+execute-enemy balder-knight parish s1 s2 (1)
+rest parish (1)
+attack-minor balder-knight parish hp2 hp1 (1)
+execute-enemy balder-knight parish s2 s3 (1)
+level-up-stats parish pl0 pl1 hp2 hp3 s3 s2 (1)
+level-up-stats parish pl1 pl2 hp3 hp4 s2 s0 (1)
+move parish darkroot (1)
+move darkroot boss-arena (1)
+attack-boss sif boss-arena hp4 hp3 bp6 bp5 (1)
+attack-boss sif boss-arena hp3 hp2 bp5 bp4 (1)
+attack-boss sif boss-arena hp2 hp1 bp4 bp3 (1)
+drink-estus e3 hp1 hp2 hp4 (1)
+attack-boss sif boss-arena hp2 hp1 bp3 bp2 (1)
+drink-estus e1 hp1 hp2 hp4 (1)
+attack-boss sif boss-arena hp2 hp1 bp2 bp1 (1)
+drink-estus e2 hp1 hp2 hp4 (1)
+attack-boss sif boss-arena hp2 hp1 bp1 bp0 (1)
+kill-boss sif boss-arena w1 e4 bp0 (1)
+move boss-arena darkroot (1)
+move darkroot parish (1)
+move parish firelink (1)
+deposit-soul sif firelink (1)
+[t=0.090829s, 435307088 KB] Plan length: 45 step(s).
+[t=0.090829s, 435307088 KB] Plan cost: 45
+[t=0.090829s, 435307088 KB] Expanded 3001 state(s).
+[t=0.090829s, 435307088 KB] Reopened 0 state(s).
+[t=0.090829s, 435307088 KB] Evaluated 3735 state(s).
+[t=0.090829s, 435307088 KB] Evaluations: 6737
+[t=0.090829s, 435307088 KB] Generated 8282 state(s).
+[t=0.090829s, 435307088 KB] Dead ends: 733 state(s).
+[t=0.090829s, 435307088 KB] Number of registered states: 3735
+[t=0.090829s, 435307088 KB] Int hash set load factor: 3735/4096 = 0.911865
+[t=0.090829s, 435307088 KB] Int hash set resizes: 12
+[t=0.090829s, 435307088 KB] Search time: 0.077162s
+[t=0.090829s, 435307088 KB] Total time: 0.090829s
+Solution found.
+Peak memory: 435307088 KB
+Remove intermediate file output.sas
+search exit code: 0
+
+INFO     Planner time: 0.24s
+
+=== Experiment Summary ===
+End Time: 2025-12-16 11:43:13
+Runtime: 0 seconds
+Exit Code: 0
+Status: SUCCESS
+Explanation: SUCCESS (solution found)
