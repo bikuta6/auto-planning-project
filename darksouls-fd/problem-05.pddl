@@ -34,6 +34,7 @@
     (is-alive quelaag)
     (has-active-boss quelaag-arena)
     (at-player firelink)
+    (last-rested-bonfire firelink)
 
     ;; discrete ladders
     (hp-next hp0 hp1) (hp-next hp1 hp2) (hp-next hp2 hp3) (hp-next hp3 hp4) (hp-next hp4 hp5) (hp-next hp5 hp6)

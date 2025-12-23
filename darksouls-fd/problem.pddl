@@ -32,6 +32,7 @@
     (has-active-boss boss-arena)
     (has-active-boss roof)
     (at-player firelink)
+    (last-rested-bonfire firelink)
     (is-firelink firelink)
     (has-bonfire firelink)
     (has-bonfire parish)

@@ -486,7 +486,6 @@
       (player-dead)                        ;; El jugador está muerto
       (last-rested-bonfire ?bonfire-loc)   ;; Existe una hoguera de respawn
       (player-max-hp ?max-hp)              ;; Para curar al máximo
-      (player-max-souls ?min-souls)        ;; Asumimos que el mínimo es el "máximo" definido como s0
     )
     :effect (and
       (not (player-dead))                  ;; Ya no está muerto
@@ -502,9 +501,10 @@
       ;; Restaura HP al máximo
       (forall (?h - hp-level)
         (when (player-hp ?h)
-          (and (not (player-hp ?h)) (player-hp ?max-hp))
+          (not (player-hp ?h))
         )
       )
+      (player-hp ?max-hp)
       
       ;; Rellena todos los estus desbloqueados
       (forall (?s - estus-slot)
@@ -519,25 +519,35 @@
           (not (player-souls ?s))
         )
       )
-      ;; Resetea almas al mínimo (debe estar definido en el problema como s0 o similar)
       (player-souls ?min-souls)
       
-      ;; PENALIZACION: Revive todos los enemigos menores a salud máxima
+      ;; PENALIZACION: Revive todos los enemigos menores
       (forall (?m - minor-enemy)
         (when (not (is-alive ?m))
-          (and (is-alive ?m) (not (weakened ?m)))
+          (is-alive ?m)
+        )
+      )
+      (forall (?m - minor-enemy)
+        (when (is-alive ?m)
+          (not (weakened ?m))
         )
       )
       
       ;; PENALIZACION: Resetea la fase de todos los jefes vivos al máximo
-      (forall (?b - boss ?pmax - boss-phase)
-        (when (and (is-alive ?b) (boss-max-phase ?b ?pmax))
+      (forall (?b - boss)
+        (when (is-alive ?b)
           (forall (?p - boss-phase)
             (when (boss-current-phase ?b ?p)
-              (and 
-                (not (boss-current-phase ?b ?p))
-                (boss-current-phase ?b ?pmax)
-              )
+              (not (boss-current-phase ?b ?p))
+            )
+          )
+        )
+      )
+      (forall (?b - boss)
+        (when (is-alive ?b)
+          (forall (?pmax - boss-phase)
+            (when (boss-max-phase ?b ?pmax)
+              (boss-current-phase ?b ?pmax)
             )
           )
         )

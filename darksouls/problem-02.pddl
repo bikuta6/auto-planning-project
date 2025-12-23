@@ -41,6 +41,7 @@
     (= (level-up-cost) 100)
     (= (player-weapon-level) 0)
     (at-player firelink)
+    (last-rested-bonfire firelink)
     (= (total-cost) 0)
 
     ;; mob stats

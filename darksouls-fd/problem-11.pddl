@@ -37,6 +37,7 @@
     (is-alive taurus-demon)
     (has-active-boss boss-arena)
     (at-player firelink)
+    (last-rested-bonfire firelink)
 
     ;; discrete ladders
     (hp-next hp0 hp1) (hp-next hp1 hp2) (hp-next hp2 hp3)

@@ -37,6 +37,7 @@
     (= (total-cost) 0)
 
     (at-player firelink)
+    (last-rested-bonfire firelink)
 
     ;; enemy stats
     (= (enemy-health taurus) 180)

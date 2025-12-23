@@ -37,6 +37,7 @@
     (= (level-up-cost) 120)
     (= (player-weapon-level) 0)
     (at-player firelink)
+    (last-rested-bonfire firelink)
     (= (total-cost) 0)
 
     ;; enemy stats
