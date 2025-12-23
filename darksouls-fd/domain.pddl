@@ -17,7 +17,7 @@
 ;; =================================================================
 
 (define (domain dark-souls-fd)
-  (:requirements :strips :typing :negative-preconditions :adl)
+  (:requirements :strips :typing :negative-preconditions :adl :action-costs)
 
   (:types
     location - object
@@ -78,9 +78,10 @@
     (hp-after-attack ?e - enemy ?h1 ?h2 - hp-level) ;; cómo queda la vida tras atacar a ?e
 
     (player-dead)                                  ;; estado terminal: no puedes actuar
+    (last-rested-bonfire ?loc - location)          ;; última hoguera donde descansó el jugador
 
     ;; jefe: contador de golpes
-    (boss-phase ?b - boss ?p - boss-phase)
+    (boss-current-phase ?b - boss ?p - boss-phase)
     (boss-phase-next ?p1 ?p2 - boss-phase)         ;; decremento: p1 -> p2
     (boss-max-phase ?b - boss ?p - boss-phase)     ;; fase inicial para resetear al huir
     (boss-phase-zero ?p - boss-phase)              ;; marca la fase 0 (boss listo para rematar)
@@ -89,7 +90,7 @@
     (wlevel-next ?w1 ?w2 - wlevel)
     (can-damage-boss ?b - boss ?w - wlevel)       ;; tabla: qué niveles de arma pueden dañar al jefe
 
-    (player-level ?l - player-level)
+    (player-current-level ?l - player-level)
     (player-level-next ?l1 ?l2 - player-level)
 
     ;; Estus
@@ -104,6 +105,13 @@
     (soul-after-drop ?e - enemy ?s1 ?s2 - soul-level)
     ;; tabla de gasto por subir nivel: desde l1 a l2, s1 -> s2 (coste creciente por nivel)
     (soul-spend-for-level ?l1 ?l2 - player-level ?s1 ?s2 - soul-level)
+  )
+
+  ;; =================================================================
+  ;; FUNCIONES
+  ;; =================================================================
+  (:functions
+    (total-cost) - number  ; Costo total acumulado (métrica de optimización)
   )
 
   ;; =================================================================
@@ -122,33 +130,35 @@
     :effect (and
       (not (at-player ?from))
       (at-player ?to)
+      (increase (total-cost) 10)
     )
   )
 
-  ;(:action flee-boss
-  ;  :parameters (?from ?to - location ?b - boss ?pmax - boss-phase)
-  ;  :precondition (and
-  ;    (at-player ?from)
-  ;    (not (player-dead))
-  ;    (connected ?from ?to)
-  ;    (not (locked ?from ?to))
-  ;    (has-active-boss ?from)
-  ;    (enemy-at ?b ?from)
-  ;    (is-alive ?b)
-  ;    (boss-max-phase ?b ?pmax)
-  ;  )
-  ;  :effect (and
-  ;    (not (at-player ?from))
-  ;    (at-player ?to)
-  ;    ;; huir resetea el contador de golpes del jefe
-  ;    (forall (?p - boss-phase)
-  ;      (when (boss-phase ?b ?p)
-  ;        (not (boss-phase ?b ?p))
-  ;      )
-  ;    )
-  ;    (boss-phase ?b ?pmax)
-  ;  )
-  ;)
+  (:action flee-boss
+    :parameters (?from ?to - location ?b - boss ?pmax - boss-phase)
+    :precondition (and
+      (at-player ?from)
+      (not (player-dead))
+      (connected ?from ?to)
+      (not (locked ?from ?to))
+      (has-active-boss ?from)
+      (enemy-at ?b ?from)
+      (is-alive ?b)
+      (boss-max-phase ?b ?pmax)
+    )
+    :effect (and
+      (not (at-player ?from))
+      (at-player ?to)
+      ;; huir resetea el contador de golpes del jefe
+      (forall (?p - boss-phase)
+        (when (boss-current-phase ?b ?p)
+          (not (boss-current-phase ?b ?p))
+        )
+      )
+      (boss-current-phase ?b ?pmax)
+      (increase (total-cost) 20)
+    )
+  )
 
   ;; =================================================================
   ;; INVENTARIO / EXPLORACIÓN
@@ -164,6 +174,7 @@
     :effect (and
       (not (key-at ?k ?loc))
       (has-key ?k)
+      (increase (total-cost) 5)
     )
   )
 
@@ -180,6 +191,7 @@
     :effect (and
       (not (locked ?loc ?to))
       (not (locked ?to ?loc))
+      (increase (total-cost) 10)
     )
   )
 
@@ -194,6 +206,7 @@
       (not (can-open-shortcut ?loc ?dest))
       (connected ?loc ?dest)
       (connected ?dest ?loc)
+      (increase (total-cost) 15)
     )
   )
 
@@ -207,12 +220,18 @@
     :effect (and
       (not (titanite-at ?loc))
       (has-titanite)
+      (increase (total-cost) 5)
     )
   )
 
   ;; =================================================================
   ;; MEJORA DE ARMA
   ;; =================================================================
+  ;; NOTA IMPORTANTE: La mejora de arma NO aumenta el daño del jugador.
+  ;; El nivel de arma actúa como un "gate" (requisito) para poder enfrentar
+  ;; ciertos jefes. El predicado (can-damage-boss ?b ?w) define qué nivel
+  ;; mínimo de arma se requiere para cada jefe.
+  ;; El daño real al jefe se codifica en la tabla (hp-after-attack) del problema.
 
   (:action upgrade-weapon
     :parameters (?loc - location ?w1 ?w2 - wlevel)
@@ -228,6 +247,7 @@
       (not (has-titanite))
       (not (player-weapon-level ?w1))
       (player-weapon-level ?w2)
+      (increase (total-cost) 50)
     )
   )
 
@@ -255,6 +275,7 @@
       (when (hp-zero ?h2)
         (player-dead)
       )
+      (increase (total-cost) 5)
     )
   )
 
@@ -268,17 +289,18 @@
       (is-alive ?b)
       (player-hp ?h1)
       (hp-after-attack ?b ?h1 ?h2)
-      (boss-phase ?b ?p1)
+      (boss-current-phase ?b ?p1)
       (boss-phase-next ?p1 ?p2)
     )
     :effect (and
       (not (player-hp ?h1))
       (player-hp ?h2)
-      (not (boss-phase ?b ?p1))
-      (boss-phase ?b ?p2)
+      (not (boss-current-phase ?b ?p1))
+      (boss-current-phase ?b ?p2)
       (when (hp-zero ?h2)
         (player-dead)
       )
+      (increase (total-cost) 5)
     )
   )
 
@@ -298,6 +320,7 @@
       (not (weakened ?e))
       (not (player-souls ?s1))
       (player-souls ?s2)
+      (increase (total-cost) 2)
     )
   )
 
@@ -311,7 +334,7 @@
       (not (player-dead))
       (enemy-at ?b ?loc)
       (is-alive ?b)
-      (boss-phase ?b ?p)
+      (boss-current-phase ?b ?p)
       (boss-phase-zero ?p)
       (player-weapon-level ?w)
       (can-damage-boss ?b ?w)
@@ -321,8 +344,8 @@
     :effect (and
       (not (is-alive ?b))
       (forall (?p - boss-phase)
-        (when (boss-phase ?b ?p)
-          (not (boss-phase ?b ?p))
+        (when (boss-current-phase ?b ?p)
+          (not (boss-current-phase ?b ?p))
         )
       )
       (not (has-active-boss ?loc))
@@ -330,6 +353,7 @@
 
       (estus-unlocked ?slot)
       (estus-full ?slot)
+      (increase (total-cost) 100)
     )
   )
 
@@ -352,10 +376,12 @@
       (not (estus-full ?slot))
       (not (player-hp ?h1))
       (player-hp ?h2)
+      (increase (total-cost) 5)
     )
   )
 
   ;; Descansar: cura al máximo, rellena estus, revive enemigos menores.
+  ;; También actualiza la última hoguera donde descansó (para respawn).
   (:action rest
     :parameters (?loc - location)
     :precondition (and
@@ -384,6 +410,16 @@
           (and (is-alive ?m) (not (weakened ?m)))
         )
       )
+      
+      ;; actualiza la última hoguera de descanso
+      (forall (?old-loc - location)
+        (when (last-rested-bonfire ?old-loc)
+          (not (last-rested-bonfire ?old-loc))
+        )
+      )
+      (last-rested-bonfire ?loc)
+      
+      (increase (total-cost) 60)
     )
   )
 
@@ -394,7 +430,7 @@
       (at-player ?loc)
       (not (player-dead))
       (has-bonfire ?loc)
-      (player-level ?l1)
+      (player-current-level ?l1)
       (player-level-next ?l1 ?l2)
       (player-max-hp ?m1)
       (hp-next ?m1 ?m2)
@@ -402,8 +438,8 @@
       (soul-spend-for-level ?l1 ?l2 ?s1 ?s2)
     )
     :effect (and
-      (not (player-level ?l1))
-      (player-level ?l2)
+      (not (player-current-level ?l1))
+      (player-current-level ?l2)
       (not (player-max-hp ?m1))
       (player-max-hp ?m2)
 
@@ -416,6 +452,7 @@
           (and (not (player-hp ?h)) (player-hp ?m2))
         )
       )
+      (increase (total-cost) 10)
     )
   )
 
@@ -430,6 +467,83 @@
     :effect (and
       (not (has-boss-soul ?b))
       (deposited-soul ?b)
+      (increase (total-cost) 10)
+    )
+  )
+
+  ;; =================================================================
+  ;; MUERTE Y RESPAWN
+  ;; =================================================================
+
+  ;; RESPAWN: Revive al jugador en la última hoguera donde descansó
+  ;; PENALIZACIONES COSTOSAS (simulando Dark Souls):
+  ;; - Pierde TODAS las almas acumuladas (vuelve a soul-level mínimo)
+  ;; - Revive a TODOS los enemigos menores
+  ;; - Alto costo de acción (muerte es muy costosa)
+  (:action respawn
+    :parameters (?bonfire-loc - location ?max-hp - hp-level ?min-souls - soul-level)
+    :precondition (and
+      (player-dead)                        ;; El jugador está muerto
+      (last-rested-bonfire ?bonfire-loc)   ;; Existe una hoguera de respawn
+      (player-max-hp ?max-hp)              ;; Para curar al máximo
+      (player-max-souls ?min-souls)        ;; Asumimos que el mínimo es el "máximo" definido como s0
+    )
+    :effect (and
+      (not (player-dead))                  ;; Ya no está muerto
+      
+      ;; Teleporta al jugador a la hoguera
+      (forall (?old-loc - location)
+        (when (at-player ?old-loc)
+          (not (at-player ?old-loc))
+        )
+      )
+      (at-player ?bonfire-loc)
+      
+      ;; Restaura HP al máximo
+      (forall (?h - hp-level)
+        (when (player-hp ?h)
+          (and (not (player-hp ?h)) (player-hp ?max-hp))
+        )
+      )
+      
+      ;; Rellena todos los estus desbloqueados
+      (forall (?s - estus-slot)
+        (when (estus-unlocked ?s)
+          (estus-full ?s)
+        )
+      )
+      
+      ;; PENALIZACION CRITICA: Pierde todas las almas (vuelve al nivel mínimo)
+      (forall (?s - soul-level)
+        (when (player-souls ?s)
+          (not (player-souls ?s))
+        )
+      )
+      ;; Resetea almas al mínimo (debe estar definido en el problema como s0 o similar)
+      (player-souls ?min-souls)
+      
+      ;; PENALIZACION: Revive todos los enemigos menores a salud máxima
+      (forall (?m - minor-enemy)
+        (when (not (is-alive ?m))
+          (and (is-alive ?m) (not (weakened ?m)))
+        )
+      )
+      
+      ;; PENALIZACION: Resetea la fase de todos los jefes vivos al máximo
+      (forall (?b - boss ?pmax - boss-phase)
+        (when (and (is-alive ?b) (boss-max-phase ?b ?pmax))
+          (forall (?p - boss-phase)
+            (when (boss-current-phase ?b ?p)
+              (and 
+                (not (boss-current-phase ?b ?p))
+                (boss-current-phase ?b ?pmax)
+              )
+            )
+          )
+        )
+      )
+      
+      (increase (total-cost) 200)          ;; Costo MUY alto - morir es muy costoso
     )
   )
 )

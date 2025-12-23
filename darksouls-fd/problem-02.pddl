@@ -43,7 +43,7 @@
     (hp-leq hp3 hp3)
     (player-max-hp hp2)
     (player-hp hp2)
-    (player-level pl0) (player-level-next pl0 pl1)
+    (player-current-level pl0) (player-level-next pl0 pl1)
     (player-weapon-level w0)
 
     ;; souls ladder (discrete, with max)
@@ -56,9 +56,9 @@
     (boss-phase-next bp2 bp1)
     (boss-phase-next bp1 bp0)
     (boss-max-phase gargoyle1 bp2)
-    (boss-phase gargoyle1 bp2)
+    (boss-current-phase gargoyle1 bp2)
     (boss-max-phase gargoyle2 bp2)
-    (boss-phase gargoyle2 bp2)
+    (boss-current-phase gargoyle2 bp2)
     (estus-unlocked e1)
     (estus-unlocked e2)
     (estus-full e1)
@@ -88,9 +88,13 @@
     ;; boss weapon requirements
     (can-damage-boss gargoyle1 w0)
     (can-damage-boss gargoyle2 w0)
+  
+    ;; cost tracking
+    (= (total-cost) 0)
   )
   (:goal (and
     (deposited-soul gargoyle1)
     (deposited-soul gargoyle2)
   ))
+  (:metric minimize (total-cost))
 )

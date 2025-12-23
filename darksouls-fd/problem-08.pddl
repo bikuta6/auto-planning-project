@@ -47,7 +47,7 @@
     (hp-leq hp3 hp3)
     (player-max-hp hp2)
     (player-hp hp2)
-    (player-level pl0) (player-level-next pl0 pl1)
+    (player-current-level pl0) (player-level-next pl0 pl1)
     (player-weapon-level w1)
     (wlevel-next w0 w1)
 
@@ -61,7 +61,7 @@
     (boss-phase-next bp2 bp1)
     (boss-phase-next bp1 bp0)
     (boss-max-phase dummy-boss bp2)
-    (boss-phase dummy-boss bp2)
+    (boss-current-phase dummy-boss bp2)
     (estus-unlocked e1)
     (estus-full e1)
 
@@ -90,9 +90,13 @@
     ;; boss weapon requirements
     (can-damage-boss dummy-boss w0)
     (can-damage-boss dummy-boss w1)
+  
+    ;; cost tracking
+    (= (total-cost) 0)
   )
   (:goal (and
     (not (locked gatehouse inner-valley))
     (at-player inner-valley)
   ))
+    (:metric minimize (total-cost))
 )

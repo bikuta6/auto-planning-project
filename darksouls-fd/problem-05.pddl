@@ -49,7 +49,7 @@
 
     (player-max-hp hp4)
     (player-hp hp4)
-    (player-level pl0) (player-level-next pl0 pl1) (player-level-next pl1 pl2) (player-level-next pl2 pl3)
+    (player-current-level pl0) (player-level-next pl0 pl1) (player-level-next pl1 pl2) (player-level-next pl2 pl3)
     (player-weapon-level w0)
     (wlevel-next w0 w1)
 
@@ -65,7 +65,7 @@
     (boss-phase-next bp3 bp2)
     (boss-phase-next bp4 bp3)
     (boss-max-phase quelaag bp4)
-    (boss-phase quelaag bp4)
+    (boss-current-phase quelaag bp4)
     (estus-unlocked e1)
     (estus-full e1)
 
@@ -109,9 +109,13 @@
 
     ;; boss weapon requirements
     (can-damage-boss quelaag w1)
+  
+    ;; cost tracking
+    (= (total-cost) 0)
   )
   (:goal (and
     (not (is-alive quelaag))
     (deposited-soul quelaag)
   ))
+    (:metric minimize (total-cost))
 )

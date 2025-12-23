@@ -50,6 +50,10 @@
         (has-boss-soul ?b - boss)            ; El jugador tiene el alma de un jefe
         (deposited-soul ?b - boss)           ; El alma de un jefe ha sido depositada
         (has-active-boss ?loc - location)    ; Hay un jefe activo en la ubicación (muro de niebla)
+        
+        ;; SISTEMA DE MUERTE Y RESPAWN
+        (player-dead)                        ; El jugador está muerto (no puede actuar)
+        (last-rested-bonfire ?loc - location) ; Última hoguera donde descansó el jugador
     )
 
     ;; FUNCIONES NUMERICAS
@@ -92,6 +96,7 @@
         :parameters (?from ?to - location)
         :precondition (and 
             (at-player ?from)                ; El jugador está en la ubicación origen
+            (not (player-dead))              ; El jugador no está muerto
             (connected ?from ?to)            ; Las ubicaciones están conectadas
             (not (locked ?from ?to))         ; La conexión no está cerrada
             (not (has-active-boss ?from))    ; No hay jefe activo (muro de niebla)
@@ -109,6 +114,7 @@
         :parameters (?from ?to - location ?b - boss)
         :precondition (and 
             (at-player ?from)                ; Está en la ubicación del jefe
+            (not (player-dead))              ; El jugador no está muerto
             (connected ?from ?to)            ; Hay conexión de escape
             (not (locked ?from ?to))         ; La salida no está cerrada
             (has-active-boss ?from)          ; Hay un jefe activo
@@ -127,18 +133,21 @@
     ;; =================================================================
     
     ;; MEJORAR ARMA: Aumenta el nivel del arma usando titanita en el herrero
-    ;; Cada mejora aumenta el nivel numérico y el daño del jugador
+    ;; NOTA: La mejora de arma NO aumenta el daño del jugador.
+    ;; Solo incrementa el nivel de arma, que actúa como un "gate" para
+    ;; poder enfrentar ciertos jefes que requieren un nivel mínimo.
+    ;; Esto mantiene la coherencia con el dominio proposicional (FD).
     (:action upgrade-weapon
         :parameters (?loc - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación
+            (not (player-dead))              ; El jugador no está muerto
             (is-blacksmith ?loc)             ; La ubicación tiene herrero
             (has-titanite)                   ; Tiene material de mejora
         )
         :effect (and 
             (not (has-titanite))             ; Consume la titanita
             (increase (player-weapon-level) 1) ; Sube el nivel del arma en +1
-            (increase (player-damage) 10)     ; Aumenta el daño base
             (increase (total-cost) 50)       ; Costo de la mejora
         )
     )
@@ -154,6 +163,7 @@
         :parameters (?b - boss ?loc - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación del jefe
+            (not (player-dead))              ; El jugador no está muerto
             (enemy-at ?b ?loc)               ; El jefe está aquí
             (is-alive ?b)                    ; El jefe está vivo
             (<= (enemy-health ?b) 0)         ; El jefe está debilitado (salud agotada)
@@ -180,6 +190,7 @@
         :parameters (?k - key ?loc - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación
+            (not (player-dead))              ; El jugador no está muerto
             (key-at ?k ?loc)                 ; La llave está en esta ubicación
         )
         :effect (and 
@@ -194,6 +205,7 @@
         :parameters (?k - key ?loc - location ?to - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación origen
+            (not (player-dead))              ; El jugador no está muerto
             (connected ?loc ?to)             ; Hay conexión entre ubicaciones
             (locked ?loc ?to)                ; La conexión está cerrada
             (has-key ?k)                     ; Tiene la llave
@@ -211,6 +223,7 @@
         :parameters (?loc - location ?dest - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación
+            (not (player-dead))              ; El jugador no está muerto
             (can-open-shortcut ?loc ?dest)   ; Se puede abrir este atajo
         )
         :effect (and 
@@ -226,18 +239,23 @@
     ;; =================================================================
 
     ;; ATACAR: Intercambia daño con un enemigo
+    ;; Si el ataque reduce la salud a 0 o menos, el jugador muere
     (:action attack
         :parameters (?e - enemy ?loc - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación del enemigo
+            (not (player-dead))              ; El jugador no está muerto
             (enemy-at ?e ?loc)               ; El enemigo está aquí
             (is-alive ?e)                    ; El enemigo está vivo
             (> (enemy-health ?e) 0)          ; El enemigo tiene salud
-            (> (player-health) (enemy-damage ?e)) ; El jugador sobrevivirá al contraataque
         )
         :effect (and 
             (decrease (enemy-health ?e) (player-damage))    ; Daña al enemigo
             (decrease (player-health) (enemy-damage ?e))    ; El enemigo contraataca
+            ;; Si la salud cae a 0 o menos, el jugador muere
+            (when (<= (player-health) 0)
+                (player-dead)
+            )
             (increase (total-cost) 5)        ; Costo del combate
         )
     )
@@ -247,6 +265,7 @@
         :parameters (?e - enemy ?loc - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación del enemigo
+            (not (player-dead))              ; El jugador no está muerto
             (enemy-at ?e ?loc)               ; El enemigo está aquí
             (is-alive ?e)                    ; El enemigo está vivo pero...
             (<= (enemy-health ?e) 0)         ; ...está debilitado (salud agotada)
@@ -263,6 +282,7 @@
         :parameters (?loc - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación
+            (not (player-dead))              ; El jugador no está muerto
             (titanite-at ?loc)               ; Hay titanita aquí
         )
         :effect (and 
@@ -280,6 +300,7 @@
     (:action drink-estus
         :parameters ()
         :precondition (and 
+            (not (player-dead))              ; El jugador no está muerto
             (> (estus-charges) 0)            ; Tiene frascos disponibles
             (< (player-health) (player-max-health)) ; No está a salud máxima
         )
@@ -292,10 +313,12 @@
         
     ;; DESCANSAR: Usa una hoguera para recuperar salud y frascos completamente
     ;; ATENCION: También revive a todos los enemigos menores
+    ;; Actualiza la última hoguera donde el jugador descansó (para respawn)
     (:action rest
         :parameters (?loc - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación
+            (not (player-dead))              ; El jugador no está muerto
             (has-bonfire ?loc)               ; La ubicación tiene hoguera
         )
         :effect (and 
@@ -310,6 +333,13 @@
                     )
                 )
             )
+            ;; Actualiza la última hoguera de descanso
+            (forall (?old-loc - location)
+                (when (last-rested-bonfire ?old-loc)
+                    (not (last-rested-bonfire ?old-loc))
+                )
+            )
+            (last-rested-bonfire ?loc)
             (increase (total-cost) 60)       ; Costo alto por descansar
         )
     )
@@ -319,6 +349,7 @@
         :parameters (?loc - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación
+            (not (player-dead))              ; El jugador no está muerto
             (has-bonfire ?loc)               ; Es una hoguera cualquiera
             (>= (player-souls) (level-up-cost)) ; Tiene suficientes almas
         )
@@ -336,6 +367,7 @@
         :parameters (?b - boss ?loc - location)
         :precondition (and 
             (at-player ?loc)                 ; Está en la ubicación
+            (not (player-dead))              ; El jugador no está muerto
             (is-firelink ?loc)               ; Es Firelink Shrine
             (has-boss-soul ?b)               ; Tiene el alma del jefe
         )
@@ -343,6 +375,54 @@
             (not (has-boss-soul ?b))         ; Ya no tiene el alma
             (deposited-soul ?b)              ; El alma ha sido depositada (objetivo)
             (increase (total-cost) 10)       ; Costo de depositar
+        )
+    )
+
+    ;; =================================================================
+    ;; MUERTE Y RESPAWN
+    ;; =================================================================
+
+    ;; RESPAWN: Revive al jugador en la última hoguera donde descansó
+    ;; PENALIZACIONES COSTOSAS (simulando Dark Souls):
+    ;; - Pierde TODAS las almas acumuladas
+    ;; - Revive a TODOS los enemigos menores
+    ;; - Alto costo de acción (muerte es muy costosa)
+    (:action respawn
+        :parameters (?bonfire-loc - location)
+        :precondition (and 
+            (player-dead)                    ; El jugador está muerto
+            (last-rested-bonfire ?bonfire-loc) ; Existe una hoguera de respawn
+        )
+        :effect (and 
+            (not (player-dead))              ; Ya no está muerto
+            ;; Teleporta al jugador a la hoguera
+            (forall (?old-loc - location)
+                (when (at-player ?old-loc)
+                    (not (at-player ?old-loc))
+                )
+            )
+            (at-player ?bonfire-loc)
+            ;; Restaura salud y frascos
+            (assign (player-health) (player-max-health))
+            (assign (estus-charges) (estus-max))
+            ;; PENALIZACION CRITICA: Pierde todas las almas
+            (assign (player-souls) 0)
+            ;; PENALIZACION: Revive todos los enemigos menores
+            (forall (?m - minor-enemy) 
+                (when (not (is-alive ?m))
+                    (and 
+                        (assign (enemy-health ?m) (enemy-max-health ?m))
+                        (is-alive ?m)
+                    )
+                )
+            )
+            ;; PENALIZACION: Resetea la salud de todos los jefes vivos
+            (forall (?b - boss)
+                (when (is-alive ?b)
+                    (assign (enemy-health ?b) (enemy-max-health ?b))
+                )
+            )
+            (increase (total-cost) 200)      ; Costo MUY alto - morir es muy costoso
         )
     )
 )

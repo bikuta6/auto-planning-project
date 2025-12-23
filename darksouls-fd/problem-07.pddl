@@ -49,7 +49,7 @@
     (hp-leq hp5 hp5)
     (player-max-hp hp2)
     (player-hp hp2)
-    (player-level pl0) (player-level-next pl0 pl1)
+    (player-current-level pl0) (player-level-next pl0 pl1)
     (player-weapon-level w2)
     (wlevel-next w0 w1)
     (wlevel-next w1 w2)
@@ -66,9 +66,9 @@
     (boss-phase-next bp2 bp1)
     (boss-phase-next bp1 bp0)
     (boss-max-phase ornstein bp4)
-    (boss-phase ornstein bp4)
+    (boss-current-phase ornstein bp4)
     (boss-max-phase smough bp4)
-    (boss-phase smough bp4)
+    (boss-current-phase smough bp4)
     (estus-unlocked e1)
     (estus-unlocked e2)
     (estus-full e1)
@@ -114,6 +114,9 @@
     ;; boss weapon requirements
     (can-damage-boss ornstein w2)
     (can-damage-boss smough w2)
+  
+    ;; cost tracking
+    (= (total-cost) 0)
   )
   (:goal (and
     (not (is-alive ornstein))
@@ -121,4 +124,5 @@
     (deposited-soul ornstein)
     (deposited-soul smough)
   ))
+    (:metric minimize (total-cost))
 )

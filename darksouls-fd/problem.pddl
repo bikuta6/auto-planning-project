@@ -61,7 +61,7 @@
 
     (player-max-hp hp2)
     (player-hp hp2)
-    (player-level pl0) (player-level-next pl0 pl1)  (player-level-next pl1 pl2) (player-level-next pl2 pl3)
+    (player-current-level pl0) (player-level-next pl0 pl1)  (player-level-next pl1 pl2) (player-level-next pl2 pl3)
     (player-weapon-level w0)
     (wlevel-next w0 w1)
 
@@ -80,10 +80,10 @@
     (boss-phase-next bp1 bp0)
 
     (boss-max-phase sif bp6)
-    (boss-phase sif bp6)
+    (boss-current-phase sif bp6)
 
     (boss-max-phase gargoyles bp2)
-    (boss-phase gargoyles bp2)
+    (boss-current-phase gargoyles bp2)
 
     (estus-unlocked e1)
     (estus-unlocked e2)
@@ -132,6 +132,7 @@
     (can-damage-boss sif w1)
     (can-damage-boss gargoyles w0)
     (can-damage-boss gargoyles w1)
+    (= (total-cost) 0)
   )
   (:goal 
         (and
@@ -139,4 +140,5 @@
             (deposited-soul sif)                     
         )
     )
+    (:metric minimize (total-cost))
 )

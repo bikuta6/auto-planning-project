@@ -39,7 +39,7 @@
     (hp-leq hp3 hp3)
     (player-max-hp hp2)
     (player-hp hp2)
-    (player-level pl0) (player-level-next pl0 pl1)
+    (player-current-level pl0) (player-level-next pl0 pl1)
     (player-weapon-level w0)
 
     ;; souls ladder (discrete, with max)
@@ -52,7 +52,7 @@
     (boss-phase-next bp2 bp1)
     (boss-phase-next bp1 bp0)
     (boss-max-phase dummmy-boss bp2)
-    (boss-phase dummmy-boss bp2)
+    (boss-current-phase dummmy-boss bp2)
     (estus-unlocked e1)
     (estus-unlocked e2)
     (estus-full e1)
@@ -74,8 +74,12 @@
 
     ;; boss weapon requirements
     (can-damage-boss dummmy-boss w0)
+  
+    ;; cost tracking
+    (= (total-cost) 0)
   )
   (:goal (and
     (not (locked parish bell-tower))
-  ))
+))
+    (:metric minimize (total-cost))
 )
