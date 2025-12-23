@@ -1,0 +1,1458 @@
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+Cueing down from goal distance:    6 into depth [1] --- pruning stopped --- [1][2]
+                                   5            [1][2] --- pruning stopped --- [1]
+                                   4            [1][2] --- pruning stopped --- [1]
+                                   3            [1]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BOSS-ROOM)
+        1: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        2: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        3: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        4: (KILL-BOSS TUTORIAL-BOSS BOSS-ROOM)
+        5: (MOVE BOSS-ROOM FIRELINK)
+        6: (DEPOSIT-SOUL TUTORIAL-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 17 easy, 0 hard action templates
+               0.15 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 22 states, to a max depth of 2
+               0.15 seconds total time
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+Cueing down from goal distance:    6 (135.000000) into depth [1] --- pruning stopped --- [1][2][3]
+                                   4 (135.000000)           [1][2] --- pruning stopped --- [1][2]
+                                   3 (130.000000)           [1]
+                                   2 (20.000000)           [1]
+                                   1 (10.000000)           [1]
+                                   0 (0.000000)           
+
+Cueing down from goal distance:    6 (135.000000) into depth [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (320.000000)            --- pruning stopped --- 
+
+time spent:    0.00 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 121 states, to a max depth of 3
+               0.00 seconds total time
+
+total cost:  150.00
+
+
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 1.000000*g(s) + 3.000000*h(s) where
+ metric is((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+advancing to distance:    6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BOSS-ROOM)
+        1: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        2: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        3: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        4: (KILL-BOSS TUTORIAL-BOSS BOSS-ROOM)
+        5: (MOVE BOSS-ROOM FIRELINK)
+        6: (DEPOSIT-SOUL TUTORIAL-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 19 states, to a max depth of 0
+               0.00 seconds total time
+
+total cost:    0.00
+
+
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 1.000000*g(s) + 3.000000*h(s) where
+ metric is((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+advancing to distance:   18
+                         17
+                         16
+                          5
+                          3
+                          0
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BOSS-ROOM)
+        1: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        2: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        3: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        4: (KILL-BOSS TUTORIAL-BOSS BOSS-ROOM)
+        5: (MOVE BOSS-ROOM FIRELINK)
+        6: (DEPOSIT-SOUL TUTORIAL-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 19 states, to a max depth of 0
+               0.00 seconds total time
+
+total cost:    0.00
+
+
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-02' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+Cueing down from goal distance:   12 into depth [1][2] --- pruning stopped --- [1][2][3]
+                                  11            [1][2] --- pruning stopped --- [1]
+                                  10            [1][2] --- pruning stopped --- [1]
+                                   8            [1]
+                                   7            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9]
+                                   6            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30]
+                                   5            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43][44][45][46][47][48][49][50][51][52][53][54]
+                                   4            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43]
+                                   3            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43][44][45][46][47][48][49][50][51][52][53][54][55][56][57][58][59][60][61][62][63][64][65][66][67][68][69][70][71][72][73][74][75][76][77][78][79][80][81][82][83][84][85][86][87][88][89][90][91][92][93][94]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK PATHWAY)
+        1: (MOVE PATHWAY BOSS-ROOM)
+        2: (ATTACK FIRST-BOSS BOSS-ROOM)
+        3: (ATTACK FIRST-BOSS BOSS-ROOM)
+        4: (ATTACK FIRST-BOSS BOSS-ROOM)
+        5: (ATTACK FIRST-BOSS BOSS-ROOM)
+        6: (RESPAWN FIRELINK)
+        7: (MOVE FIRELINK PATHWAY)
+        8: (MOVE PATHWAY BOSS-ROOM)
+        9: (ATTACK FIRST-BOSS BOSS-ROOM)
+       10: (ATTACK FIRST-BOSS BOSS-ROOM)
+       11: (ATTACK FIRST-BOSS BOSS-ROOM)
+       12: (DRINK-ESTUS)
+       13: (ATTACK FIRST-BOSS BOSS-ROOM)
+       14: (ATTACK FIRST-BOSS BOSS-ROOM)
+       15: (RESPAWN FIRELINK)
+       16: (MOVE FIRELINK PATHWAY)
+       17: (ATTACK HOLLOW PATHWAY)
+       18: (ATTACK HOLLOW PATHWAY)
+       19: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       20: (MOVE PATHWAY FIRELINK)
+       21: (REST FIRELINK)
+       22: (MOVE FIRELINK PATHWAY)
+       23: (ATTACK HOLLOW PATHWAY)
+       24: (ATTACK HOLLOW PATHWAY)
+       25: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       26: (MOVE PATHWAY FIRELINK)
+       27: (REST FIRELINK)
+       28: (MOVE FIRELINK PATHWAY)
+       29: (ATTACK HOLLOW PATHWAY)
+       30: (ATTACK HOLLOW PATHWAY)
+       31: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       32: (MOVE PATHWAY FIRELINK)
+       33: (REST FIRELINK)
+       34: (LEVEL-UP-STATS FIRELINK)
+       35: (LEVEL-UP-STATS FIRELINK)
+       36: (MOVE FIRELINK PATHWAY)
+       37: (MOVE PATHWAY BOSS-ROOM)
+       38: (ATTACK FIRST-BOSS BOSS-ROOM)
+       39: (ATTACK FIRST-BOSS BOSS-ROOM)
+       40: (ATTACK FIRST-BOSS BOSS-ROOM)
+       41: (ATTACK FIRST-BOSS BOSS-ROOM)
+       42: (DRINK-ESTUS)
+       43: (ATTACK FIRST-BOSS BOSS-ROOM)
+       44: (ATTACK FIRST-BOSS BOSS-ROOM)
+       45: (RESPAWN FIRELINK)
+       46: (MOVE FIRELINK PATHWAY)
+       47: (ATTACK HOLLOW PATHWAY)
+       48: (ATTACK HOLLOW PATHWAY)
+       49: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       50: (MOVE PATHWAY FIRELINK)
+       51: (REST FIRELINK)
+       52: (MOVE FIRELINK PATHWAY)
+       53: (ATTACK HOLLOW PATHWAY)
+       54: (ATTACK HOLLOW PATHWAY)
+       55: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       56: (MOVE PATHWAY FIRELINK)
+       57: (REST FIRELINK)
+       58: (MOVE FIRELINK PATHWAY)
+       59: (ATTACK HOLLOW PATHWAY)
+       60: (ATTACK HOLLOW PATHWAY)
+       61: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       62: (MOVE PATHWAY FIRELINK)
+       63: (REST FIRELINK)
+       64: (MOVE FIRELINK PATHWAY)
+       65: (ATTACK HOLLOW PATHWAY)
+       66: (ATTACK HOLLOW PATHWAY)
+       67: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       68: (MOVE PATHWAY FIRELINK)
+       69: (REST FIRELINK)
+       70: (MOVE FIRELINK PATHWAY)
+       71: (ATTACK HOLLOW PATHWAY)
+       72: (ATTACK HOLLOW PATHWAY)
+       73: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       74: (MOVE PATHWAY FIRELINK)
+       75: (REST FIRELINK)
+       76: (MOVE FIRELINK PATHWAY)
+       77: (ATTACK HOLLOW PATHWAY)
+       78: (ATTACK HOLLOW PATHWAY)
+       79: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       80: (MOVE PATHWAY FIRELINK)
+       81: (REST FIRELINK)
+       82: (MOVE FIRELINK PATHWAY)
+       83: (ATTACK HOLLOW PATHWAY)
+       84: (ATTACK HOLLOW PATHWAY)
+       85: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       86: (MOVE PATHWAY FIRELINK)
+       87: (LEVEL-UP-STATS FIRELINK)
+       88: (LEVEL-UP-STATS FIRELINK)
+       89: (MOVE FIRELINK PATHWAY)
+       90: (MOVE PATHWAY BOSS-ROOM)
+       91: (ATTACK FIRST-BOSS BOSS-ROOM)
+       92: (ATTACK FIRST-BOSS BOSS-ROOM)
+       93: (ATTACK FIRST-BOSS BOSS-ROOM)
+       94: (ATTACK FIRST-BOSS BOSS-ROOM)
+       95: (ATTACK FIRST-BOSS BOSS-ROOM)
+       96: (DRINK-ESTUS)
+       97: (ATTACK FIRST-BOSS BOSS-ROOM)
+       98: (ATTACK FIRST-BOSS BOSS-ROOM)
+       99: (RESPAWN FIRELINK)
+      100: (MOVE FIRELINK PATHWAY)
+      101: (ATTACK HOLLOW PATHWAY)
+      102: (ATTACK HOLLOW PATHWAY)
+      103: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      104: (MOVE PATHWAY FIRELINK)
+      105: (REST FIRELINK)
+      106: (MOVE FIRELINK PATHWAY)
+      107: (ATTACK HOLLOW PATHWAY)
+      108: (ATTACK HOLLOW PATHWAY)
+      109: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      110: (MOVE PATHWAY FIRELINK)
+      111: (REST FIRELINK)
+      112: (MOVE FIRELINK PATHWAY)
+      113: (ATTACK HOLLOW PATHWAY)
+      114: (ATTACK HOLLOW PATHWAY)
+      115: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      116: (MOVE PATHWAY FIRELINK)
+      117: (REST FIRELINK)
+      118: (MOVE FIRELINK PATHWAY)
+      119: (ATTACK HOLLOW PATHWAY)
+      120: (ATTACK HOLLOW PATHWAY)
+      121: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      122: (MOVE PATHWAY FIRELINK)
+      123: (REST FIRELINK)
+      124: (MOVE FIRELINK PATHWAY)
+      125: (ATTACK HOLLOW PATHWAY)
+      126: (ATTACK HOLLOW PATHWAY)
+      127: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      128: (MOVE PATHWAY FIRELINK)
+      129: (REST FIRELINK)
+      130: (LEVEL-UP-STATS FIRELINK)
+      131: (MOVE FIRELINK PATHWAY)
+      132: (MOVE PATHWAY BOSS-ROOM)
+      133: (ATTACK FIRST-BOSS BOSS-ROOM)
+      134: (ATTACK FIRST-BOSS BOSS-ROOM)
+      135: (ATTACK FIRST-BOSS BOSS-ROOM)
+      136: (ATTACK FIRST-BOSS BOSS-ROOM)
+      137: (ATTACK FIRST-BOSS BOSS-ROOM)
+      138: (ATTACK FIRST-BOSS BOSS-ROOM)
+      139: (DRINK-ESTUS)
+      140: (ATTACK FIRST-BOSS BOSS-ROOM)
+      141: (ATTACK FIRST-BOSS BOSS-ROOM)
+      142: (RESPAWN FIRELINK)
+      143: (MOVE FIRELINK PATHWAY)
+      144: (ATTACK HOLLOW PATHWAY)
+      145: (ATTACK HOLLOW PATHWAY)
+      146: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      147: (MOVE PATHWAY FIRELINK)
+      148: (REST FIRELINK)
+      149: (MOVE FIRELINK PATHWAY)
+      150: (ATTACK HOLLOW PATHWAY)
+      151: (ATTACK HOLLOW PATHWAY)
+      152: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      153: (MOVE PATHWAY FIRELINK)
+      154: (REST FIRELINK)
+      155: (MOVE FIRELINK PATHWAY)
+      156: (ATTACK HOLLOW PATHWAY)
+      157: (ATTACK HOLLOW PATHWAY)
+      158: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      159: (MOVE PATHWAY FIRELINK)
+      160: (REST FIRELINK)
+      161: (MOVE FIRELINK PATHWAY)
+      162: (ATTACK HOLLOW PATHWAY)
+      163: (ATTACK HOLLOW PATHWAY)
+      164: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      165: (MOVE PATHWAY FIRELINK)
+      166: (REST FIRELINK)
+      167: (MOVE FIRELINK PATHWAY)
+      168: (ATTACK HOLLOW PATHWAY)
+      169: (ATTACK HOLLOW PATHWAY)
+      170: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      171: (MOVE PATHWAY FIRELINK)
+      172: (REST FIRELINK)
+      173: (MOVE FIRELINK PATHWAY)
+      174: (ATTACK HOLLOW PATHWAY)
+      175: (ATTACK HOLLOW PATHWAY)
+      176: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      177: (MOVE PATHWAY FIRELINK)
+      178: (REST FIRELINK)
+      179: (MOVE FIRELINK PATHWAY)
+      180: (ATTACK HOLLOW PATHWAY)
+      181: (ATTACK HOLLOW PATHWAY)
+      182: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      183: (MOVE PATHWAY FIRELINK)
+      184: (REST FIRELINK)
+      185: (MOVE FIRELINK PATHWAY)
+      186: (ATTACK HOLLOW PATHWAY)
+      187: (ATTACK HOLLOW PATHWAY)
+      188: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      189: (MOVE PATHWAY FIRELINK)
+      190: (REST FIRELINK)
+      191: (MOVE FIRELINK PATHWAY)
+      192: (ATTACK HOLLOW PATHWAY)
+      193: (ATTACK HOLLOW PATHWAY)
+      194: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      195: (MOVE PATHWAY FIRELINK)
+      196: (REST FIRELINK)
+      197: (MOVE FIRELINK PATHWAY)
+      198: (ATTACK HOLLOW PATHWAY)
+      199: (ATTACK HOLLOW PATHWAY)
+      200: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      201: (MOVE PATHWAY FIRELINK)
+      202: (REST FIRELINK)
+      203: (MOVE FIRELINK PATHWAY)
+      204: (ATTACK HOLLOW PATHWAY)
+      205: (ATTACK HOLLOW PATHWAY)
+      206: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      207: (MOVE PATHWAY FIRELINK)
+      208: (REST FIRELINK)
+      209: (MOVE FIRELINK PATHWAY)
+      210: (ATTACK HOLLOW PATHWAY)
+      211: (ATTACK HOLLOW PATHWAY)
+      212: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      213: (MOVE PATHWAY FIRELINK)
+      214: (REST FIRELINK)
+      215: (MOVE FIRELINK PATHWAY)
+      216: (ATTACK HOLLOW PATHWAY)
+      217: (ATTACK HOLLOW PATHWAY)
+      218: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      219: (MOVE PATHWAY FIRELINK)
+      220: (REST FIRELINK)
+      221: (LEVEL-UP-STATS FIRELINK)
+      222: (LEVEL-UP-STATS FIRELINK)
+      223: (MOVE FIRELINK PATHWAY)
+      224: (MOVE PATHWAY BOSS-ROOM)
+      225: (ATTACK FIRST-BOSS BOSS-ROOM)
+      226: (ATTACK FIRST-BOSS BOSS-ROOM)
+      227: (ATTACK FIRST-BOSS BOSS-ROOM)
+      228: (ATTACK FIRST-BOSS BOSS-ROOM)
+      229: (ATTACK FIRST-BOSS BOSS-ROOM)
+      230: (ATTACK FIRST-BOSS BOSS-ROOM)
+      231: (ATTACK FIRST-BOSS BOSS-ROOM)
+      232: (DRINK-ESTUS)
+      233: (ATTACK FIRST-BOSS BOSS-ROOM)
+      234: (KILL-BOSS FIRST-BOSS BOSS-ROOM)
+      235: (MOVE BOSS-ROOM PATHWAY)
+      236: (MOVE PATHWAY FIRELINK)
+      237: (DEPOSIT-SOUL FIRST-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 24 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 20 facts and 15 actions
+               0.00 seconds creating final representation with 14 relevant facts, 17 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               2.50 seconds searching, evaluating 38275 states, to a max depth of 94
+               2.50 seconds total time
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+Cueing down from goal distance:    6 into depth [1] --- pruning stopped --- [1][2]
+                                   5            [1][2] --- pruning stopped --- [1]
+                                   4            [1][2] --- pruning stopped --- [1]
+                                   3            [1]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BOSS-ROOM)
+        1: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        2: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        3: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        4: (KILL-BOSS TUTORIAL-BOSS BOSS-ROOM)
+        5: (MOVE BOSS-ROOM FIRELINK)
+        6: (DEPOSIT-SOUL TUTORIAL-BOSS FIRELINK)
+     
+
+time spent:    0.15 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 22 states, to a max depth of 2
+               0.15 seconds total time
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+Cueing down from goal distance:    6 (135.000000) into depth [1] --- pruning stopped --- [1][2][3]
+                                   4 (135.000000)           [1][2] --- pruning stopped --- [1][2]
+                                   3 (130.000000)           [1]
+                                   2 (20.000000)           [1]
+                                   1 (10.000000)           [1]
+                                   0 (0.000000)           
+
+Cueing down from goal distance:    6 (135.000000) into depth [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (320.000000)            --- pruning stopped --- 
+
+time spent:    0.00 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 121 states, to a max depth of 3
+               0.00 seconds total time
+
+total cost:  150.00
+
+
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 1.000000*g(s) + 3.000000*h(s) where
+ metric is((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+advancing to distance:    6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BOSS-ROOM)
+        1: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        2: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        3: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        4: (KILL-BOSS TUTORIAL-BOSS BOSS-ROOM)
+        5: (MOVE BOSS-ROOM FIRELINK)
+        6: (DEPOSIT-SOUL TUTORIAL-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 19 states, to a max depth of 0
+               0.00 seconds total time
+
+total cost:    0.00
+
+
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 1.000000*g(s) + 3.000000*h(s) where
+ metric is((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+advancing to distance:   18
+                         17
+                         16
+                          5
+                          3
+                          0
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BOSS-ROOM)
+        1: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        2: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        3: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        4: (KILL-BOSS TUTORIAL-BOSS BOSS-ROOM)
+        5: (MOVE BOSS-ROOM FIRELINK)
+        6: (DEPOSIT-SOUL TUTORIAL-BOSS FIRELINK)
+     
+
+time spent:    0.15 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 19 states, to a max depth of 0
+               0.15 seconds total time
+
+total cost:    0.00
+
+
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-02' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+Cueing down from goal distance:   12 into depth [1][2] --- pruning stopped --- [1][2][3]
+                                  11            [1][2] --- pruning stopped --- [1]
+                                  10            [1][2] --- pruning stopped --- [1]
+                                   8            [1]
+                                   7            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9]
+                                   6            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30]
+                                   5            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43][44][45][46][47][48][49][50][51][52][53][54]
+                                   4            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43]
+                                   3            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43][44][45][46][47][48][49][50][51][52][53][54][55][56][57][58][59][60][61][62][63][64][65][66][67][68][69][70][71][72][73][74][75][76][77][78][79][80][81][82][83][84][85][86][87][88][89][90][91][92][93][94]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK PATHWAY)
+        1: (MOVE PATHWAY BOSS-ROOM)
+        2: (ATTACK FIRST-BOSS BOSS-ROOM)
+        3: (ATTACK FIRST-BOSS BOSS-ROOM)
+        4: (ATTACK FIRST-BOSS BOSS-ROOM)
+        5: (ATTACK FIRST-BOSS BOSS-ROOM)
+        6: (RESPAWN FIRELINK)
+        7: (MOVE FIRELINK PATHWAY)
+        8: (MOVE PATHWAY BOSS-ROOM)
+        9: (ATTACK FIRST-BOSS BOSS-ROOM)
+       10: (ATTACK FIRST-BOSS BOSS-ROOM)
+       11: (ATTACK FIRST-BOSS BOSS-ROOM)
+       12: (DRINK-ESTUS)
+       13: (ATTACK FIRST-BOSS BOSS-ROOM)
+       14: (ATTACK FIRST-BOSS BOSS-ROOM)
+       15: (RESPAWN FIRELINK)
+       16: (MOVE FIRELINK PATHWAY)
+       17: (ATTACK HOLLOW PATHWAY)
+       18: (ATTACK HOLLOW PATHWAY)
+       19: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       20: (MOVE PATHWAY FIRELINK)
+       21: (REST FIRELINK)
+       22: (MOVE FIRELINK PATHWAY)
+       23: (ATTACK HOLLOW PATHWAY)
+       24: (ATTACK HOLLOW PATHWAY)
+       25: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       26: (MOVE PATHWAY FIRELINK)
+       27: (REST FIRELINK)
+       28: (MOVE FIRELINK PATHWAY)
+       29: (ATTACK HOLLOW PATHWAY)
+       30: (ATTACK HOLLOW PATHWAY)
+       31: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       32: (MOVE PATHWAY FIRELINK)
+       33: (REST FIRELINK)
+       34: (LEVEL-UP-STATS FIRELINK)
+       35: (LEVEL-UP-STATS FIRELINK)
+       36: (MOVE FIRELINK PATHWAY)
+       37: (MOVE PATHWAY BOSS-ROOM)
+       38: (ATTACK FIRST-BOSS BOSS-ROOM)
+       39: (ATTACK FIRST-BOSS BOSS-ROOM)
+       40: (ATTACK FIRST-BOSS BOSS-ROOM)
+       41: (ATTACK FIRST-BOSS BOSS-ROOM)
+       42: (DRINK-ESTUS)
+       43: (ATTACK FIRST-BOSS BOSS-ROOM)
+       44: (ATTACK FIRST-BOSS BOSS-ROOM)
+       45: (RESPAWN FIRELINK)
+       46: (MOVE FIRELINK PATHWAY)
+       47: (ATTACK HOLLOW PATHWAY)
+       48: (ATTACK HOLLOW PATHWAY)
+       49: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       50: (MOVE PATHWAY FIRELINK)
+       51: (REST FIRELINK)
+       52: (MOVE FIRELINK PATHWAY)
+       53: (ATTACK HOLLOW PATHWAY)
+       54: (ATTACK HOLLOW PATHWAY)
+       55: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       56: (MOVE PATHWAY FIRELINK)
+       57: (REST FIRELINK)
+       58: (MOVE FIRELINK PATHWAY)
+       59: (ATTACK HOLLOW PATHWAY)
+       60: (ATTACK HOLLOW PATHWAY)
+       61: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       62: (MOVE PATHWAY FIRELINK)
+       63: (REST FIRELINK)
+       64: (MOVE FIRELINK PATHWAY)
+       65: (ATTACK HOLLOW PATHWAY)
+       66: (ATTACK HOLLOW PATHWAY)
+       67: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       68: (MOVE PATHWAY FIRELINK)
+       69: (REST FIRELINK)
+       70: (MOVE FIRELINK PATHWAY)
+       71: (ATTACK HOLLOW PATHWAY)
+       72: (ATTACK HOLLOW PATHWAY)
+       73: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       74: (MOVE PATHWAY FIRELINK)
+       75: (REST FIRELINK)
+       76: (MOVE FIRELINK PATHWAY)
+       77: (ATTACK HOLLOW PATHWAY)
+       78: (ATTACK HOLLOW PATHWAY)
+       79: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       80: (MOVE PATHWAY FIRELINK)
+       81: (REST FIRELINK)
+       82: (MOVE FIRELINK PATHWAY)
+       83: (ATTACK HOLLOW PATHWAY)
+       84: (ATTACK HOLLOW PATHWAY)
+       85: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       86: (MOVE PATHWAY FIRELINK)
+       87: (LEVEL-UP-STATS FIRELINK)
+       88: (LEVEL-UP-STATS FIRELINK)
+       89: (MOVE FIRELINK PATHWAY)
+       90: (MOVE PATHWAY BOSS-ROOM)
+       91: (ATTACK FIRST-BOSS BOSS-ROOM)
+       92: (ATTACK FIRST-BOSS BOSS-ROOM)
+       93: (ATTACK FIRST-BOSS BOSS-ROOM)
+       94: (ATTACK FIRST-BOSS BOSS-ROOM)
+       95: (ATTACK FIRST-BOSS BOSS-ROOM)
+       96: (DRINK-ESTUS)
+       97: (ATTACK FIRST-BOSS BOSS-ROOM)
+       98: (ATTACK FIRST-BOSS BOSS-ROOM)
+       99: (RESPAWN FIRELINK)
+      100: (MOVE FIRELINK PATHWAY)
+      101: (ATTACK HOLLOW PATHWAY)
+      102: (ATTACK HOLLOW PATHWAY)
+      103: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      104: (MOVE PATHWAY FIRELINK)
+      105: (REST FIRELINK)
+      106: (MOVE FIRELINK PATHWAY)
+      107: (ATTACK HOLLOW PATHWAY)
+      108: (ATTACK HOLLOW PATHWAY)
+      109: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      110: (MOVE PATHWAY FIRELINK)
+      111: (REST FIRELINK)
+      112: (MOVE FIRELINK PATHWAY)
+      113: (ATTACK HOLLOW PATHWAY)
+      114: (ATTACK HOLLOW PATHWAY)
+      115: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      116: (MOVE PATHWAY FIRELINK)
+      117: (REST FIRELINK)
+      118: (MOVE FIRELINK PATHWAY)
+      119: (ATTACK HOLLOW PATHWAY)
+      120: (ATTACK HOLLOW PATHWAY)
+      121: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      122: (MOVE PATHWAY FIRELINK)
+      123: (REST FIRELINK)
+      124: (MOVE FIRELINK PATHWAY)
+      125: (ATTACK HOLLOW PATHWAY)
+      126: (ATTACK HOLLOW PATHWAY)
+      127: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      128: (MOVE PATHWAY FIRELINK)
+      129: (REST FIRELINK)
+      130: (LEVEL-UP-STATS FIRELINK)
+      131: (MOVE FIRELINK PATHWAY)
+      132: (MOVE PATHWAY BOSS-ROOM)
+      133: (ATTACK FIRST-BOSS BOSS-ROOM)
+      134: (ATTACK FIRST-BOSS BOSS-ROOM)
+      135: (ATTACK FIRST-BOSS BOSS-ROOM)
+      136: (ATTACK FIRST-BOSS BOSS-ROOM)
+      137: (ATTACK FIRST-BOSS BOSS-ROOM)
+      138: (ATTACK FIRST-BOSS BOSS-ROOM)
+      139: (DRINK-ESTUS)
+      140: (ATTACK FIRST-BOSS BOSS-ROOM)
+      141: (ATTACK FIRST-BOSS BOSS-ROOM)
+      142: (RESPAWN FIRELINK)
+      143: (MOVE FIRELINK PATHWAY)
+      144: (ATTACK HOLLOW PATHWAY)
+      145: (ATTACK HOLLOW PATHWAY)
+      146: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      147: (MOVE PATHWAY FIRELINK)
+      148: (REST FIRELINK)
+      149: (MOVE FIRELINK PATHWAY)
+      150: (ATTACK HOLLOW PATHWAY)
+      151: (ATTACK HOLLOW PATHWAY)
+      152: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      153: (MOVE PATHWAY FIRELINK)
+      154: (REST FIRELINK)
+      155: (MOVE FIRELINK PATHWAY)
+      156: (ATTACK HOLLOW PATHWAY)
+      157: (ATTACK HOLLOW PATHWAY)
+      158: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      159: (MOVE PATHWAY FIRELINK)
+      160: (REST FIRELINK)
+      161: (MOVE FIRELINK PATHWAY)
+      162: (ATTACK HOLLOW PATHWAY)
+      163: (ATTACK HOLLOW PATHWAY)
+      164: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      165: (MOVE PATHWAY FIRELINK)
+      166: (REST FIRELINK)
+      167: (MOVE FIRELINK PATHWAY)
+      168: (ATTACK HOLLOW PATHWAY)
+      169: (ATTACK HOLLOW PATHWAY)
+      170: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      171: (MOVE PATHWAY FIRELINK)
+      172: (REST FIRELINK)
+      173: (MOVE FIRELINK PATHWAY)
+      174: (ATTACK HOLLOW PATHWAY)
+      175: (ATTACK HOLLOW PATHWAY)
+      176: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      177: (MOVE PATHWAY FIRELINK)
+      178: (REST FIRELINK)
+      179: (MOVE FIRELINK PATHWAY)
+      180: (ATTACK HOLLOW PATHWAY)
+      181: (ATTACK HOLLOW PATHWAY)
+      182: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      183: (MOVE PATHWAY FIRELINK)
+      184: (REST FIRELINK)
+      185: (MOVE FIRELINK PATHWAY)
+      186: (ATTACK HOLLOW PATHWAY)
+      187: (ATTACK HOLLOW PATHWAY)
+      188: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      189: (MOVE PATHWAY FIRELINK)
+      190: (REST FIRELINK)
+      191: (MOVE FIRELINK PATHWAY)
+      192: (ATTACK HOLLOW PATHWAY)
+      193: (ATTACK HOLLOW PATHWAY)
+      194: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      195: (MOVE PATHWAY FIRELINK)
+      196: (REST FIRELINK)
+      197: (MOVE FIRELINK PATHWAY)
+      198: (ATTACK HOLLOW PATHWAY)
+      199: (ATTACK HOLLOW PATHWAY)
+      200: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      201: (MOVE PATHWAY FIRELINK)
+      202: (REST FIRELINK)
+      203: (MOVE FIRELINK PATHWAY)
+      204: (ATTACK HOLLOW PATHWAY)
+      205: (ATTACK HOLLOW PATHWAY)
+      206: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      207: (MOVE PATHWAY FIRELINK)
+      208: (REST FIRELINK)
+      209: (MOVE FIRELINK PATHWAY)
+      210: (ATTACK HOLLOW PATHWAY)
+      211: (ATTACK HOLLOW PATHWAY)
+      212: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      213: (MOVE PATHWAY FIRELINK)
+      214: (REST FIRELINK)
+      215: (MOVE FIRELINK PATHWAY)
+      216: (ATTACK HOLLOW PATHWAY)
+      217: (ATTACK HOLLOW PATHWAY)
+      218: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      219: (MOVE PATHWAY FIRELINK)
+      220: (REST FIRELINK)
+      221: (LEVEL-UP-STATS FIRELINK)
+      222: (LEVEL-UP-STATS FIRELINK)
+      223: (MOVE FIRELINK PATHWAY)
+      224: (MOVE PATHWAY BOSS-ROOM)
+      225: (ATTACK FIRST-BOSS BOSS-ROOM)
+      226: (ATTACK FIRST-BOSS BOSS-ROOM)
+      227: (ATTACK FIRST-BOSS BOSS-ROOM)
+      228: (ATTACK FIRST-BOSS BOSS-ROOM)
+      229: (ATTACK FIRST-BOSS BOSS-ROOM)
+      230: (ATTACK FIRST-BOSS BOSS-ROOM)
+      231: (ATTACK FIRST-BOSS BOSS-ROOM)
+      232: (DRINK-ESTUS)
+      233: (ATTACK FIRST-BOSS BOSS-ROOM)
+      234: (KILL-BOSS FIRST-BOSS BOSS-ROOM)
+      235: (MOVE BOSS-ROOM PATHWAY)
+      236: (MOVE PATHWAY FIRELINK)
+      237: (DEPOSIT-SOUL FIRST-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 24 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 20 facts and 15 actions
+               0.00 seconds creating final representation with 14 relevant facts, 17 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               2.50 seconds searching, evaluating 38275 states, to a max depth of 94
+               2.50 seconds total time
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+Cueing down from goal distance:    6 into depth [1] --- pruning stopped --- [1][2]
+                                   5            [1][2] --- pruning stopped --- [1]
+                                   4            [1][2] --- pruning stopped --- [1]
+                                   3            [1]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BOSS-ROOM)
+        1: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        2: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        3: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        4: (KILL-BOSS TUTORIAL-BOSS BOSS-ROOM)
+        5: (MOVE BOSS-ROOM FIRELINK)
+        6: (DEPOSIT-SOUL TUTORIAL-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.15 seconds building connectivity graph
+               0.00 seconds searching, evaluating 22 states, to a max depth of 2
+               0.15 seconds total time
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+Cueing down from goal distance:    6 (135.000000) into depth [1] --- pruning stopped --- [1][2][3]
+                                   4 (135.000000)           [1][2] --- pruning stopped --- [1][2]
+                                   3 (130.000000)           [1]
+                                   2 (20.000000)           [1]
+                                   1 (10.000000)           [1]
+                                   0 (0.000000)           
+
+Cueing down from goal distance:    6 (135.000000) into depth [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (140.000000)           [1]
+                                   6 (135.000000)           [1] --- pruning stopped --- [1][2]
+                                   5 (320.000000)            --- pruning stopped --- 
+
+time spent:    0.15 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 121 states, to a max depth of 3
+               0.15 seconds total time
+
+total cost:  150.00
+
+
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 1.000000*g(s) + 3.000000*h(s) where
+ metric is((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+advancing to distance:    6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BOSS-ROOM)
+        1: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        2: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        3: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        4: (KILL-BOSS TUTORIAL-BOSS BOSS-ROOM)
+        5: (MOVE BOSS-ROOM FIRELINK)
+        6: (DEPOSIT-SOUL TUTORIAL-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 19 states, to a max depth of 0
+               0.00 seconds total time
+
+total cost:    0.00
+
+
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-01' defined
+ ... done.
+
+
+metric established (normalized to minimize): ((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 1.000000*g(s) + 3.000000*h(s) where
+ metric is((1.00*[RF1](TOTAL-COST)) - () + 0.00)
+
+advancing to distance:   18
+                         17
+                         16
+                          5
+                          3
+                          0
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK BOSS-ROOM)
+        1: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        2: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        3: (ATTACK TUTORIAL-BOSS BOSS-ROOM)
+        4: (KILL-BOSS TUTORIAL-BOSS BOSS-ROOM)
+        5: (MOVE BOSS-ROOM FIRELINK)
+        6: (DEPOSIT-SOUL TUTORIAL-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 17 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 17 facts and 14 actions
+               0.00 seconds creating final representation with 14 relevant facts, 16 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 19 states, to a max depth of 0
+               0.00 seconds total time
+
+total cost:    0.00
+
+
+
+
+
+ff: parsing domain file
+domain 'DARK-SOULS' defined
+ ... done.
+ff: parsing problem file
+problem 'BENCH-02' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+Evaluation function 0.000000*g(s) + 1.000000*h(s) where
+ metric is plan length
+
+Cueing down from goal distance:   12 into depth [1][2] --- pruning stopped --- [1][2][3]
+                                  11            [1][2] --- pruning stopped --- [1]
+                                  10            [1][2] --- pruning stopped --- [1]
+                                   8            [1]
+                                   7            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9]
+                                   6            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30]
+                                   5            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43][44][45][46][47][48][49][50][51][52][53][54]
+                                   4            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43]
+                                   3            [1][2][3] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20][21][22][23][24][25][26][27][28][29][30][31][32][33][34][35][36][37][38][39][40][41][42][43][44][45][46][47][48][49][50][51][52][53][54][55][56][57][58][59][60][61][62][63][64][65][66][67][68][69][70][71][72][73][74][75][76][77][78][79][80][81][82][83][84][85][86][87][88][89][90][91][92][93][94]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: (MOVE FIRELINK PATHWAY)
+        1: (MOVE PATHWAY BOSS-ROOM)
+        2: (ATTACK FIRST-BOSS BOSS-ROOM)
+        3: (ATTACK FIRST-BOSS BOSS-ROOM)
+        4: (ATTACK FIRST-BOSS BOSS-ROOM)
+        5: (ATTACK FIRST-BOSS BOSS-ROOM)
+        6: (RESPAWN FIRELINK)
+        7: (MOVE FIRELINK PATHWAY)
+        8: (MOVE PATHWAY BOSS-ROOM)
+        9: (ATTACK FIRST-BOSS BOSS-ROOM)
+       10: (ATTACK FIRST-BOSS BOSS-ROOM)
+       11: (ATTACK FIRST-BOSS BOSS-ROOM)
+       12: (DRINK-ESTUS)
+       13: (ATTACK FIRST-BOSS BOSS-ROOM)
+       14: (ATTACK FIRST-BOSS BOSS-ROOM)
+       15: (RESPAWN FIRELINK)
+       16: (MOVE FIRELINK PATHWAY)
+       17: (ATTACK HOLLOW PATHWAY)
+       18: (ATTACK HOLLOW PATHWAY)
+       19: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       20: (MOVE PATHWAY FIRELINK)
+       21: (REST FIRELINK)
+       22: (MOVE FIRELINK PATHWAY)
+       23: (ATTACK HOLLOW PATHWAY)
+       24: (ATTACK HOLLOW PATHWAY)
+       25: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       26: (MOVE PATHWAY FIRELINK)
+       27: (REST FIRELINK)
+       28: (MOVE FIRELINK PATHWAY)
+       29: (ATTACK HOLLOW PATHWAY)
+       30: (ATTACK HOLLOW PATHWAY)
+       31: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       32: (MOVE PATHWAY FIRELINK)
+       33: (REST FIRELINK)
+       34: (LEVEL-UP-STATS FIRELINK)
+       35: (LEVEL-UP-STATS FIRELINK)
+       36: (MOVE FIRELINK PATHWAY)
+       37: (MOVE PATHWAY BOSS-ROOM)
+       38: (ATTACK FIRST-BOSS BOSS-ROOM)
+       39: (ATTACK FIRST-BOSS BOSS-ROOM)
+       40: (ATTACK FIRST-BOSS BOSS-ROOM)
+       41: (ATTACK FIRST-BOSS BOSS-ROOM)
+       42: (DRINK-ESTUS)
+       43: (ATTACK FIRST-BOSS BOSS-ROOM)
+       44: (ATTACK FIRST-BOSS BOSS-ROOM)
+       45: (RESPAWN FIRELINK)
+       46: (MOVE FIRELINK PATHWAY)
+       47: (ATTACK HOLLOW PATHWAY)
+       48: (ATTACK HOLLOW PATHWAY)
+       49: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       50: (MOVE PATHWAY FIRELINK)
+       51: (REST FIRELINK)
+       52: (MOVE FIRELINK PATHWAY)
+       53: (ATTACK HOLLOW PATHWAY)
+       54: (ATTACK HOLLOW PATHWAY)
+       55: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       56: (MOVE PATHWAY FIRELINK)
+       57: (REST FIRELINK)
+       58: (MOVE FIRELINK PATHWAY)
+       59: (ATTACK HOLLOW PATHWAY)
+       60: (ATTACK HOLLOW PATHWAY)
+       61: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       62: (MOVE PATHWAY FIRELINK)
+       63: (REST FIRELINK)
+       64: (MOVE FIRELINK PATHWAY)
+       65: (ATTACK HOLLOW PATHWAY)
+       66: (ATTACK HOLLOW PATHWAY)
+       67: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       68: (MOVE PATHWAY FIRELINK)
+       69: (REST FIRELINK)
+       70: (MOVE FIRELINK PATHWAY)
+       71: (ATTACK HOLLOW PATHWAY)
+       72: (ATTACK HOLLOW PATHWAY)
+       73: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       74: (MOVE PATHWAY FIRELINK)
+       75: (REST FIRELINK)
+       76: (MOVE FIRELINK PATHWAY)
+       77: (ATTACK HOLLOW PATHWAY)
+       78: (ATTACK HOLLOW PATHWAY)
+       79: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       80: (MOVE PATHWAY FIRELINK)
+       81: (REST FIRELINK)
+       82: (MOVE FIRELINK PATHWAY)
+       83: (ATTACK HOLLOW PATHWAY)
+       84: (ATTACK HOLLOW PATHWAY)
+       85: (EXECUTE-ENEMY HOLLOW PATHWAY)
+       86: (MOVE PATHWAY FIRELINK)
+       87: (LEVEL-UP-STATS FIRELINK)
+       88: (LEVEL-UP-STATS FIRELINK)
+       89: (MOVE FIRELINK PATHWAY)
+       90: (MOVE PATHWAY BOSS-ROOM)
+       91: (ATTACK FIRST-BOSS BOSS-ROOM)
+       92: (ATTACK FIRST-BOSS BOSS-ROOM)
+       93: (ATTACK FIRST-BOSS BOSS-ROOM)
+       94: (ATTACK FIRST-BOSS BOSS-ROOM)
+       95: (ATTACK FIRST-BOSS BOSS-ROOM)
+       96: (DRINK-ESTUS)
+       97: (ATTACK FIRST-BOSS BOSS-ROOM)
+       98: (ATTACK FIRST-BOSS BOSS-ROOM)
+       99: (RESPAWN FIRELINK)
+      100: (MOVE FIRELINK PATHWAY)
+      101: (ATTACK HOLLOW PATHWAY)
+      102: (ATTACK HOLLOW PATHWAY)
+      103: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      104: (MOVE PATHWAY FIRELINK)
+      105: (REST FIRELINK)
+      106: (MOVE FIRELINK PATHWAY)
+      107: (ATTACK HOLLOW PATHWAY)
+      108: (ATTACK HOLLOW PATHWAY)
+      109: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      110: (MOVE PATHWAY FIRELINK)
+      111: (REST FIRELINK)
+      112: (MOVE FIRELINK PATHWAY)
+      113: (ATTACK HOLLOW PATHWAY)
+      114: (ATTACK HOLLOW PATHWAY)
+      115: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      116: (MOVE PATHWAY FIRELINK)
+      117: (REST FIRELINK)
+      118: (MOVE FIRELINK PATHWAY)
+      119: (ATTACK HOLLOW PATHWAY)
+      120: (ATTACK HOLLOW PATHWAY)
+      121: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      122: (MOVE PATHWAY FIRELINK)
+      123: (REST FIRELINK)
+      124: (MOVE FIRELINK PATHWAY)
+      125: (ATTACK HOLLOW PATHWAY)
+      126: (ATTACK HOLLOW PATHWAY)
+      127: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      128: (MOVE PATHWAY FIRELINK)
+      129: (REST FIRELINK)
+      130: (LEVEL-UP-STATS FIRELINK)
+      131: (MOVE FIRELINK PATHWAY)
+      132: (MOVE PATHWAY BOSS-ROOM)
+      133: (ATTACK FIRST-BOSS BOSS-ROOM)
+      134: (ATTACK FIRST-BOSS BOSS-ROOM)
+      135: (ATTACK FIRST-BOSS BOSS-ROOM)
+      136: (ATTACK FIRST-BOSS BOSS-ROOM)
+      137: (ATTACK FIRST-BOSS BOSS-ROOM)
+      138: (ATTACK FIRST-BOSS BOSS-ROOM)
+      139: (DRINK-ESTUS)
+      140: (ATTACK FIRST-BOSS BOSS-ROOM)
+      141: (ATTACK FIRST-BOSS BOSS-ROOM)
+      142: (RESPAWN FIRELINK)
+      143: (MOVE FIRELINK PATHWAY)
+      144: (ATTACK HOLLOW PATHWAY)
+      145: (ATTACK HOLLOW PATHWAY)
+      146: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      147: (MOVE PATHWAY FIRELINK)
+      148: (REST FIRELINK)
+      149: (MOVE FIRELINK PATHWAY)
+      150: (ATTACK HOLLOW PATHWAY)
+      151: (ATTACK HOLLOW PATHWAY)
+      152: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      153: (MOVE PATHWAY FIRELINK)
+      154: (REST FIRELINK)
+      155: (MOVE FIRELINK PATHWAY)
+      156: (ATTACK HOLLOW PATHWAY)
+      157: (ATTACK HOLLOW PATHWAY)
+      158: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      159: (MOVE PATHWAY FIRELINK)
+      160: (REST FIRELINK)
+      161: (MOVE FIRELINK PATHWAY)
+      162: (ATTACK HOLLOW PATHWAY)
+      163: (ATTACK HOLLOW PATHWAY)
+      164: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      165: (MOVE PATHWAY FIRELINK)
+      166: (REST FIRELINK)
+      167: (MOVE FIRELINK PATHWAY)
+      168: (ATTACK HOLLOW PATHWAY)
+      169: (ATTACK HOLLOW PATHWAY)
+      170: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      171: (MOVE PATHWAY FIRELINK)
+      172: (REST FIRELINK)
+      173: (MOVE FIRELINK PATHWAY)
+      174: (ATTACK HOLLOW PATHWAY)
+      175: (ATTACK HOLLOW PATHWAY)
+      176: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      177: (MOVE PATHWAY FIRELINK)
+      178: (REST FIRELINK)
+      179: (MOVE FIRELINK PATHWAY)
+      180: (ATTACK HOLLOW PATHWAY)
+      181: (ATTACK HOLLOW PATHWAY)
+      182: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      183: (MOVE PATHWAY FIRELINK)
+      184: (REST FIRELINK)
+      185: (MOVE FIRELINK PATHWAY)
+      186: (ATTACK HOLLOW PATHWAY)
+      187: (ATTACK HOLLOW PATHWAY)
+      188: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      189: (MOVE PATHWAY FIRELINK)
+      190: (REST FIRELINK)
+      191: (MOVE FIRELINK PATHWAY)
+      192: (ATTACK HOLLOW PATHWAY)
+      193: (ATTACK HOLLOW PATHWAY)
+      194: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      195: (MOVE PATHWAY FIRELINK)
+      196: (REST FIRELINK)
+      197: (MOVE FIRELINK PATHWAY)
+      198: (ATTACK HOLLOW PATHWAY)
+      199: (ATTACK HOLLOW PATHWAY)
+      200: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      201: (MOVE PATHWAY FIRELINK)
+      202: (REST FIRELINK)
+      203: (MOVE FIRELINK PATHWAY)
+      204: (ATTACK HOLLOW PATHWAY)
+      205: (ATTACK HOLLOW PATHWAY)
+      206: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      207: (MOVE PATHWAY FIRELINK)
+      208: (REST FIRELINK)
+      209: (MOVE FIRELINK PATHWAY)
+      210: (ATTACK HOLLOW PATHWAY)
+      211: (ATTACK HOLLOW PATHWAY)
+      212: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      213: (MOVE PATHWAY FIRELINK)
+      214: (REST FIRELINK)
+      215: (MOVE FIRELINK PATHWAY)
+      216: (ATTACK HOLLOW PATHWAY)
+      217: (ATTACK HOLLOW PATHWAY)
+      218: (EXECUTE-ENEMY HOLLOW PATHWAY)
+      219: (MOVE PATHWAY FIRELINK)
+      220: (REST FIRELINK)
+      221: (LEVEL-UP-STATS FIRELINK)
+      222: (LEVEL-UP-STATS FIRELINK)
+      223: (MOVE FIRELINK PATHWAY)
+      224: (MOVE PATHWAY BOSS-ROOM)
+      225: (ATTACK FIRST-BOSS BOSS-ROOM)
+      226: (ATTACK FIRST-BOSS BOSS-ROOM)
+      227: (ATTACK FIRST-BOSS BOSS-ROOM)
+      228: (ATTACK FIRST-BOSS BOSS-ROOM)
+      229: (ATTACK FIRST-BOSS BOSS-ROOM)
+      230: (ATTACK FIRST-BOSS BOSS-ROOM)
+      231: (ATTACK FIRST-BOSS BOSS-ROOM)
+      232: (DRINK-ESTUS)
+      233: (ATTACK FIRST-BOSS BOSS-ROOM)
+      234: (KILL-BOSS FIRST-BOSS BOSS-ROOM)
+      235: (MOVE BOSS-ROOM PATHWAY)
+      236: (MOVE PATHWAY FIRELINK)
+      237: (DEPOSIT-SOUL FIRST-BOSS FIRELINK)
+     
+
+time spent:    0.00 seconds instantiating 24 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 20 facts and 15 actions
+               0.00 seconds creating final representation with 14 relevant facts, 17 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               2.50 seconds searching, evaluating 38275 states, to a max depth of 94
+               2.50 seconds total time
+
+
