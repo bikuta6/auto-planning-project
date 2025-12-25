@@ -115,8 +115,7 @@
         :precondition (and 
             (at-player ?from)                ; Está en la ubicación del jefe
             (not (player-dead))              ; El jugador no está muerto
-            (connected ?from ?to)            ; Hay conexión de escape
-            (not (locked ?from ?to))         ; La salida no está cerrada
+            (last-rested-bonfire ?to)          ; Hay conexión de escape
             (has-active-boss ?from)          ; Hay un jefe activo
             (enemy-at ?b ?from)              ; El jefe está en esta ubicación
         )
@@ -124,7 +123,7 @@
             (not (at-player ?from))          ; Sale de la ubicación del jefe
             (at-player ?to)                  ; Va a la ubicación de escape
             (assign (enemy-health ?b) (enemy-max-health ?b)) ; El jefe recupera toda su salud
-            (increase (total-cost) 20)       ; Costo mayor por huir
+            (increase (total-cost) 5)       ; Costo mayor por huir
         )
     )
 
@@ -388,20 +387,17 @@
     ;; - Revive a TODOS los enemigos menores
     ;; - Alto costo de acción (muerte es muy costosa)
     (:action respawn
-        :parameters (?bonfire-loc - location)
+        :parameters (?bonfire ?current - location)
         :precondition (and 
             (player-dead)                    ; El jugador está muerto
-            (last-rested-bonfire ?bonfire-loc) ; Existe una hoguera de respawn
+            (last-rested-bonfire ?bonfire) ; Existe una hoguera de respawn
+            (at-player ?current)             ; Está en la ubicación actual (muerto)
         )
         :effect (and 
             (not (player-dead))              ; Ya no está muerto
             ;; Teleporta al jugador a la hoguera
-            (forall (?old-loc - location)
-                (when (at-player ?old-loc)
-                    (not (at-player ?old-loc))
-                )
-            )
-            (at-player ?bonfire-loc)
+            (not (at-player ?current))
+            (at-player ?bonfire)
             ;; Restaura salud y frascos
             (assign (player-health) (player-max-health))
             (assign (estus-charges) (estus-max))

@@ -139,8 +139,7 @@
     :precondition (and
       (at-player ?from)
       (not (player-dead))
-      (connected ?from ?to)
-      (not (locked ?from ?to))
+      (last-rested-bonfire ?to)
       (has-active-boss ?from)
       (enemy-at ?b ?from)
       (is-alive ?b)
@@ -156,7 +155,7 @@
         )
       )
       (boss-current-phase ?b ?pmax)
-      (increase (total-cost) 20)
+      (increase (total-cost) 5)
     )
   )
 
@@ -481,22 +480,19 @@
   ;; - Revive a TODOS los enemigos menores
   ;; - Alto costo de acción (muerte es muy costosa)
   (:action respawn
-    :parameters (?bonfire-loc - location ?max-hp - hp-level ?min-souls - soul-level)
+    :parameters (?bonfire ?current - location ?max-hp - hp-level ?min-souls - soul-level)
     :precondition (and
       (player-dead)                        ;; El jugador está muerto
-      (last-rested-bonfire ?bonfire-loc)   ;; Existe una hoguera de respawn
+      (last-rested-bonfire ?bonfire)   ;; Existe una hoguera de respawn
       (player-max-hp ?max-hp)              ;; Para curar al máximo
+      (at-player ?current)                 ;; Está en la ubicación actual (muerto)
     )
     :effect (and
       (not (player-dead))                  ;; Ya no está muerto
       
       ;; Teleporta al jugador a la hoguera
-      (forall (?old-loc - location)
-        (when (at-player ?old-loc)
-          (not (at-player ?old-loc))
-        )
-      )
-      (at-player ?bonfire-loc)
+      (not (at-player ?current))  
+      (at-player ?bonfire)
       
       ;; Restaura HP al máximo
       (forall (?h - hp-level)
