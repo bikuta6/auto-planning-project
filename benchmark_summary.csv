@@ -1,6 +1,0 @@
-Problem,Config,Solved,TotalCost,PlanLength,StatesEval,SearchTime
-01,Metric-FF-EHC,YES,10,1,22,0.00
-01,CEHC-Cost,YES,150.00,0,121,0.00
-01,Anytime-BFS,YES,10,1,19,0.00
-01,Hadd-Metric,YES,10,1,19,0.00
-02,Metric-FF-EHC,YES,10,1,38275,2.50
