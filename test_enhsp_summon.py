@@ -29,12 +29,12 @@ def parse_args():
     )
     parser.add_argument(
         "--domain",
-        default="darksouls/domain.pddl",
+        default="darksouls-invocations/domain.pddl",
         help="Path to the domain PDDL file (default: darksouls/domain.pddl)",
     )
     parser.add_argument(
         "--problem-dir",
-        default="darksouls",
+        default="darksouls-invocations",
         help="Directory that contains the problem PDDL files (default: darksouls)",
     )
     parser.add_argument(
