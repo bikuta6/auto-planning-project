@@ -11,9 +11,9 @@ from unified_planning.model.metrics import MinimizeSequentialPlanLength
 from unified_planning.engines.results import PlanGenerationResultStatus
 
 PLANNER_METADATA = {
-    "enhsp": {"desc": "ENHSP", "timeout": 600.0},
-    "enhsp-opt": {"desc": "ENHSP OPT", "timeout": 600.0},
-    "enhsp-any": {"desc": "ENHSP ANY", "timeout": 600.0},
+    "enhsp": {"desc": "ENHSP", "timeout": 1800.0},
+    "enhsp-opt": {"desc": "ENHSP OPT", "timeout": 1800.0},
+    "enhsp-any": {"desc": "ENHSP ANY", "timeout": 1800.0},
 }
 
 DEFAULT_PLANNER_ORDER = [
@@ -70,13 +70,13 @@ def parse_args():
     )
     parser.add_argument(
         "--output",
-        default="benchmark_results.json",
+        default="benchmark_results_numeric.json",
         help="JSON file where benchmark results will be stored",
     )
     parser.add_argument(
         "--plan-dir",
-        default="plans",
-        help="Directory where generated plans will be stored (default: plans)",
+        default="plans-numeric",
+        help="Directory where generated plans will be stored (default: plans-numeric)",
     )
     return parser.parse_args()
 
@@ -270,25 +270,16 @@ def run_benchmark(domain_path, problems, planners, args):
         print("=" * 80)
 
         try:
-            # Cost mode: original metric (e.g., total-cost) if present.
+            # Only cost mode: use original metric (e.g., total-cost) if present.
             problem_cost = reader.parse_problem(domain_file, str(problem_path))
             print(problem_cost.quality_metrics)
-            # Length mode: copy and drop quality metrics so enhsp-opt optimizes plan length.
-            problem_length = reader.parse_problem(domain_file, str(problem_path))
-            drop_quality_metrics(problem_length)
-            print(problem_length.quality_metrics)
         except Exception as exc:
             print(f"  ERROR loading {problem_path}: {exc}")
             continue
 
-        modes = [
-            ("cost", "with metric (e.g., total-cost)", problem_cost),
-            ("length", "without metric (optimize plan length)", problem_length),
-        ]
-
-        for mode_key, mode_desc, problem in modes:
-            print(f"\n[MODE: {mode_key}] {mode_desc}")
-            for planner_name in planners:
+        mode_key, mode_desc, problem = "cost", "with metric (e.g., total-cost)", problem_cost
+        print(f"\n[MODE: {mode_key}] {mode_desc}")
+        for planner_name in planners:
                 planner_desc = planner_label(planner_name)
                 timeout = resolve_timeout(planner_name, args)
                 print(f"\n--- {planner_desc} ({planner_name}) ---")
@@ -460,11 +451,9 @@ def main():
     print("- enhsp-any: portfolio/anytime configuration; internally runs multiple"
           " ENHSP variants and returns the best plan it has found when the"
           " search stops (still exposed as a single plan in UP).")
-    print("This benchmark runs each problem in two modes:")
-    print("  - cost: uses the PDDL quality metric (e.g., total-cost) when present;")
-    print("           enhsp-opt optimizes that metric.")
-    print("  - length: ignores any metric so enhsp-opt optimizes plan length"
-          " (number of actions).\n")
+    print("This benchmark runs each problem only in cost mode:")
+    print("  - cost: uses the PDDL quality metric (e.g., total-cost) when present.")
+ 
 
     results = run_benchmark(domain_path, problems, available_planners, args)
     write_results(results, args.output)
