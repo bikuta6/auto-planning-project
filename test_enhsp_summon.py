@@ -70,13 +70,13 @@ def parse_args():
     )
     parser.add_argument(
         "--output",
-        default="benchmark_results_numeric.json",
+        default="benchmark_results_summon.json",
         help="JSON file where benchmark results will be stored",
     )
     parser.add_argument(
         "--plan-dir",
-        default="plans-numeric",
-        help="Directory where generated plans will be stored (default: plans-numeric)",
+        default="plans-summon",
+        help="Directory where generated plans will be stored (default: plans-summon)",
     )
     return parser.parse_args()
 
