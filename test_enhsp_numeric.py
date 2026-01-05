@@ -50,7 +50,7 @@ def parse_args():
     parser.add_argument(
         "--limit",
         type=int,
-        default=9,
+        default=10,
         help="Maximum number of problems to benchmark (default: 9, 0 disables the limit)",
     )
     parser.add_argument(

@@ -139,22 +139,22 @@
 
     ;; HUIR DEL JEFE: Permite escapar de una pelea con un jefe
     ;; El jefe recupera toda su salud al huir
-    (:action flee-boss
-        :parameters (?from ?to - location ?b - boss)
-        :precondition (and 
-            (at-player ?from)                ; Está en la ubicación del jefe
-            (not (player-dead))              ; El jugador no está muerto
-            (last-rested-bonfire ?to)          ; Hay conexión de escape
-            (has-active-boss ?from)          ; Hay un jefe activo
-            (enemy-at ?b ?from)              ; El jefe está en esta ubicación
-        )
-        :effect (and 
-            (not (at-player ?from))          ; Sale de la ubicación del jefe
-            (at-player ?to)                  ; Va a la ubicación de escape
-            (assign (enemy-health ?b) (enemy-max-health ?b)) ; El jefe recupera toda su salud
-            (increase (total-cost) 5)       ; Costo mayor por huir
-        )
-    )
+    ;; (:action flee-boss
+    ;;     :parameters (?from ?to - location ?b - boss)
+    ;;     :precondition (and 
+    ;;         (at-player ?from)                ; Está en la ubicación del jefe
+    ;;         (not (player-dead))              ; El jugador no está muerto
+    ;;         (last-rested-bonfire ?to)          ; Hay conexión de escape
+    ;;         (has-active-boss ?from)          ; Hay un jefe activo
+    ;;         (enemy-at ?b ?from)              ; El jefe está en esta ubicación
+    ;;     )
+    ;;     :effect (and 
+    ;;         (not (at-player ?from))          ; Sale de la ubicación del jefe
+    ;;         (at-player ?to)                  ; Va a la ubicación de escape
+    ;;         (assign (enemy-health ?b) (enemy-max-health ?b)) ; El jefe recupera toda su salud
+    ;;         (increase (total-cost) 5)       ; Costo mayor por huir
+    ;;     )
+    ;; )
 
     ;; =================================================================
     ;; ACCIONES DE MEJORA DE EQUIPO

@@ -9,7 +9,7 @@
 FAST_DOWNWARD_PATH=../downward/fast-downward.py
 BENCHMARKS_DIR=./
 TIME_LIMIT=1800
-OUTPUT_DIR=./experiment_results
+OUTPUT_DIR=./experiment_results_fd
 LOG_DIR=${OUTPUT_DIR}/logs
 SUMMARY_DIR=${OUTPUT_DIR}/summaries
 

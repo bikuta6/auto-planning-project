@@ -51,7 +51,7 @@
     (= (summon-health) 0)
     (= (summon-max-health) 100)
     (= (summon-damage) 18)
-    (= (summon-cost) 150)
+    (= (summon-cost) 10)
   )
   (:goal (and
     (deposited-soul tutorial-boss)

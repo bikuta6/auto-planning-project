@@ -1,7 +1,0 @@
-01. move(firelink, boss-room)
-02. attack(tutorial-boss, boss-room)
-03. attack(tutorial-boss, boss-room)
-04. attack(tutorial-boss, boss-room)
-05. kill-boss(tutorial-boss, boss-room)
-06. move(boss-room, firelink)
-07. deposit-soul(tutorial-boss, firelink)
