@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Set Java memory options
-export _JAVA_OPTIONS="-Xmx16g"
+export _JAVA_OPTIONS="-Xmx24g"
 
 # Run tests with uv
 uv run test_enhsp_numeric.py

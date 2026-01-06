@@ -124,10 +124,11 @@ def extract_stats(planner_output):
         "duplicates": r"Number of Duplicates detected:(\d+)",
     }
     for key, pattern in patterns.items():
-        match = re.search(pattern, planner_output)
-        if match:
+        matches = re.findall(pattern, planner_output)
+        if matches:
+            value = matches[-1]  # Take the last match for anytime planners
             stats[key] = (
-                float(match.group(1)) if "." in match.group(1) else int(match.group(1))
+                float(value) if "." in value else int(value)
             )
     return stats
 
