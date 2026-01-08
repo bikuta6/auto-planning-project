@@ -111,7 +111,7 @@ def generate_plots(df, df_solved):
         palette='muted',
         height=5, 
         aspect=1.2,
-        sharey=False
+        sharey=True
     )
     g.set_axis_labels("Problem ID", "Plan Metric (Cost)")
     g.fig.suptitle('Cost Comparison per Problem across Domains', y=1.05)

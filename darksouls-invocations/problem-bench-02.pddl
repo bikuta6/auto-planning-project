@@ -48,7 +48,7 @@
     
     (= (enemy-health first-boss) 200)
     (= (enemy-max-health first-boss) 200)
-    (= (enemy-damage first-boss) 50)
+    (= (enemy-damage first-boss) 30)
     (= (enemy-soul-value first-boss) 600)
     (= (boss-required-weapon-level first-boss) 0)
 
