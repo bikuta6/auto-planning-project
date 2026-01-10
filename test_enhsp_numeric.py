@@ -199,7 +199,10 @@ def solve_with_planner(planner_name, problem, timeout, output_stream):
     start_time = datetime.now()
 
     if planner_name == "enhsp-any":
-        with AnytimePlanner(problem_kind=problem.kind) as planner:
+        with AnytimePlanner(          
+            problem_kind=problem.kind,
+            params={"params": "-autoanytime"}
+            ) as planner:
             engine_name = getattr(planner, "name", planner_name)
             best_result = None
             for result in planner.get_solutions(problem, timeout=timeout, output_stream=output_stream):
@@ -241,7 +244,8 @@ def solve_with_planner(planner_name, problem, timeout, output_stream):
                 engine_name = getattr(planner, "name", planner_name)
     else:
         # Default satisficing ENHSP (or any other suitable numeric planner)
-        with OneshotPlanner(problem_kind=problem.kind) as planner:
+        params = {"params": "-s lazygbfs -h hmrp -ha true"}
+        with OneshotPlanner(problem_kind=problem.kind, params=params) as planner:
             result = planner.solve(
                 problem, output_stream=output_stream, timeout=timeout
             )
