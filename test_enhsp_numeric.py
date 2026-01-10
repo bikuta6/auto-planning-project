@@ -201,11 +201,13 @@ def solve_with_planner(planner_name, problem, timeout, output_stream):
     if planner_name == "enhsp-any":
         with AnytimePlanner(          
             problem_kind=problem.kind,
-            params={"params": "-autoanytime"}
+            params={"params": "-anytime -autoanytime"},
+            anytime_guarantee="INCREASING_QUALITY",
             ) as planner:
             engine_name = getattr(planner, "name", planner_name)
             best_result = None
-            for result in planner.get_solutions(problem, timeout=timeout, output_stream=output_stream):
+            for i, result in enumerate(planner.get_solutions(problem, timeout=timeout, output_stream=output_stream)):
+                print(f"  Anytime iteration {i+1}: status={result.status}, plan_length={len(result.plan.actions) if result.plan else 0}")
                 best_result = result
 
         end_time = datetime.now()

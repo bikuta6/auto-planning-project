@@ -105,6 +105,11 @@
     (soul-after-drop ?e - enemy ?s1 ?s2 - soul-level)
     ;; tabla de gasto por subir nivel: desde l1 a l2, s1 -> s2 (coste creciente por nivel)
     (soul-spend-for-level ?l1 ?l2 - player-level ?s1 ?s2 - soul-level)
+
+    ;; Arreglos para mejorar la discretizacion
+    (soul-min ?s - soul-level)
+    
+
   )
 
   ;; =================================================================
@@ -486,6 +491,7 @@
       (last-rested-bonfire ?bonfire)   ;; Existe una hoguera de respawn
       (player-max-hp ?max-hp)              ;; Para curar al máximo
       (at-player ?current)                 ;; Está en la ubicación actual (muerto)
+      (soul-min ?min-souls)
     )
     :effect (and
       (not (player-dead))                  ;; Ya no está muerto
