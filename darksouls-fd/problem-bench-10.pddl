@@ -1,6 +1,7 @@
 ;; BENCHMARK 10-FD: Epic Challenge - Large complex problem
 (define (problem bench-10-fd)
   (:domain dark-souls-fd)
+
   (:objects
     firelink workshop burg parish depths catacombs fortress throne - location
     master-key catacombs-key - key
@@ -13,7 +14,11 @@
     e1 e2 e3 e4 e5 e6 - estus-slot
     s0 s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 s15 s16 s17 s18 s19 s20 - soul-level
   )
+
   (:init
+    ;; -----------------------------
+    ;; Map / connectivity
+    ;; -----------------------------
     (connected firelink workshop) (connected workshop firelink)
     (connected firelink burg) (connected burg firelink)
     (connected burg parish) (connected parish burg)
@@ -21,18 +26,42 @@
     (connected firelink catacombs) (connected catacombs firelink)
     (connected catacombs fortress) (connected fortress catacombs)
     (connected fortress throne) (connected throne fortress)
+
     (locked parish depths) (locked depths parish)
     (locked catacombs fortress) (locked fortress catacombs)
+
     (can-open-shortcut parish firelink)
     (can-open-shortcut fortress catacombs)
-    (is-firelink firelink) (has-bonfire firelink) (has-bonfire parish) (has-bonfire fortress)
+
+    (is-firelink firelink)
+    (has-bonfire firelink) (has-bonfire parish) (has-bonfire fortress)
     (is-blacksmith workshop)
-    (key-at master-key burg) (key-at catacombs-key depths)
-    (matches master-key parish depths) (matches catacombs-key catacombs fortress)
+
+    ;; -----------------------------
+    ;; Keys / items
+    ;; -----------------------------
+    (key-at master-key burg)
+    (key-at catacombs-key depths)
+
+    (matches master-key parish depths)
+    (matches catacombs-key catacombs fortress)
+
     (titanite-at workshop)
-    (enemy-at hollow burg) (enemy-at bandit parish) (enemy-at skeleton catacombs) (enemy-at giant fortress)
+
+    ;; -----------------------------
+    ;; Enemies / bosses
+    ;; -----------------------------
+    (enemy-at hollow burg)
+    (enemy-at bandit parish)
+    (enemy-at skeleton catacombs)
+    (enemy-at giant fortress)
+
     (is-alive hollow) (is-alive bandit) (is-alive skeleton) (is-alive giant)
-    (enemy-at gaping-dragon depths) (enemy-at iron-golem fortress) (enemy-at final-lord throne)
+
+    (enemy-at gaping-dragon depths)
+    (enemy-at iron-golem fortress)
+    (enemy-at final-lord throne)
+
     (is-alive gaping-dragon) (is-alive iron-golem) (is-alive final-lord)
     (has-active-boss depths) (has-active-boss fortress) (has-active-boss throne)
     (at-player firelink) (last-rested-bonfire firelink)
@@ -64,8 +93,11 @@
     (player-level-next pl0 pl1) (player-level-next pl1 pl2) (player-level-next pl2 pl3) (player-level-next pl3 pl4) (player-level-next pl4 pl5) (player-level-next pl5 pl6) (player-level-next pl6 pl7) (player-level-next pl7 pl8) (player-level-next pl8 pl9) (player-level-next pl9 pl10) (player-level-next pl10 pl11) (player-level-next pl11 pl12) (player-level-next pl12 pl13) (player-level-next pl13 pl14) (player-level-next pl14 pl15)
     (player-weapon-level w0) (wlevel-next w0 w1)
     (boss-phase-zero bp0)
-    (boss-phase-next bp6 bp5) (boss-phase-next bp5 bp4) (boss-phase-next bp4 bp3) (boss-phase-next bp3 bp2) (boss-phase-next bp2 bp1) (boss-phase-next bp1 bp0)
+
+    (boss-phase-next bp6 bp5) (boss-phase-next bp5 bp4) (boss-phase-next bp4 bp3)
+    (boss-phase-next bp3 bp2) (boss-phase-next bp2 bp1) (boss-phase-next bp1 bp0)
     (boss-phase-next bp7 bp6)
+
     (boss-max-phase gaping-dragon bp6) (boss-current-phase gaping-dragon bp6)
     (boss-max-phase iron-golem bp6) (boss-current-phase iron-golem bp6)
     (boss-max-phase final-lord bp7) (boss-current-phase final-lord bp7)
@@ -238,12 +270,18 @@
     (can-damage-boss gaping-dragon w0)
     (can-damage-boss iron-golem w1)
     (can-damage-boss final-lord w1)
+
+    ;; -----------------------------
+    ;; Cost init
+    ;; -----------------------------
     (= (total-cost) 0)
   )
+
   (:goal (and
     (deposited-soul gaping-dragon)
     (deposited-soul iron-golem)
     (deposited-soul final-lord)
   ))
+
   (:metric minimize (total-cost))
 )

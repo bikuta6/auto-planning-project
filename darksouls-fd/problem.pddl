@@ -50,15 +50,35 @@
     ;; discrete ladders
     (hp-next hp0 hp1) (hp-next hp1 hp2) (hp-next hp2 hp3) (hp-next hp3 hp4) (hp-next hp4 hp5) (hp-next hp5 hp6)
     (hp-zero hp0)
+    ;; HP-HEAL table: Estus heals +5, capped by max-hp ?m
+    ;; (hp-heal ?m ?h_before ?h_after)
+    ;; ---------------------------------------------
+    ;; max = hp0
+    (hp-heal hp0 hp0 hp0) (hp-heal hp0 hp1 hp0) (hp-heal hp0 hp2 hp0) (hp-heal hp0 hp3 hp0) (hp-heal hp0 hp4 hp0)
+    (hp-heal hp0 hp5 hp0) (hp-heal hp0 hp6 hp0)
+    ;; max = hp1
+    (hp-heal hp1 hp0 hp1) (hp-heal hp1 hp1 hp1) (hp-heal hp1 hp2 hp1) (hp-heal hp1 hp3 hp1) (hp-heal hp1 hp4 hp1)
+    (hp-heal hp1 hp5 hp1) (hp-heal hp1 hp6 hp1)
+    ;; max = hp2
+    (hp-heal hp2 hp0 hp2) (hp-heal hp2 hp1 hp2) (hp-heal hp2 hp2 hp2) (hp-heal hp2 hp3 hp2) (hp-heal hp2 hp4 hp2)
+    (hp-heal hp2 hp5 hp2) (hp-heal hp2 hp6 hp2)
+    ;; max = hp3
+    (hp-heal hp3 hp0 hp3) (hp-heal hp3 hp1 hp3) (hp-heal hp3 hp2 hp3) (hp-heal hp3 hp3 hp3) (hp-heal hp3 hp4 hp3)
+    (hp-heal hp3 hp5 hp3) (hp-heal hp3 hp6 hp3)
+    ;; max = hp4
+    (hp-heal hp4 hp0 hp4) (hp-heal hp4 hp1 hp4) (hp-heal hp4 hp2 hp4) (hp-heal hp4 hp3 hp4) (hp-heal hp4 hp4 hp4)
+    (hp-heal hp4 hp5 hp4) (hp-heal hp4 hp6 hp4)
+    ;; max = hp5
+    (hp-heal hp5 hp0 hp5) (hp-heal hp5 hp1 hp5) (hp-heal hp5 hp2 hp5) (hp-heal hp5 hp3 hp5) (hp-heal hp5 hp4 hp5)
+    (hp-heal hp5 hp5 hp5) (hp-heal hp5 hp6 hp5)
+    ;; max = hp6
+    (hp-heal hp6 hp0 hp5) (hp-heal hp6 hp1 hp6) (hp-heal hp6 hp2 hp6) (hp-heal hp6 hp3 hp6) (hp-heal hp6 hp4 hp6)
+    (hp-heal hp6 hp5 hp6) (hp-heal hp6 hp6 hp6)
+    ;; HP-HEAL table: Estus heals +5, capped by max-hp ?m
+    ;; ---------------------------------------------
+    ;; max = hp6
 
     ;; hp ordering (<=)
-    (hp-leq hp0 hp0) (hp-leq hp0 hp1) (hp-leq hp0 hp2) (hp-leq hp0 hp3) (hp-leq hp0 hp4) (hp-leq hp0 hp5) (hp-leq hp0 hp6)
-    (hp-leq hp1 hp1) (hp-leq hp1 hp2) (hp-leq hp1 hp3) (hp-leq hp1 hp4) (hp-leq hp1 hp5) (hp-leq hp1 hp6)
-    (hp-leq hp2 hp2) (hp-leq hp2 hp3) (hp-leq hp2 hp4) (hp-leq hp2 hp5) (hp-leq hp2 hp6)
-    (hp-leq hp3 hp3) (hp-leq hp3 hp4) (hp-leq hp3 hp5) (hp-leq hp3 hp6)
-    (hp-leq hp4 hp4) (hp-leq hp4 hp5) (hp-leq hp4 hp6)
-    (hp-leq hp5 hp5) (hp-leq hp5 hp6)
-    (hp-leq hp6 hp6)  
 
     (player-max-hp hp2)
     (player-hp hp2)
