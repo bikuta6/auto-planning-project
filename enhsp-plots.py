@@ -8,7 +8,7 @@ def load_and_preprocess_data(numeric_file, summon_file):
     # Load JSON files
     with open(numeric_file, 'r') as f:
         df_numeric = pd.DataFrame(json.load(f))
-        df_numeric['domain'] = 'numeric'
+        df_numeric['domain'] = 'base'
         
     with open(summon_file, 'r') as f:
         df_summon = pd.DataFrame(json.load(f))
@@ -69,14 +69,14 @@ def generate_plots(df, df_solved):
     # 3. Plan Quality Scatter Plot (Cost) with problem id labels
     df_pivot_metric = df_solved.pivot_table(index=['problem', 'engine_label'], columns='domain', values='metric').dropna().reset_index()
     plt.figure(figsize=(8, 8))
-    sns.scatterplot(data=df_pivot_metric, x='numeric', y='summon', hue='engine_label', s=100)
+    sns.scatterplot(data=df_pivot_metric, x='base', y='summon', hue='engine_label', s=100)
     # Add problem id labels
     for _, row in df_pivot_metric.iterrows():
-        plt.text(row['numeric'], row['summon'], str(row['problem']), fontsize=20, alpha=0.9)
-    max_val = max(df_pivot_metric['numeric'].max(), df_pivot_metric['summon'].max())
+        plt.text(row['base'], row['summon'], str(row['problem']), fontsize=20, alpha=0.9)
+    max_val = max(df_pivot_metric['base'].max(), df_pivot_metric['summon'].max())
     plt.plot([0, max_val], [0, max_val], 'r--', alpha=0.5, label='Equal Cost')
-    plt.title('Plan Quality: Numeric vs. Summon (Metric Value)')
-    plt.xlabel('Metric (Numeric Domain)')
+    plt.title('Plan Quality: Base vs. Summon (Metric Value)')
+    plt.xlabel('Metric (Base Domain)')
     plt.ylabel('Metric (Summon Domain)')
     plt.legend()
     plt.savefig('plots/quality_comparison.png', bbox_inches='tight')
@@ -85,16 +85,16 @@ def generate_plots(df, df_solved):
     # 4. Search Effort (Nodes Expanded) with problem id labels
     df_pivot_nodes = df_solved.pivot_table(index=['problem', 'engine_label'], columns='domain', values='expanded_nodes').dropna().reset_index()
     plt.figure(figsize=(8, 8))
-    sns.scatterplot(data=df_pivot_nodes, x='numeric', y='summon', hue='engine_label', s=100)
+    sns.scatterplot(data=df_pivot_nodes, x='base', y='summon', hue='engine_label', s=100)
     # Add problem id labels
     for _, row in df_pivot_nodes.iterrows():
-        plt.text(row['numeric'], row['summon'], str(row['problem']), fontsize=20, alpha=0.9)
-    max_val_nodes = max(df_pivot_nodes['numeric'].max(), df_pivot_nodes['summon'].max())
+        plt.text(row['base'], row['summon'], str(row['problem']), fontsize=20, alpha=0.9)
+    max_val_nodes = max(df_pivot_nodes['base'].max(), df_pivot_nodes['summon'].max())
     plt.plot([1, max_val_nodes], [1, max_val_nodes], 'r--', alpha=0.5, label='Equal Nodes')
     plt.xscale('log')
     plt.yscale('log')
     plt.title('Search Effort: Nodes Expanded (Log Scale)')
-    plt.xlabel('Nodes (Numeric Domain)')
+    plt.xlabel('Nodes (Base Domain)')
     plt.ylabel('Nodes (Summon Domain)')
     plt.legend()
     plt.savefig('plots/search_effort.png', bbox_inches='tight')
