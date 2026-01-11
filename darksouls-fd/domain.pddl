@@ -73,7 +73,7 @@
     (player-hp ?h - hp-level)
     (player-max-hp ?h - hp-level)
     (hp-next ?h1 ?h2 - hp-level)                  ;; sucesor (curación/level-up)
-    (hp-leq ?h ?m - hp-level)                     ;; tabla: h <= m (no sobrecurar)
+    (hp-heal ?m ?h1 ?h2 - hp-level)               ;; resultado de curacion con estus (capado por max)
     (hp-zero ?h - hp-level)                        ;; marca el nivel de HP "muerte" (p.ej., hp0)
     (hp-after-attack ?e - enemy ?h1 ?h2 - hp-level) ;; cómo queda la vida tras atacar a ?e
 
@@ -105,6 +105,11 @@
     (soul-after-drop ?e - enemy ?s1 ?s2 - soul-level)
     ;; tabla de gasto por subir nivel: desde l1 a l2, s1 -> s2 (coste creciente por nivel)
     (soul-spend-for-level ?l1 ?l2 - player-level ?s1 ?s2 - soul-level)
+
+    ;; Arreglos para mejorar la discretizacion
+    (soul-min ?s - soul-level)
+    
+
   )
 
   ;; =================================================================
@@ -361,23 +366,26 @@
   ;; =================================================================
 
   (:action drink-estus
-    :parameters (?slot - estus-slot ?h1 ?h2 ?m - hp-level)
-    :precondition (and
-      (estus-unlocked ?slot)
-      (estus-full ?slot)
-      (player-hp ?h1)
-      (not (player-dead))
-      (hp-next ?h1 ?h2)
-      (player-max-hp ?m)
-      (hp-leq ?h2 ?m)
-    )
-    :effect (and
-      (not (estus-full ?slot))
-      (not (player-hp ?h1))
-      (player-hp ?h2)
-      (increase (total-cost) 5)
-    )
+  :parameters (?slot - estus-slot ?h1 ?h2 ?m - hp-level)
+  :precondition (and
+    (estus-unlocked ?slot)
+    (estus-full ?slot)
+    (player-hp ?h1)
+    (player-max-hp ?m)
+    (not (player-dead))
+
+    ;; en vez de adivinar ?h2 y filtrar,
+    ;; se obtiene DIRECTAMENTE de la tabla:
+    (hp-heal ?m ?h1 ?h2)
   )
+  :effect (and
+    (not (estus-full ?slot))
+    (not (player-hp ?h1))
+    (player-hp ?h2)
+    (increase (total-cost) 5)
+  )
+)
+
 
   ;; Descansar: cura al máximo, rellena estus, revive enemigos menores.
   ;; También actualiza la última hoguera donde descansó (para respawn).
@@ -486,6 +494,7 @@
       (last-rested-bonfire ?bonfire)   ;; Existe una hoguera de respawn
       (player-max-hp ?max-hp)              ;; Para curar al máximo
       (at-player ?current)                 ;; Está en la ubicación actual (muerto)
+      (soul-min ?min-souls)
     )
     :effect (and
       (not (player-dead))                  ;; Ya no está muerto
