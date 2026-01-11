@@ -51,6 +51,13 @@
     (= (enemy-damage first-boss) 30)
     (= (enemy-soul-value first-boss) 600)
     (= (boss-required-weapon-level first-boss) 0)
+
+    ;; Summon stats (shared default configuration)
+    (summon-available)
+    (= (summon-health) 0)
+    (= (summon-max-health) 100)
+    (= (summon-damage) 18)
+    (= (summon-cost) 10)
   )
   (:goal (and
     (deposited-soul first-boss)

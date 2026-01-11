@@ -29,6 +29,7 @@
         ;; NAVEGACION Y MAPA
         (connected ?from ?to - location)     ; Dos ubicaciones están conectadas
         (at-player ?loc - location)          ; Posición actual del jugador
+        (at-summon ?loc - location)          ; Posición actual de la invocación/minion
         (is-firelink ?loc - location)        ; Ubicación es Firelink Shrine (hub principal)
         (has-bonfire ?loc - location)        ; Ubicación tiene hoguera (punto de descanso)
         (is-blacksmith ?loc - location)      ; Ubicación tiene herrero (para mejorar armas)
@@ -54,6 +55,10 @@
         ;; SISTEMA DE MUERTE Y RESPAWN
         (player-dead)                        ; El jugador está muerto (no puede actuar)
         (last-rested-bonfire ?loc - location) ; Última hoguera donde descansó el jugador
+
+        ;; SISTEMA DE INVOCACION (MINION)
+        (summon-available)                   ; La invocación puede ser realizada al menos una vez
+        (summon-dead)                        ; La invocación ha muerto y no puede volver
     )
 
     ;; FUNCIONES NUMERICAS
@@ -83,6 +88,12 @@
         ;; SISTEMA DE MEJORA DE ARMAS 
         (player-weapon-level)                ; Nivel actual del arma (0, +1, +2, etc.)
         (boss-required-weapon-level ?b - boss) ; Nivel de arma requerido para dañar a un jefe
+
+        ;; ESTADISTICAS DE LA INVOCACION/MINION
+        (summon-health)                      ; Salud actual de la invocación
+        (summon-max-health)                  ; Salud máxima de la invocación
+        (summon-damage)                      ; Daño que inflige la invocación
+        (summon-cost)                        ; Costo en almas de invocar al minion
     )
 
     ;; =================================================================
@@ -105,6 +116,24 @@
             (not (at-player ?from))          ; Ya no está en la ubicación origen
             (at-player ?to)                  ; Ahora está en la ubicación destino
             (increase (total-cost) 10)       ; Costo del movimiento
+        )
+    )
+
+    ;; MOVER INVOCACION: Permite a la invocación moverse entre ubicaciones conectadas
+    ;; No está limitada por muros de niebla de jefes, pero sí por puertas cerradas.
+    (:action move-summon
+        :parameters (?from ?to - location)
+        :precondition (and 
+            (at-summon ?from)                ; La invocación está en la ubicación origen
+            (not (player-dead))              ; El jugador no está muerto (no hay acciones si el jugador está muerto)
+            (not (summon-dead))              ; La invocación sigue viva
+            (connected ?from ?to)            ; Las ubicaciones están conectadas
+            (not (locked ?from ?to))         ; La conexión no está cerrada
+        )
+        :effect (and 
+            (not (at-summon ?from))          ; Ya no está en la ubicación origen
+            (at-summon ?to)                  ; Ahora está en la ubicación destino
+            (increase (total-cost) 5)        ; Costo de movimiento reducido
         )
     )
 
@@ -148,6 +177,31 @@
             (not (has-titanite))             ; Consume la titanita
             (increase (player-weapon-level) 1) ; Sube el nivel del arma en +1
             (increase (total-cost) 50)       ; Costo de la mejora
+        )
+    )
+
+    ;; =================================================================
+    ;; ACCIONES DE INVOCACION DEL MINION
+    ;; =================================================================
+
+    ;; INVOCAR MINION: Crea la invocación en la posición del jugador
+    ;; Paga un costo en almas y un costo en la métrica total.
+    ;; Solo puede hacerse si la invocación sigue disponible y no está ya viva.
+    (:action summon-minion
+        :parameters (?loc - location)
+        :precondition (and
+            (at-player ?loc)                 ; El jugador está en la ubicación
+            (not (player-dead))              ; El jugador no está muerto
+            (summon-available)               ; La invocación aún no se ha consumido
+            (not (summon-dead))              ; No ha muerto definitivamente
+            (>= (player-souls) (summon-cost)) ; Tiene almas suficientes para pagar la invocación
+        )
+        :effect (and
+            (at-summon ?loc)                 ; El minion aparece en la posición del jugador
+            (decrease (player-souls) (summon-cost)) ; Paga el costo en almas
+            (assign (summon-health) (summon-max-health)) ; Se genera con salud completa
+            (not (summon-available))         ; No se podrá volver a invocar una vez usada
+            (increase (total-cost) 20)       ; Costo adicional en la métrica
         )
     )
 
@@ -258,6 +312,32 @@
             (increase (total-cost) 5)        ; Costo del combate
         )
     )
+
+    ;; ATACAR CON MINION: La invocación intercambia daño con un enemigo
+    ;; Si la salud de la invocación cae a 0 o menos, muere de forma permanente.
+    (:action summon-attack
+        :parameters (?e - enemy ?loc - location)
+        :precondition (and 
+            (at-summon ?loc)                 ; La invocación está en la ubicación del enemigo
+            (not (player-dead))              ; El jugador no está muerto
+            (not (summon-dead))              ; La invocación sigue viva
+            (enemy-at ?e ?loc)               ; El enemigo está aquí
+            (is-alive ?e)                    ; El enemigo está vivo
+            (> (enemy-health ?e) 0)          ; El enemigo tiene salud
+        )
+        :effect (and 
+            (decrease (enemy-health ?e) (summon-damage))     ; El minion daña al enemigo
+            (decrease (summon-health) (enemy-damage ?e))     ; El enemigo contraataca al minion
+            ;; Si la salud de la invocación cae a 0 o menos, muere y desaparece
+            (when (<= (summon-health) 0)
+                (and
+                    (summon-dead)
+                    (not (at-summon ?loc))
+                )
+            )
+            (increase (total-cost) 3)        ; Costo de combate reducido
+        )
+    )
         
     ;; EJECUTAR ENEMIGO: Mata a un enemigo debilitado y obtiene sus almas
     (:action execute-enemy
@@ -273,6 +353,25 @@
             (not (is-alive ?e))              ; El enemigo muere
             (increase (player-souls) (enemy-soul-value ?e)) ; Obtienes sus almas
             (increase (total-cost) 2)        ; Costo mínimo por ejecutar
+        )
+    )
+
+    ;; EJECUTAR ENEMIGO CON MINION: El minion remata a un enemigo debilitado
+    ;; Las almas obtenidas siguen siendo para el jugador.
+    (:action summon-execute-enemy
+        :parameters (?e - enemy ?loc - location)
+        :precondition (and 
+            (at-summon ?loc)                 ; La invocación está en la ubicación del enemigo
+            (not (player-dead))              ; El jugador no está muerto
+            (not (summon-dead))              ; La invocación sigue viva
+            (enemy-at ?e ?loc)               ; El enemigo está aquí
+            (is-alive ?e)                    ; El enemigo está vivo pero...
+            (<= (enemy-health ?e) 0)         ; ...está debilitado (salud agotada)
+        )
+        :effect (and 
+            (not (is-alive ?e))              ; El enemigo muere
+            (increase (player-souls) (enemy-soul-value ?e)) ; Almas para el jugador
+            (increase (total-cost) 1)        ; Costo aún menor que la ejecución del jugador
         )
     )
         

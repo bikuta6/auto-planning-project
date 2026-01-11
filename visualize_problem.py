@@ -540,7 +540,7 @@ def main():
     parser = argparse.ArgumentParser(
         description='Visualize Dark Souls PDDL problem files as interactive maps'
     )
-    parser.add_argument('problem_file', type=str, 
+    parser.add_argument('--problem_file', type=str, 
                        help='Path to the PDDL problem file')
     parser.add_argument('-o', '--output', type=str, default=None,
                        help='Output file path (HTML/PNG/PDF). If not specified, opens interactive browser view. Use .html for best results.')

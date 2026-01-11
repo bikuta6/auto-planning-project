@@ -7,13 +7,12 @@
     master-key catacombs-key - key
     hollow bandit skeleton giant - minor-enemy
     gaping-dragon iron-golem final-lord - boss
-
-    hp0 hp1 hp2 hp3 hp4 hp5 hp6 hp7 hp8 hp9 hp10 hp11 hp12 hp13 hp14 hp15 - hp-level
+    hp0 hp1 hp2 hp3 hp4 hp5 hp6 hp7 hp8 hp9 hp10 hp11 hp12 hp13 hp14 hp15 hp16 hp17 hp18 hp19 hp20 - hp-level
     w0 w1 - wlevel
-    pl0 pl1 pl2 pl3 pl4 pl5 - player-level
+    pl0 pl1 pl2 pl3 pl4 pl5 pl6 pl7 pl8 pl9 pl10 pl11 pl12 pl13 pl14 pl15 - player-level
     bp0 bp1 bp2 bp3 bp4 bp5 bp6 bp7 - boss-phase
     e1 e2 e3 e4 e5 e6 - estus-slot
-    s0 s1 s2 s3 s4 s5 - soul-level
+    s0 s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 s15 s16 s17 s18 s19 s20 - soul-level
   )
 
   (:init
@@ -64,78 +63,35 @@
     (enemy-at final-lord throne)
 
     (is-alive gaping-dragon) (is-alive iron-golem) (is-alive final-lord)
-
-    (has-active-boss depths)
-    (has-active-boss fortress)
-    (has-active-boss throne)
-
-    ;; -----------------------------
-    ;; Player state
-    ;; -----------------------------
-    (at-player firelink)
-    (last-rested-bonfire firelink)
-
-    ;; -----------------------------
-    ;; HP ladder + death marker
-    ;; -----------------------------
-    (hp-next hp0 hp1) (hp-next hp1 hp2) (hp-next hp2 hp3) (hp-next hp3 hp4) (hp-next hp4 hp5)
-    (hp-next hp5 hp6) (hp-next hp6 hp7) (hp-next hp7 hp8) (hp-next hp8 hp9) (hp-next hp9 hp10)
-    (hp-next hp10 hp11) (hp-next hp11 hp12) (hp-next hp12 hp13) (hp-next hp13 hp14) (hp-next hp14 hp15)
-
+    (has-active-boss depths) (has-active-boss fortress) (has-active-boss throne)
+    (at-player firelink) (last-rested-bonfire firelink)
+    (hp-next hp0 hp1) (hp-next hp1 hp2) (hp-next hp2 hp3) (hp-next hp3 hp4) (hp-next hp4 hp5) (hp-next hp5 hp6) (hp-next hp6 hp7) (hp-next hp7 hp8) (hp-next hp8 hp9) (hp-next hp9 hp10) (hp-next hp10 hp11) (hp-next hp11 hp12) (hp-next hp12 hp13) (hp-next hp13 hp14) (hp-next hp14 hp15) (hp-next hp15 hp16) (hp-next hp16 hp17) (hp-next hp17 hp18) (hp-next hp18 hp19) (hp-next hp19 hp20)
     (hp-zero hp0)
-
-    ;; player HP starts at 10, but max-hp can reach 15 via level-up-stats
-    (player-max-hp hp10)
-    (player-hp hp10)
-
-    ;; -----------------------------
-    ;; HP-HEAL table: Estus heals +5, capped by max-hp ?m
-    ;; (hp-heal ?m ?h_before ?h_after)
-    ;; -----------------------------
-
-    ;; max = hp10
-    (hp-heal hp10 hp0 hp5)  (hp-heal hp10 hp1 hp6)  (hp-heal hp10 hp2 hp7)  (hp-heal hp10 hp3 hp8)  (hp-heal hp10 hp4 hp9)
-    (hp-heal hp10 hp5 hp10) (hp-heal hp10 hp6 hp10) (hp-heal hp10 hp7 hp10) (hp-heal hp10 hp8 hp10) (hp-heal hp10 hp9 hp10)
-    (hp-heal hp10 hp10 hp10) (hp-heal hp10 hp11 hp10) (hp-heal hp10 hp12 hp10) (hp-heal hp10 hp13 hp10) (hp-heal hp10 hp14 hp10) (hp-heal hp10 hp15 hp10)
-
-    ;; max = hp11
-    (hp-heal hp11 hp0 hp5)  (hp-heal hp11 hp1 hp6)  (hp-heal hp11 hp2 hp7)  (hp-heal hp11 hp3 hp8)  (hp-heal hp11 hp4 hp9)
-    (hp-heal hp11 hp5 hp10) (hp-heal hp11 hp6 hp11) (hp-heal hp11 hp7 hp11) (hp-heal hp11 hp8 hp11) (hp-heal hp11 hp9 hp11)
-    (hp-heal hp11 hp10 hp11) (hp-heal hp11 hp11 hp11) (hp-heal hp11 hp12 hp11) (hp-heal hp11 hp13 hp11) (hp-heal hp11 hp14 hp11) (hp-heal hp11 hp15 hp11)
-
-    ;; max = hp12
-    (hp-heal hp12 hp0 hp5)  (hp-heal hp12 hp1 hp6)  (hp-heal hp12 hp2 hp7)  (hp-heal hp12 hp3 hp8)  (hp-heal hp12 hp4 hp9)
-    (hp-heal hp12 hp5 hp10) (hp-heal hp12 hp6 hp11) (hp-heal hp12 hp7 hp12) (hp-heal hp12 hp8 hp12) (hp-heal hp12 hp9 hp12)
-    (hp-heal hp12 hp10 hp12) (hp-heal hp12 hp11 hp12) (hp-heal hp12 hp12 hp12) (hp-heal hp12 hp13 hp12) (hp-heal hp12 hp14 hp12) (hp-heal hp12 hp15 hp12)
-
-    ;; max = hp13
-    (hp-heal hp13 hp0 hp5)  (hp-heal hp13 hp1 hp6)  (hp-heal hp13 hp2 hp7)  (hp-heal hp13 hp3 hp8)  (hp-heal hp13 hp4 hp9)
-    (hp-heal hp13 hp5 hp10) (hp-heal hp13 hp6 hp11) (hp-heal hp13 hp7 hp12) (hp-heal hp13 hp8 hp13) (hp-heal hp13 hp9 hp13)
-    (hp-heal hp13 hp10 hp13) (hp-heal hp13 hp11 hp13) (hp-heal hp13 hp12 hp13) (hp-heal hp13 hp13 hp13) (hp-heal hp13 hp14 hp13) (hp-heal hp13 hp15 hp13)
-
-    ;; max = hp14
-    (hp-heal hp14 hp0 hp5)  (hp-heal hp14 hp1 hp6)  (hp-heal hp14 hp2 hp7)  (hp-heal hp14 hp3 hp8)  (hp-heal hp14 hp4 hp9)
-    (hp-heal hp14 hp5 hp10) (hp-heal hp14 hp6 hp11) (hp-heal hp14 hp7 hp12) (hp-heal hp14 hp8 hp13) (hp-heal hp14 hp9 hp14)
-    (hp-heal hp14 hp10 hp14) (hp-heal hp14 hp11 hp14) (hp-heal hp14 hp12 hp14) (hp-heal hp14 hp13 hp14) (hp-heal hp14 hp14 hp14) (hp-heal hp14 hp15 hp14)
-
-    ;; max = hp15
-    (hp-heal hp15 hp0 hp5)  (hp-heal hp15 hp1 hp6)  (hp-heal hp15 hp2 hp7)  (hp-heal hp15 hp3 hp8)  (hp-heal hp15 hp4 hp9)
-    (hp-heal hp15 hp5 hp10) (hp-heal hp15 hp6 hp11) (hp-heal hp15 hp7 hp12) (hp-heal hp15 hp8 hp13) (hp-heal hp15 hp9 hp14)
-    (hp-heal hp15 hp10 hp15) (hp-heal hp15 hp11 hp15) (hp-heal hp15 hp12 hp15) (hp-heal hp15 hp13 hp15) (hp-heal hp15 hp14 hp15) (hp-heal hp15 hp15 hp15)
-
-    ;; -----------------------------
-    ;; Player progression / weapon
-    ;; -----------------------------
+    (hp-leq hp0 hp0) (hp-leq hp0 hp1) (hp-leq hp0 hp2) (hp-leq hp0 hp3) (hp-leq hp0 hp4) (hp-leq hp0 hp5) (hp-leq hp0 hp6) (hp-leq hp0 hp7) (hp-leq hp0 hp8) (hp-leq hp0 hp9) (hp-leq hp0 hp10) (hp-leq hp0 hp11) (hp-leq hp0 hp12) (hp-leq hp0 hp13) (hp-leq hp0 hp14) (hp-leq hp0 hp15) (hp-leq hp0 hp16) (hp-leq hp0 hp17) (hp-leq hp0 hp18) (hp-leq hp0 hp19) (hp-leq hp0 hp20)
+    (hp-leq hp1 hp1) (hp-leq hp1 hp2) (hp-leq hp1 hp3) (hp-leq hp1 hp4) (hp-leq hp1 hp5) (hp-leq hp1 hp6) (hp-leq hp1 hp7) (hp-leq hp1 hp8) (hp-leq hp1 hp9) (hp-leq hp1 hp10) (hp-leq hp1 hp11) (hp-leq hp1 hp12) (hp-leq hp1 hp13) (hp-leq hp1 hp14) (hp-leq hp1 hp15) (hp-leq hp1 hp16) (hp-leq hp1 hp17) (hp-leq hp1 hp18) (hp-leq hp1 hp19) (hp-leq hp1 hp20)
+    (hp-leq hp2 hp2) (hp-leq hp2 hp3) (hp-leq hp2 hp4) (hp-leq hp2 hp5) (hp-leq hp2 hp6) (hp-leq hp2 hp7) (hp-leq hp2 hp8) (hp-leq hp2 hp9) (hp-leq hp2 hp10) (hp-leq hp2 hp11) (hp-leq hp2 hp12) (hp-leq hp2 hp13) (hp-leq hp2 hp14) (hp-leq hp2 hp15) (hp-leq hp2 hp16) (hp-leq hp2 hp17) (hp-leq hp2 hp18) (hp-leq hp2 hp19) (hp-leq hp2 hp20)
+    (hp-leq hp3 hp3) (hp-leq hp3 hp4) (hp-leq hp3 hp5) (hp-leq hp3 hp6) (hp-leq hp3 hp7) (hp-leq hp3 hp8) (hp-leq hp3 hp9) (hp-leq hp3 hp10) (hp-leq hp3 hp11) (hp-leq hp3 hp12) (hp-leq hp3 hp13) (hp-leq hp3 hp14) (hp-leq hp3 hp15) (hp-leq hp3 hp16) (hp-leq hp3 hp17) (hp-leq hp3 hp18) (hp-leq hp3 hp19) (hp-leq hp3 hp20)
+    (hp-leq hp4 hp4) (hp-leq hp4 hp5) (hp-leq hp4 hp6) (hp-leq hp4 hp7) (hp-leq hp4 hp8) (hp-leq hp4 hp9) (hp-leq hp4 hp10) (hp-leq hp4 hp11) (hp-leq hp4 hp12) (hp-leq hp4 hp13) (hp-leq hp4 hp14) (hp-leq hp4 hp15) (hp-leq hp4 hp16) (hp-leq hp4 hp17) (hp-leq hp4 hp18) (hp-leq hp4 hp19) (hp-leq hp4 hp20)
+    (hp-leq hp5 hp5) (hp-leq hp5 hp6) (hp-leq hp5 hp7) (hp-leq hp5 hp8) (hp-leq hp5 hp9) (hp-leq hp5 hp10) (hp-leq hp5 hp11) (hp-leq hp5 hp12) (hp-leq hp5 hp13) (hp-leq hp5 hp14) (hp-leq hp5 hp15) (hp-leq hp5 hp16) (hp-leq hp5 hp17) (hp-leq hp5 hp18) (hp-leq hp5 hp19) (hp-leq hp5 hp20)
+    (hp-leq hp6 hp6) (hp-leq hp6 hp7) (hp-leq hp6 hp8) (hp-leq hp6 hp9) (hp-leq hp6 hp10) (hp-leq hp6 hp11) (hp-leq hp6 hp12) (hp-leq hp6 hp13) (hp-leq hp6 hp14) (hp-leq hp6 hp15) (hp-leq hp6 hp16) (hp-leq hp6 hp17) (hp-leq hp6 hp18) (hp-leq hp6 hp19) (hp-leq hp6 hp20)
+    (hp-leq hp7 hp7) (hp-leq hp7 hp8) (hp-leq hp7 hp9) (hp-leq hp7 hp10) (hp-leq hp7 hp11) (hp-leq hp7 hp12) (hp-leq hp7 hp13) (hp-leq hp7 hp14) (hp-leq hp7 hp15) (hp-leq hp7 hp16) (hp-leq hp7 hp17) (hp-leq hp7 hp18) (hp-leq hp7 hp19) (hp-leq hp7 hp20)
+    (hp-leq hp8 hp8) (hp-leq hp8 hp9) (hp-leq hp8 hp10) (hp-leq hp8 hp11) (hp-leq hp8 hp12) (hp-leq hp8 hp13) (hp-leq hp8 hp14) (hp-leq hp8 hp15) (hp-leq hp8 hp16) (hp-leq hp8 hp17) (hp-leq hp8 hp18) (hp-leq hp8 hp19) (hp-leq hp8 hp20)
+    (hp-leq hp9 hp9) (hp-leq hp9 hp10) (hp-leq hp9 hp11) (hp-leq hp9 hp12) (hp-leq hp9 hp13) (hp-leq hp9 hp14) (hp-leq hp9 hp15) (hp-leq hp9 hp16) (hp-leq hp9 hp17) (hp-leq hp9 hp18) (hp-leq hp9 hp19) (hp-leq hp9 hp20)
+    (hp-leq hp10 hp10) (hp-leq hp10 hp11) (hp-leq hp10 hp12) (hp-leq hp10 hp13) (hp-leq hp10 hp14) (hp-leq hp10 hp15) (hp-leq hp10 hp16) (hp-leq hp10 hp17) (hp-leq hp10 hp18) (hp-leq hp10 hp19) (hp-leq hp10 hp20)
+    (hp-leq hp11 hp11) (hp-leq hp11 hp12) (hp-leq hp11 hp13) (hp-leq hp11 hp14) (hp-leq hp11 hp15) (hp-leq hp11 hp16) (hp-leq hp11 hp17) (hp-leq hp11 hp18) (hp-leq hp11 hp19) (hp-leq hp11 hp20)
+    (hp-leq hp12 hp12) (hp-leq hp12 hp13) (hp-leq hp12 hp14) (hp-leq hp12 hp15) (hp-leq hp12 hp16) (hp-leq hp12 hp17) (hp-leq hp12 hp18) (hp-leq hp12 hp19) (hp-leq hp12 hp20)
+    (hp-leq hp13 hp13) (hp-leq hp13 hp14) (hp-leq hp13 hp15) (hp-leq hp13 hp16) (hp-leq hp13 hp17) (hp-leq hp13 hp18) (hp-leq hp13 hp19) (hp-leq hp13 hp20)
+    (hp-leq hp14 hp14) (hp-leq hp14 hp15) (hp-leq hp14 hp16) (hp-leq hp14 hp17) (hp-leq hp14 hp18) (hp-leq hp14 hp19) (hp-leq hp14 hp20)
+    (hp-leq hp15 hp15) (hp-leq hp15 hp16) (hp-leq hp15 hp17) (hp-leq hp15 hp18) (hp-leq hp15 hp19) (hp-leq hp15 hp20)
+    (hp-leq hp16 hp16) (hp-leq hp16 hp17) (hp-leq hp16 hp18) (hp-leq hp16 hp19) (hp-leq hp16 hp20)
+    (hp-leq hp17 hp17) (hp-leq hp17 hp18) (hp-leq hp17 hp19) (hp-leq hp17 hp20)
+    (hp-leq hp18 hp18) (hp-leq hp18 hp19) (hp-leq hp18 hp20)
+    (hp-leq hp19 hp19) (hp-leq hp19 hp20)
+    (hp-leq hp20 hp20)
+    (player-max-hp hp5) (player-hp hp5)
     (player-current-level pl0)
-    (player-level-next pl0 pl1) (player-level-next pl1 pl2) (player-level-next pl2 pl3)
-    (player-level-next pl3 pl4) (player-level-next pl4 pl5)
-
-    (player-weapon-level w0)
-    (wlevel-next w0 w1)
-
-    ;; -----------------------------
-    ;; Boss phases
-    ;; -----------------------------
+    (player-level-next pl0 pl1) (player-level-next pl1 pl2) (player-level-next pl2 pl3) (player-level-next pl3 pl4) (player-level-next pl4 pl5) (player-level-next pl5 pl6) (player-level-next pl6 pl7) (player-level-next pl7 pl8) (player-level-next pl8 pl9) (player-level-next pl9 pl10) (player-level-next pl10 pl11) (player-level-next pl11 pl12) (player-level-next pl12 pl13) (player-level-next pl13 pl14) (player-level-next pl14 pl15)
+    (player-weapon-level w0) (wlevel-next w0 w1)
     (boss-phase-zero bp0)
 
     (boss-phase-next bp6 bp5) (boss-phase-next bp5 bp4) (boss-phase-next bp4 bp3)
@@ -143,94 +99,174 @@
     (boss-phase-next bp7 bp6)
 
     (boss-max-phase gaping-dragon bp6) (boss-current-phase gaping-dragon bp6)
-    (boss-max-phase iron-golem bp6)    (boss-current-phase iron-golem bp6)
-    (boss-max-phase final-lord bp7)    (boss-current-phase final-lord bp7)
-
-    ;; -----------------------------
-    ;; Estus
-    ;; -----------------------------
-    (estus-unlocked e1) (estus-full e1)
-    (estus-unlocked e2) (estus-full e2)
-    (estus-unlocked e3) (estus-full e3)
-
-    ;; -----------------------------
-    ;; Souls ladder
-    ;; -----------------------------
-    (soul-next s0 s1) (soul-next s1 s2) (soul-next s2 s3) (soul-next s3 s4) (soul-next s4 s5)
-    (player-max-souls s5)
-    (player-souls s0)
-    (soul-min s0)
-
-    ;; enemy drops (saturating)
-    (soul-after-drop hollow s0 s2) (soul-after-drop hollow s1 s3) (soul-after-drop hollow s2 s4) (soul-after-drop hollow s3 s5) (soul-after-drop hollow s4 s5) (soul-after-drop hollow s5 s5)
-    (soul-after-drop bandit s0 s2) (soul-after-drop bandit s1 s3) (soul-after-drop bandit s2 s4) (soul-after-drop bandit s3 s5) (soul-after-drop bandit s4 s5) (soul-after-drop bandit s5 s5)
-    (soul-after-drop skeleton s0 s2) (soul-after-drop skeleton s1 s3) (soul-after-drop skeleton s2 s4) (soul-after-drop skeleton s3 s5) (soul-after-drop skeleton s4 s5) (soul-after-drop skeleton s5 s5)
-    (soul-after-drop giant s0 s2) (soul-after-drop giant s1 s3) (soul-after-drop giant s2 s4) (soul-after-drop giant s3 s5) (soul-after-drop giant s4 s5) (soul-after-drop giant s5 s5)
-
-    (soul-after-drop gaping-dragon s0 s4) (soul-after-drop gaping-dragon s1 s5) (soul-after-drop gaping-dragon s2 s5) (soul-after-drop gaping-dragon s3 s5) (soul-after-drop gaping-dragon s4 s5) (soul-after-drop gaping-dragon s5 s5)
-    (soul-after-drop iron-golem s0 s4)    (soul-after-drop iron-golem s1 s5)    (soul-after-drop iron-golem s2 s5)    (soul-after-drop iron-golem s3 s5)    (soul-after-drop iron-golem s4 s5)    (soul-after-drop iron-golem s5 s5)
-    (soul-after-drop final-lord s0 s5)    (soul-after-drop final-lord s1 s5)    (soul-after-drop final-lord s2 s5)    (soul-after-drop final-lord s3 s5)    (soul-after-drop final-lord s4 s5)    (soul-after-drop final-lord s5 s5)
-
-    ;; spend souls for leveling (cost grows)
-    (soul-spend-for-level pl0 pl1 s1 s0) (soul-spend-for-level pl0 pl1 s2 s1) (soul-spend-for-level pl0 pl1 s3 s2) (soul-spend-for-level pl0 pl1 s4 s3) (soul-spend-for-level pl0 pl1 s5 s4)
-    (soul-spend-for-level pl1 pl2 s2 s0) (soul-spend-for-level pl1 pl2 s3 s1) (soul-spend-for-level pl1 pl2 s4 s2) (soul-spend-for-level pl1 pl2 s5 s3)
-    (soul-spend-for-level pl2 pl3 s3 s0) (soul-spend-for-level pl2 pl3 s4 s1) (soul-spend-for-level pl2 pl3 s5 s2)
-    (soul-spend-for-level pl3 pl4 s4 s0) (soul-spend-for-level pl3 pl4 s5 s1)
-    (soul-spend-for-level pl4 pl5 s5 s0)
-
-    ;; -----------------------------
-    ;; Damage model (hp-after-attack)
-    ;; -----------------------------
-    ;; bandit: -1 each hit
-    (hp-after-attack bandit hp15 hp14) (hp-after-attack bandit hp14 hp13) (hp-after-attack bandit hp13 hp12) (hp-after-attack bandit hp12 hp11)
-    (hp-after-attack bandit hp11 hp10) (hp-after-attack bandit hp10 hp9)  (hp-after-attack bandit hp9 hp8)   (hp-after-attack bandit hp8 hp7)
-    (hp-after-attack bandit hp7 hp6)   (hp-after-attack bandit hp6 hp5)   (hp-after-attack bandit hp5 hp4)   (hp-after-attack bandit hp4 hp3)
-    (hp-after-attack bandit hp3 hp2)   (hp-after-attack bandit hp2 hp1)   (hp-after-attack bandit hp1 hp0)
-
-    ;; final-lord: -2 per hit-ish (as you defined)
-    (hp-after-attack final-lord hp15 hp13) (hp-after-attack final-lord hp14 hp12) (hp-after-attack final-lord hp13 hp11)
-    (hp-after-attack final-lord hp12 hp10) (hp-after-attack final-lord hp11 hp9)  (hp-after-attack final-lord hp10 hp8)
-    (hp-after-attack final-lord hp9 hp7)   (hp-after-attack final-lord hp8 hp6)   (hp-after-attack final-lord hp7 hp5)
-    (hp-after-attack final-lord hp6 hp4)   (hp-after-attack final-lord hp5 hp3)   (hp-after-attack final-lord hp4 hp2)
-    (hp-after-attack final-lord hp3 hp1)   (hp-after-attack final-lord hp2 hp0)   (hp-after-attack final-lord hp1 hp0)
-
-    ;; gaping-dragon: -1 each hit
-    (hp-after-attack gaping-dragon hp15 hp14) (hp-after-attack gaping-dragon hp14 hp13) (hp-after-attack gaping-dragon hp13 hp12)
-    (hp-after-attack gaping-dragon hp12 hp11) (hp-after-attack gaping-dragon hp11 hp10) (hp-after-attack gaping-dragon hp10 hp9)
-    (hp-after-attack gaping-dragon hp9 hp8)   (hp-after-attack gaping-dragon hp8 hp7)   (hp-after-attack gaping-dragon hp7 hp6)
-    (hp-after-attack gaping-dragon hp6 hp5)   (hp-after-attack gaping-dragon hp5 hp4)   (hp-after-attack gaping-dragon hp4 hp3)
-    (hp-after-attack gaping-dragon hp3 hp2)   (hp-after-attack gaping-dragon hp2 hp1)   (hp-after-attack gaping-dragon hp1 hp0)
-
-    ;; giant: -2 per hit-ish
-    (hp-after-attack giant hp15 hp13) (hp-after-attack giant hp14 hp12) (hp-after-attack giant hp13 hp11)
-    (hp-after-attack giant hp12 hp10) (hp-after-attack giant hp11 hp9)  (hp-after-attack giant hp10 hp8)
-    (hp-after-attack giant hp9 hp7)   (hp-after-attack giant hp8 hp6)   (hp-after-attack giant hp7 hp5)
-    (hp-after-attack giant hp6 hp4)   (hp-after-attack giant hp5 hp3)   (hp-after-attack giant hp4 hp2)
-    (hp-after-attack giant hp3 hp1)   (hp-after-attack giant hp2 hp0)   (hp-after-attack giant hp1 hp0)
-
-    ;; hollow: -1 each hit
-    (hp-after-attack hollow hp15 hp14) (hp-after-attack hollow hp14 hp13) (hp-after-attack hollow hp13 hp12) (hp-after-attack hollow hp12 hp11)
-    (hp-after-attack hollow hp11 hp10) (hp-after-attack hollow hp10 hp9)  (hp-after-attack hollow hp9 hp8)   (hp-after-attack hollow hp8 hp7)
-    (hp-after-attack hollow hp7 hp6)   (hp-after-attack hollow hp6 hp5)   (hp-after-attack hollow hp5 hp4)   (hp-after-attack hollow hp4 hp3)
-    (hp-after-attack hollow hp3 hp2)   (hp-after-attack hollow hp2 hp1)   (hp-after-attack hollow hp1 hp0)
-
-    ;; iron-golem: -2 per hit-ish
-    (hp-after-attack iron-golem hp15 hp13) (hp-after-attack iron-golem hp14 hp12) (hp-after-attack iron-golem hp13 hp11)
-    (hp-after-attack iron-golem hp12 hp10) (hp-after-attack iron-golem hp11 hp9)  (hp-after-attack iron-golem hp10 hp8)
-    (hp-after-attack iron-golem hp9 hp7)   (hp-after-attack iron-golem hp8 hp6)   (hp-after-attack iron-golem hp7 hp5)
-    (hp-after-attack iron-golem hp6 hp4)   (hp-after-attack iron-golem hp5 hp3)   (hp-after-attack iron-golem hp4 hp2)
-    (hp-after-attack iron-golem hp3 hp1)   (hp-after-attack iron-golem hp2 hp0)   (hp-after-attack iron-golem hp1 hp0)
-
-    ;; skeleton: -1 each hit
-    (hp-after-attack skeleton hp15 hp14) (hp-after-attack skeleton hp14 hp13) (hp-after-attack skeleton hp13 hp12)
-    (hp-after-attack skeleton hp12 hp11) (hp-after-attack skeleton hp11 hp10) (hp-after-attack skeleton hp10 hp9)
-    (hp-after-attack skeleton hp9 hp8)   (hp-after-attack skeleton hp8 hp7)   (hp-after-attack skeleton hp7 hp6)
-    (hp-after-attack skeleton hp6 hp5)   (hp-after-attack skeleton hp5 hp4)   (hp-after-attack skeleton hp4 hp3)
-    (hp-after-attack skeleton hp3 hp2)   (hp-after-attack skeleton hp2 hp1)   (hp-after-attack skeleton hp1 hp0)
-
-    ;; -----------------------------
-    ;; Weapon gates for bosses
-    ;; -----------------------------
+    (boss-max-phase iron-golem bp6) (boss-current-phase iron-golem bp6)
+    (boss-max-phase final-lord bp7) (boss-current-phase final-lord bp7)
+    (estus-unlocked e1) (estus-full e1) (estus-unlocked e2) (estus-full e2) (estus-unlocked e3) (estus-full e3)
+    (soul-next s0 s1) (soul-next s1 s2) (soul-next s2 s3) (soul-next s3 s4) (soul-next s4 s5) (soul-next s5 s6) (soul-next s6 s7) (soul-next s7 s8) (soul-next s8 s9) (soul-next s9 s10) (soul-next s10 s11) (soul-next s11 s12) (soul-next s12 s13) (soul-next s13 s14) (soul-next s14 s15) (soul-next s15 s16) (soul-next s16 s17) (soul-next s17 s18) (soul-next s18 s19) (soul-next s19 s20)
+    (hp-after-attack bandit hp20 hp19)
+    (hp-after-attack bandit hp19 hp18)
+    (hp-after-attack bandit hp18 hp17)
+    (hp-after-attack bandit hp17 hp16)
+    (hp-after-attack bandit hp16 hp15)
+    (hp-after-attack bandit hp15 hp14)
+    (hp-after-attack bandit hp14 hp13)
+    (hp-after-attack bandit hp13 hp12)
+    (hp-after-attack bandit hp12 hp11)
+    (hp-after-attack bandit hp11 hp10)
+    (hp-after-attack bandit hp10 hp9)
+    (hp-after-attack bandit hp9 hp8)
+    (hp-after-attack bandit hp8 hp7)
+    (hp-after-attack bandit hp7 hp6)
+    (hp-after-attack bandit hp6 hp5)
+    (hp-after-attack bandit hp5 hp4)
+    (hp-after-attack bandit hp4 hp3)
+    (hp-after-attack bandit hp3 hp2)
+    (hp-after-attack bandit hp2 hp1)
+    (hp-after-attack bandit hp1 hp0)
+    (hp-after-attack final-lord hp20 hp18)
+    (hp-after-attack final-lord hp19 hp17)
+    (hp-after-attack final-lord hp18 hp16)
+    (hp-after-attack final-lord hp17 hp15)
+    (hp-after-attack final-lord hp16 hp14)
+    (hp-after-attack final-lord hp15 hp13)
+    (hp-after-attack final-lord hp14 hp12)
+    (hp-after-attack final-lord hp13 hp11)
+    (hp-after-attack final-lord hp12 hp10)
+    (hp-after-attack final-lord hp11 hp9)
+    (hp-after-attack final-lord hp10 hp8)
+    (hp-after-attack final-lord hp9 hp7)
+    (hp-after-attack final-lord hp8 hp6)
+    (hp-after-attack final-lord hp7 hp5)
+    (hp-after-attack final-lord hp6 hp4)
+    (hp-after-attack final-lord hp5 hp3)
+    (hp-after-attack final-lord hp4 hp2)
+    (hp-after-attack final-lord hp3 hp1)
+    (hp-after-attack final-lord hp2 hp0)
+    (hp-after-attack final-lord hp1 hp0)
+    (hp-after-attack gaping-dragon hp20 hp19)
+    (hp-after-attack gaping-dragon hp19 hp18)
+    (hp-after-attack gaping-dragon hp18 hp17)
+    (hp-after-attack gaping-dragon hp17 hp16)
+    (hp-after-attack gaping-dragon hp16 hp15)
+    (hp-after-attack gaping-dragon hp15 hp14)
+    (hp-after-attack gaping-dragon hp14 hp13)
+    (hp-after-attack gaping-dragon hp13 hp12)
+    (hp-after-attack gaping-dragon hp12 hp11)
+    (hp-after-attack gaping-dragon hp11 hp10)
+    (hp-after-attack gaping-dragon hp10 hp9)
+    (hp-after-attack gaping-dragon hp9 hp8)
+    (hp-after-attack gaping-dragon hp8 hp7)
+    (hp-after-attack gaping-dragon hp7 hp6)
+    (hp-after-attack gaping-dragon hp6 hp5)
+    (hp-after-attack gaping-dragon hp5 hp4)
+    (hp-after-attack gaping-dragon hp4 hp3)
+    (hp-after-attack gaping-dragon hp3 hp2)
+    (hp-after-attack gaping-dragon hp2 hp1)
+    (hp-after-attack gaping-dragon hp1 hp0)
+    (hp-after-attack giant hp20 hp18)
+    (hp-after-attack giant hp19 hp17)
+    (hp-after-attack giant hp18 hp16)
+    (hp-after-attack giant hp17 hp15)
+    (hp-after-attack giant hp16 hp14)
+    (hp-after-attack giant hp15 hp13)
+    (hp-after-attack giant hp14 hp12)
+    (hp-after-attack giant hp13 hp11)
+    (hp-after-attack giant hp12 hp10)
+    (hp-after-attack giant hp11 hp9)
+    (hp-after-attack giant hp10 hp8)
+    (hp-after-attack giant hp9 hp7)
+    (hp-after-attack giant hp8 hp6)
+    (hp-after-attack giant hp7 hp5)
+    (hp-after-attack giant hp6 hp4)
+    (hp-after-attack giant hp5 hp3)
+    (hp-after-attack giant hp4 hp2)
+    (hp-after-attack giant hp3 hp1)
+    (hp-after-attack giant hp2 hp0)
+    (hp-after-attack giant hp1 hp0)
+    (hp-after-attack hollow hp20 hp19)
+    (hp-after-attack hollow hp19 hp18)
+    (hp-after-attack hollow hp18 hp17)
+    (hp-after-attack hollow hp17 hp16)
+    (hp-after-attack hollow hp16 hp15)
+    (hp-after-attack hollow hp15 hp14)
+    (hp-after-attack hollow hp14 hp13)
+    (hp-after-attack hollow hp13 hp12)
+    (hp-after-attack hollow hp12 hp11)
+    (hp-after-attack hollow hp11 hp10)
+    (hp-after-attack hollow hp10 hp9)
+    (hp-after-attack hollow hp9 hp8)
+    (hp-after-attack hollow hp8 hp7)
+    (hp-after-attack hollow hp7 hp6)
+    (hp-after-attack hollow hp6 hp5)
+    (hp-after-attack hollow hp5 hp4)
+    (hp-after-attack hollow hp4 hp3)
+    (hp-after-attack hollow hp3 hp2)
+    (hp-after-attack hollow hp2 hp1)
+    (hp-after-attack hollow hp1 hp0)
+    (hp-after-attack iron-golem hp20 hp18)
+    (hp-after-attack iron-golem hp19 hp17)
+    (hp-after-attack iron-golem hp18 hp16)
+    (hp-after-attack iron-golem hp17 hp15)
+    (hp-after-attack iron-golem hp16 hp14)
+    (hp-after-attack iron-golem hp15 hp13)
+    (hp-after-attack iron-golem hp14 hp12)
+    (hp-after-attack iron-golem hp13 hp11)
+    (hp-after-attack iron-golem hp12 hp10)
+    (hp-after-attack iron-golem hp11 hp9)
+    (hp-after-attack iron-golem hp10 hp8)
+    (hp-after-attack iron-golem hp9 hp7)
+    (hp-after-attack iron-golem hp8 hp6)
+    (hp-after-attack iron-golem hp7 hp5)
+    (hp-after-attack iron-golem hp6 hp4)
+    (hp-after-attack iron-golem hp5 hp3)
+    (hp-after-attack iron-golem hp4 hp2)
+    (hp-after-attack iron-golem hp3 hp1)
+    (hp-after-attack iron-golem hp2 hp0)
+    (hp-after-attack iron-golem hp1 hp0)
+    (hp-after-attack skeleton hp20 hp19)
+    (hp-after-attack skeleton hp19 hp18)
+    (hp-after-attack skeleton hp18 hp17)
+    (hp-after-attack skeleton hp17 hp16)
+    (hp-after-attack skeleton hp16 hp15)
+    (hp-after-attack skeleton hp15 hp14)
+    (hp-after-attack skeleton hp14 hp13)
+    (hp-after-attack skeleton hp13 hp12)
+    (hp-after-attack skeleton hp12 hp11)
+    (hp-after-attack skeleton hp11 hp10)
+    (hp-after-attack skeleton hp10 hp9)
+    (hp-after-attack skeleton hp9 hp8)
+    (hp-after-attack skeleton hp8 hp7)
+    (hp-after-attack skeleton hp7 hp6)
+    (hp-after-attack skeleton hp6 hp5)
+    (hp-after-attack skeleton hp5 hp4)
+    (hp-after-attack skeleton hp4 hp3)
+    (hp-after-attack skeleton hp3 hp2)
+    (hp-after-attack skeleton hp2 hp1)
+    (hp-after-attack skeleton hp1 hp0)
+    ;; Souls Lader
+    (player-max-souls s20) (player-souls s0) (soul-min s0)
+    (soul-after-drop hollow s0 s2) (soul-after-drop hollow s1 s3) (soul-after-drop hollow s2 s4) (soul-after-drop hollow s3 s5) (soul-after-drop hollow s4 s6) (soul-after-drop hollow s5 s7) (soul-after-drop hollow s6 s8) (soul-after-drop hollow s7 s9) (soul-after-drop hollow s8 s10) (soul-after-drop hollow s9 s11) (soul-after-drop hollow s10 s12) (soul-after-drop hollow s11 s13) (soul-after-drop hollow s12 s14) (soul-after-drop hollow s13 s15) (soul-after-drop hollow s14 s16) (soul-after-drop hollow s15 s17) (soul-after-drop hollow s16 s18) (soul-after-drop hollow s17 s19) (soul-after-drop hollow s18 s20) (soul-after-drop hollow s19 s20) (soul-after-drop hollow s20 s20)
+    (soul-after-drop bandit s0 s2) (soul-after-drop bandit s1 s3) (soul-after-drop bandit s2 s4) (soul-after-drop bandit s3 s5) (soul-after-drop bandit s4 s6) (soul-after-drop bandit s5 s7) (soul-after-drop bandit s6 s8) (soul-after-drop bandit s7 s9) (soul-after-drop bandit s8 s10) (soul-after-drop bandit s9 s11) (soul-after-drop bandit s10 s12) (soul-after-drop bandit s11 s13) (soul-after-drop bandit s12 s14) (soul-after-drop bandit s13 s15) (soul-after-drop bandit s14 s16) (soul-after-drop bandit s15 s17) (soul-after-drop bandit s16 s18) (soul-after-drop bandit s17 s19) (soul-after-drop bandit s18 s20) (soul-after-drop bandit s19 s20) (soul-after-drop bandit s20 s20)
+    (soul-after-drop skeleton s0 s2) (soul-after-drop skeleton s1 s3) (soul-after-drop skeleton s2 s4) (soul-after-drop skeleton s3 s5) (soul-after-drop skeleton s4 s6) (soul-after-drop skeleton s5 s7) (soul-after-drop skeleton s6 s8) (soul-after-drop skeleton s7 s9) (soul-after-drop skeleton s8 s10) (soul-after-drop skeleton s9 s11) (soul-after-drop skeleton s10 s12) (soul-after-drop skeleton s11 s13) (soul-after-drop skeleton s12 s14) (soul-after-drop skeleton s13 s15) (soul-after-drop skeleton s14 s16) (soul-after-drop skeleton s15 s17) (soul-after-drop skeleton s16 s18) (soul-after-drop skeleton s17 s19) (soul-after-drop skeleton s18 s20) (soul-after-drop skeleton s19 s20) (soul-after-drop skeleton s20 s20)
+    (soul-after-drop giant s0 s2) (soul-after-drop giant s1 s3) (soul-after-drop giant s2 s4) (soul-after-drop giant s3 s5) (soul-after-drop giant s4 s6) (soul-after-drop giant s5 s7) (soul-after-drop giant s6 s8) (soul-after-drop giant s7 s9) (soul-after-drop giant s8 s10) (soul-after-drop giant s9 s11) (soul-after-drop giant s10 s12) (soul-after-drop giant s11 s13) (soul-after-drop giant s12 s14) (soul-after-drop giant s13 s15) (soul-after-drop giant s14 s16) (soul-after-drop giant s15 s17) (soul-after-drop giant s16 s18) (soul-after-drop giant s17 s19) (soul-after-drop giant s18 s20) (soul-after-drop giant s19 s20) (soul-after-drop giant s20 s20)
+    (soul-after-drop gaping-dragon s0 s4) (soul-after-drop gaping-dragon s1 s5) (soul-after-drop gaping-dragon s2 s6) (soul-after-drop gaping-dragon s3 s7) (soul-after-drop gaping-dragon s4 s8) (soul-after-drop gaping-dragon s5 s9) (soul-after-drop gaping-dragon s6 s10) (soul-after-drop gaping-dragon s7 s11) (soul-after-drop gaping-dragon s8 s12) (soul-after-drop gaping-dragon s9 s13) (soul-after-drop gaping-dragon s10 s14) (soul-after-drop gaping-dragon s11 s15) (soul-after-drop gaping-dragon s12 s16) (soul-after-drop gaping-dragon s13 s17) (soul-after-drop gaping-dragon s14 s18) (soul-after-drop gaping-dragon s15 s19) (soul-after-drop gaping-dragon s16 s20) (soul-after-drop gaping-dragon s17 s20) (soul-after-drop gaping-dragon s18 s20) (soul-after-drop gaping-dragon s19 s20) (soul-after-drop gaping-dragon s20 s20)
+    (soul-after-drop iron-golem s0 s4) (soul-after-drop iron-golem s1 s5) (soul-after-drop iron-golem s2 s6) (soul-after-drop iron-golem s3 s7) (soul-after-drop iron-golem s4 s8) (soul-after-drop iron-golem s5 s9) (soul-after-drop iron-golem s6 s10) (soul-after-drop iron-golem s7 s11) (soul-after-drop iron-golem s8 s12) (soul-after-drop iron-golem s9 s13) (soul-after-drop iron-golem s10 s14) (soul-after-drop iron-golem s11 s15) (soul-after-drop iron-golem s12 s16) (soul-after-drop iron-golem s13 s17) (soul-after-drop iron-golem s14 s18) (soul-after-drop iron-golem s15 s19) (soul-after-drop iron-golem s16 s20) (soul-after-drop iron-golem s17 s20) (soul-after-drop iron-golem s18 s20) (soul-after-drop iron-golem s19 s20) (soul-after-drop iron-golem s20 s20)
+    (soul-after-drop final-lord s0 s5) (soul-after-drop final-lord s1 s6) (soul-after-drop final-lord s2 s7) (soul-after-drop final-lord s3 s8) (soul-after-drop final-lord s4 s9) (soul-after-drop final-lord s5 s10) (soul-after-drop final-lord s6 s11) (soul-after-drop final-lord s7 s12) (soul-after-drop final-lord s8 s13) (soul-after-drop final-lord s9 s14) (soul-after-drop final-lord s10 s15) (soul-after-drop final-lord s11 s16) (soul-after-drop final-lord s12 s17) (soul-after-drop final-lord s13 s18) (soul-after-drop final-lord s14 s19) (soul-after-drop final-lord s15 s20) (soul-after-drop final-lord s16 s20) (soul-after-drop final-lord s17 s20) (soul-after-drop final-lord s18 s20) (soul-after-drop final-lord s19 s20) (soul-after-drop final-lord s20 s20)
+    (soul-spend-for-level pl0 pl1 s1 s0) (soul-spend-for-level pl0 pl1 s2 s1) (soul-spend-for-level pl0 pl1 s3 s2) (soul-spend-for-level pl0 pl1 s4 s3) (soul-spend-for-level pl0 pl1 s5 s4) (soul-spend-for-level pl0 pl1 s6 s5) (soul-spend-for-level pl0 pl1 s7 s6) (soul-spend-for-level pl0 pl1 s8 s7) (soul-spend-for-level pl0 pl1 s9 s8) (soul-spend-for-level pl0 pl1 s10 s9) (soul-spend-for-level pl0 pl1 s11 s10) (soul-spend-for-level pl0 pl1 s12 s11) (soul-spend-for-level pl0 pl1 s13 s12) (soul-spend-for-level pl0 pl1 s14 s13) (soul-spend-for-level pl0 pl1 s15 s14) (soul-spend-for-level pl0 pl1 s16 s15) (soul-spend-for-level pl0 pl1 s17 s16) (soul-spend-for-level pl0 pl1 s18 s17) (soul-spend-for-level pl0 pl1 s19 s18) (soul-spend-for-level pl0 pl1 s20 s19)
+    (soul-spend-for-level pl1 pl2 s2 s0) (soul-spend-for-level pl1 pl2 s3 s1) (soul-spend-for-level pl1 pl2 s4 s2) (soul-spend-for-level pl1 pl2 s5 s3) (soul-spend-for-level pl1 pl2 s6 s4) (soul-spend-for-level pl1 pl2 s7 s5) (soul-spend-for-level pl1 pl2 s8 s6) (soul-spend-for-level pl1 pl2 s9 s7) (soul-spend-for-level pl1 pl2 s10 s8) (soul-spend-for-level pl1 pl2 s11 s9) (soul-spend-for-level pl1 pl2 s12 s10) (soul-spend-for-level pl1 pl2 s13 s11) (soul-spend-for-level pl1 pl2 s14 s12) (soul-spend-for-level pl1 pl2 s15 s13) (soul-spend-for-level pl1 pl2 s16 s14) (soul-spend-for-level pl1 pl2 s17 s15) (soul-spend-for-level pl1 pl2 s18 s16) (soul-spend-for-level pl1 pl2 s19 s17) (soul-spend-for-level pl1 pl2 s20 s18)
+    (soul-spend-for-level pl2 pl3 s4 s0) (soul-spend-for-level pl2 pl3 s5 s1) (soul-spend-for-level pl2 pl3 s6 s2) (soul-spend-for-level pl2 pl3 s7 s3) (soul-spend-for-level pl2 pl3 s8 s4) (soul-spend-for-level pl2 pl3 s9 s5) (soul-spend-for-level pl2 pl3 s10 s6) (soul-spend-for-level pl2 pl3 s11 s7) (soul-spend-for-level pl2 pl3 s12 s8) (soul-spend-for-level pl2 pl3 s13 s9) (soul-spend-for-level pl2 pl3 s14 s10) (soul-spend-for-level pl2 pl3 s15 s11) (soul-spend-for-level pl2 pl3 s16 s12) (soul-spend-for-level pl2 pl3 s17 s13) (soul-spend-for-level pl2 pl3 s18 s14) (soul-spend-for-level pl2 pl3 s19 s15) (soul-spend-for-level pl2 pl3 s20 s16)
+    (soul-spend-for-level pl3 pl4 s4 s0) (soul-spend-for-level pl3 pl4 s5 s1) (soul-spend-for-level pl3 pl4 s6 s2) (soul-spend-for-level pl3 pl4 s7 s3) (soul-spend-for-level pl3 pl4 s8 s4) (soul-spend-for-level pl3 pl4 s9 s5) (soul-spend-for-level pl3 pl4 s10 s6) (soul-spend-for-level pl3 pl4 s11 s7) (soul-spend-for-level pl3 pl4 s12 s8) (soul-spend-for-level pl3 pl4 s13 s9) (soul-spend-for-level pl3 pl4 s14 s10) (soul-spend-for-level pl3 pl4 s15 s11) (soul-spend-for-level pl3 pl4 s16 s12) (soul-spend-for-level pl3 pl4 s17 s13) (soul-spend-for-level pl3 pl4 s18 s14) (soul-spend-for-level pl3 pl4 s19 s15) (soul-spend-for-level pl3 pl4 s20 s16)
+    (soul-spend-for-level pl4 pl5 s4 s0) (soul-spend-for-level pl4 pl5 s5 s1) (soul-spend-for-level pl4 pl5 s6 s2) (soul-spend-for-level pl4 pl5 s7 s3) (soul-spend-for-level pl4 pl5 s8 s4) (soul-spend-for-level pl4 pl5 s9 s5) (soul-spend-for-level pl4 pl5 s10 s6) (soul-spend-for-level pl4 pl5 s11 s7) (soul-spend-for-level pl4 pl5 s12 s8) (soul-spend-for-level pl4 pl5 s13 s9) (soul-spend-for-level pl4 pl5 s14 s10) (soul-spend-for-level pl4 pl5 s15 s11) (soul-spend-for-level pl4 pl5 s16 s12) (soul-spend-for-level pl4 pl5 s17 s13) (soul-spend-for-level pl4 pl5 s18 s14) (soul-spend-for-level pl4 pl5 s19 s15) (soul-spend-for-level pl4 pl5 s20 s16)
+    (soul-spend-for-level pl5 pl6 s8 s0) (soul-spend-for-level pl5 pl6 s9 s1) (soul-spend-for-level pl5 pl6 s10 s2) (soul-spend-for-level pl5 pl6 s11 s3) (soul-spend-for-level pl5 pl6 s12 s4) (soul-spend-for-level pl5 pl6 s13 s5) (soul-spend-for-level pl5 pl6 s14 s6) (soul-spend-for-level pl5 pl6 s15 s7) (soul-spend-for-level pl5 pl6 s16 s8) (soul-spend-for-level pl5 pl6 s17 s9) (soul-spend-for-level pl5 pl6 s18 s10) (soul-spend-for-level pl5 pl6 s19 s11) (soul-spend-for-level pl5 pl6 s20 s12)
+    (soul-spend-for-level pl6 pl7 s8 s0) (soul-spend-for-level pl6 pl7 s9 s1) (soul-spend-for-level pl6 pl7 s10 s2) (soul-spend-for-level pl6 pl7 s11 s3) (soul-spend-for-level pl6 pl7 s12 s4) (soul-spend-for-level pl6 pl7 s13 s5) (soul-spend-for-level pl6 pl7 s14 s6) (soul-spend-for-level pl6 pl7 s15 s7) (soul-spend-for-level pl6 pl7 s16 s8) (soul-spend-for-level pl6 pl7 s17 s9) (soul-spend-for-level pl6 pl7 s18 s10) (soul-spend-for-level pl6 pl7 s19 s11) (soul-spend-for-level pl6 pl7 s20 s12)
+    (soul-spend-for-level pl7 pl8 s12 s0) (soul-spend-for-level pl7 pl8 s13 s1) (soul-spend-for-level pl7 pl8 s14 s2) (soul-spend-for-level pl7 pl8 s15 s3) (soul-spend-for-level pl7 pl8 s16 s4) (soul-spend-for-level pl7 pl8 s17 s5) (soul-spend-for-level pl7 pl8 s18 s6) (soul-spend-for-level pl7 pl8 s19 s7) (soul-spend-for-level pl7 pl8 s20 s8)
+    (soul-spend-for-level pl8 pl9 s12 s0) (soul-spend-for-level pl8 pl9 s13 s1) (soul-spend-for-level pl8 pl9 s14 s2) (soul-spend-for-level pl8 pl9 s15 s3) (soul-spend-for-level pl8 pl9 s16 s4) (soul-spend-for-level pl8 pl9 s17 s5) (soul-spend-for-level pl8 pl9 s18 s6) (soul-spend-for-level pl8 pl9 s19 s7) (soul-spend-for-level pl8 pl9 s20 s8)
+    (soul-spend-for-level pl9 pl10 s15 s0) (soul-spend-for-level pl9 pl10 s16 s1) (soul-spend-for-level pl9 pl10 s17 s2) (soul-spend-for-level pl9 pl10 s18 s3) (soul-spend-for-level pl9 pl10 s19 s4) (soul-spend-for-level pl9 pl10 s20 s5)
+    (soul-spend-for-level pl10 pl11 s15 s0) (soul-spend-for-level pl10 pl11 s16 s1) (soul-spend-for-level pl10 pl11 s17 s2) (soul-spend-for-level pl10 pl11 s18 s3) (soul-spend-for-level pl10 pl11 s19 s4) (soul-spend-for-level pl10 pl11 s20 s5)
+    (soul-spend-for-level pl11 pl12 s15 s0) (soul-spend-for-level pl11 pl12 s16 s1) (soul-spend-for-level pl11 pl12 s17 s2) (soul-spend-for-level pl11 pl12 s18 s3) (soul-spend-for-level pl11 pl12 s19 s4) (soul-spend-for-level pl11 pl12 s20 s5)
+    (soul-spend-for-level pl12 pl13 s17 s0) (soul-spend-for-level pl12 pl13 s18 s1) (soul-spend-for-level pl12 pl13 s19 s2) (soul-spend-for-level pl12 pl13 s20 s3)
+    (soul-spend-for-level pl13 pl14 s17 s0) (soul-spend-for-level pl13 pl14 s18 s1) (soul-spend-for-level pl13 pl14 s19 s2) (soul-spend-for-level pl13 pl14 s20 s3)
+    (soul-spend-for-level pl14 pl15 s20 s0)
     (can-damage-boss gaping-dragon w0)
     (can-damage-boss iron-golem w1)
     (can-damage-boss final-lord w1)
