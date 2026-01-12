@@ -201,7 +201,7 @@ def solve_with_planner(planner_name, problem, timeout, output_stream):
     if planner_name == "enhsp-any":
         with AnytimePlanner(          
             problem_kind=problem.kind,
-            params={"params": "-anytime -autoanytime"},
+            params={"params": "-s lazygbfs -h hmrp -ha true"},
             anytime_guarantee="INCREASING_QUALITY",
             ) as planner:
             engine_name = getattr(planner, "name", planner_name)

@@ -4,6 +4,7 @@ import re
 from datetime import datetime
 from io import StringIO
 from pathlib import Path
+import gc 
 
 from unified_planning.io import PDDLReader
 from unified_planning.shortcuts import AnytimePlanner, OneshotPlanner, get_environment
@@ -196,10 +197,12 @@ def solve_with_planner(planner_name, problem, timeout, output_stream):
     - enhsp-opt: oneshot planner with optimality guarantee.
     - enhsp-any: anytime planner; returns the last (best) plan produced.
     """
+    gc.collect()
     start_time = datetime.now()
 
     if planner_name == "enhsp-any":
-        params={"params": "-anytime -autoanytime"}
+        params={"params": "-s lazygbfs -h hmrp -ha true"}
+        
         with AnytimePlanner(problem_kind=problem.kind, params=params, anytime_guarantee="INCREASING_QUALITY") as planner:
             engine_name = getattr(planner, "name", planner_name)
             best_result = None

@@ -4,15 +4,23 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-def load_and_preprocess_data(numeric_file, summon_file):
-    # Load JSON files
-    with open(numeric_file, 'r') as f:
-        df_numeric = pd.DataFrame(json.load(f))
-        df_numeric['domain'] = 'base'
-        
-    with open(summon_file, 'r') as f:
-        df_summon = pd.DataFrame(json.load(f))
-        df_summon['domain'] = 'summon'
+def load_and_preprocess_data(numeric_source, summon_source):
+    # Accept either file paths or pre-loaded JSON data (lists of dicts)
+    def _load(source):
+        if isinstance(source, (str, os.PathLike)):
+            with open(source, 'r') as f:
+                return json.load(f)
+        # Assume it's already a parsed JSON-like structure
+        return source
+
+    numeric_data = _load(numeric_source)
+    summon_data = _load(summon_source)
+
+    df_numeric = pd.DataFrame(numeric_data)
+    df_numeric['domain'] = 'base'
+
+    df_summon = pd.DataFrame(summon_data)
+    df_summon['domain'] = 'summon'
         
     # Combine datasets
     df = pd.concat([df_numeric, df_summon], ignore_index=True)
@@ -36,7 +44,7 @@ def load_and_preprocess_data(numeric_file, summon_file):
     # now for all TIMEOUT entries, we need to ensure they have a plan, keep only those
     df_solved = df_solved[~((df_solved['status'] == 'PlanGenerationResultStatus.TIMEOUT') & (df_solved['plan_length'] == 0))]
     #replace problem names with shorter versions (just the number)
-    df_solved['problem'] = df_solved['problem'].str.extract('(\d+)').astype(int)
+    df_solved['problem'] = df_solved['problem'].str.extract(r'(\d+)').astype(int)
     
     return df, df_solved
 
@@ -118,11 +126,35 @@ def generate_plots(df, df_solved):
     plt.savefig('plots/cost_per_problem.png', bbox_inches='tight')
     plt.close()
 
+def replace_anytime_results(main_file, anytime_file):
+    with open(main_file, 'r') as f:
+        main_data = json.load(f)
+    with open(anytime_file, 'r') as f:
+        anytime_data = json.load(f)
+    
+    # Create a mapping from (engine, problem) to result in anytime data
+    anytime_map = {
+        (entry['engine'], entry['problem']): entry
+        for entry in anytime_data
+    }
+    
+    # Replace entries in main_data with those from anytime_data where applicable
+    for i, entry in enumerate(main_data):
+        key = (entry['engine'], entry['problem'])
+        if key in anytime_map:
+            main_data[i] = anytime_map[key]
+    
+    return main_data
 if __name__ == "__main__":
     num_file = 'benchmark_results_numeric.json'
     sum_file = 'benchmark_results_summon.json'
-    
-    full_df, solved_df = load_and_preprocess_data(num_file, sum_file)
+    anytime_file = 'benchmark_results_numeric_anytime.json'
+    anytime_sum_file = 'benchmark_results_summon_anytime.json'
+    # Replace anytime results from num_file and sum_file with those from anytime_file and anytime_sum_file
+    main_data_num = replace_anytime_results(num_file, anytime_file)
+    main_data_sum = replace_anytime_results(sum_file, anytime_sum_file)
+
+    full_df, solved_df = load_and_preprocess_data(main_data_num, main_data_sum)
     generate_plots(full_df, solved_df)
     
     print("All plots generated successfully.")
